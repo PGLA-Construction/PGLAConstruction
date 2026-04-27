@@ -1,8 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://albmaitredoeuvre.fr/sitemap.xml
-
-Disallow: /wp-content/
-Disallow: /wp-includes/
-Disallow: /author/
 Disallow: /category/
+
+Sitemap: https://albmaitredoeuvre.fr/sitemap.xml
