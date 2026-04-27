@@ -349,13 +349,13 @@ li { margin-bottom: 0.4em; }
   background-size: cover;
   background-position: center;
   z-index: 0;
-  filter: grayscale(35%) brightness(0.55);
+  filter: brightness(0.85);
 }
 .hero-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.55) 50%, rgba(13,13,13,0.85) 100%);
+  background: linear-gradient(135deg, rgba(13,13,13,0.65) 0%, rgba(13,13,13,0.25) 50%, rgba(13,13,13,0.7) 100%);
 }
 .hero-content {
   position: relative;
@@ -791,9 +791,11 @@ li { margin-bottom: 0.4em; }
 .legal-content a { color: var(--accent-dark); text-decoration: underline; }
 .legal-content a:hover { color: var(--accent); }
 
-/* --- Page Header (DARK banner on inner pages) --- */
+/* --- Page Header (DARK banner with photo background) --- */
 .page-header {
-  background: linear-gradient(135deg, var(--noir) 0%, var(--noir-light) 100%);
+  background:
+    linear-gradient(135deg, rgba(13,13,13,0.78) 0%, rgba(13,13,13,0.5) 50%, rgba(13,13,13,0.82) 100%),
+    url('images/04.jpg') center/cover no-repeat;
   padding: 7rem 0 4rem;
   margin-top: var(--header-height);
   text-align: center;
@@ -808,7 +810,7 @@ li { margin-bottom: 0.4em; }
   right: -10%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(212,160,23,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212,160,23,0.15) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
