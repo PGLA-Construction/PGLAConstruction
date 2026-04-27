@@ -17,8 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -82,6 +81,535 @@
   </script>
   <link rel="icon" type="image/png" href="images/8000 A 02 RECTO calibrage nouvelle carte recto HAUT 350 gr by pass   -07.png">
   <link rel="apple-touch-icon" href="images/8000 A 02 RECTO calibrage nouvelle carte recto HAUT 350 gr by pass   -07.png">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #D4A017;
+  --gold-light: #E8C547;
+  --gold-dark: #A67C00;
+  --noir: #0D0D0D;
+  --noir-light: #1A1A1A;
+  --noir-card: #141414;
+  --blanc: #FFFFFF;
+  --gris: #A0A0A0;
+  --gris-light: #F5F5F5;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  color: var(--blanc);
+  background: var(--noir);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ─── NAVIGATION ─── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(13,13,13,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212,160,23,0.15);
+  transition: all 0.4s ease;
+}
+.site-header.scrolled { background: rgba(13,13,13,0.95); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 4%;
+  transition: padding 0.4s;
+}
+.site-header.scrolled .header-inner { padding: 0.6rem 4%; }
+.logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+.logo-img { height: 56px; width: auto; transition: height 0.4s; filter: drop-shadow(0 2px 12px rgba(212,160,23,0.25)); }
+.site-header.scrolled .logo-img { height: 44px; }
+
+.nav-list {
+  display: flex; gap: 2.2rem; list-style: none;
+  align-items: center;
+}
+.nav-item { position: relative; }
+.nav-link {
+  color: var(--gris); text-decoration: none; font-weight: 400;
+  font-size: 0.95rem; letter-spacing: 0.5px; position: relative;
+  transition: color 0.3s;
+  padding: 0.4rem 0;
+  display: inline-block;
+}
+.nav-link::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 2px; background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-link:hover, .nav-link--active { color: var(--blanc); }
+.nav-link:hover::after, .nav-link--active::after { width: 100%; }
+
+.nav-dropdown {
+  position: absolute; top: 100%; left: 0;
+  background: rgba(20,20,20,0.98); backdrop-filter: blur(20px);
+  border: 1px solid rgba(212,160,23,0.15);
+  border-radius: 8px; padding: 0.5rem 0;
+  min-width: 240px; list-style: none;
+  opacity: 0; visibility: hidden;
+  transform: translateY(8px);
+  transition: all 0.25s ease;
+  margin-top: 0.5rem;
+}
+.nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li { padding: 0; }
+.nav-dropdown a {
+  display: block; padding: 0.6rem 1.2rem;
+  color: var(--gris); font-size: 0.9rem;
+  text-decoration: none; transition: all 0.2s;
+}
+.nav-dropdown a:hover { color: var(--gold); background: rgba(212,160,23,0.06); }
+.nav-dropdown a::after { display: none; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600; letter-spacing: 0.5px;
+  border-radius: 4px; cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+}
+.btn--primary { background: var(--gold); color: var(--noir); }
+.btn--primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(212,160,23,0.3); }
+.btn--outline {
+  background: transparent; color: var(--blanc);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.btn--outline:hover { border-color: var(--gold); color: var(--gold); }
+.btn--outline-dark {
+  background: transparent; color: var(--gold);
+  border: 1px solid var(--gold);
+}
+.btn--outline-dark:hover { background: var(--gold); color: var(--noir); }
+.btn--lg { padding: 1rem 2.5rem; font-size: 1rem; }
+
+.nav-toggle {
+  display: none;
+  width: 40px; height: 40px;
+  background: none; border: none; cursor: pointer;
+  color: var(--blanc);
+  padding: 0; align-items: center; justify-content: center;
+}
+.nav-toggle svg { width: 26px; height: 26px; }
+.nav-toggle .close-icon { display: none; }
+.nav-toggle.open .menu-icon { display: none; }
+.nav-toggle.open .close-icon { display: block; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  padding: 6rem 4% 4rem;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(40%) brightness(0.55);
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.6) 50%, rgba(13,13,13,0.85) 100%);
+  z-index: 1;
+}
+.hero-content {
+  position: relative; z-index: 2; text-align: center;
+  max-width: 900px;
+  animation: fadeUp 1.2s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-logo { width: 150px; margin: 0 auto 1.8rem; filter: drop-shadow(0 4px 20px rgba(212,160,23,0.3)); }
+.hero-label {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  color: var(--gold); letter-spacing: 5px; text-transform: uppercase;
+  margin-bottom: 1.2rem; font-weight: 400;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700; line-height: 1.15;
+  margin-bottom: 1.5rem;
+  color: var(--blanc);
+}
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero p {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: var(--gris); max-width: 620px; margin: 0 auto 2.5rem;
+  line-height: 1.7; font-weight: 300;
+}
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ─── CONTAINERS ─── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 4%; }
+.text-center { text-align: center; }
+
+/* ─── STATS ─── */
+.stats-bar {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--noir-light);
+  border-top: 1px solid rgba(212,160,23,0.2);
+  border-bottom: 1px solid rgba(212,160,23,0.2);
+  margin: 0 -4%;
+}
+.stat {
+  text-align: center; padding: 2.5rem 1rem;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+.stat:last-child { border-right: none; }
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 700; color: var(--gold);
+  display: block; line-height: 1;
+}
+.stat-label { font-size: 0.8rem; color: var(--gris); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 0.5rem; }
+
+/* ─── SECTIONS ─── */
+.section { padding: 6rem 4%; }
+.section--light { background: var(--noir-light); }
+.section--dark { background: #060606; }
+
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-label {
+  font-size: 0.8rem; color: var(--gold); letter-spacing: 4px;
+  text-transform: uppercase; margin-bottom: 0.8rem; font-weight: 500;
+}
+.section-title, .section h2, h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 700; margin-bottom: 1rem;
+  color: var(--blanc); line-height: 1.2;
+}
+.section-subtitle {
+  font-size: 1.1rem; color: var(--gris); max-width: 660px;
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ─── SERVICES ─── */
+.services-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 2rem; max-width: 1100px; margin: 0 auto;
+}
+.service-card {
+  background: var(--noir-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 2.2rem 2rem;
+  position: relative; overflow: hidden;
+  transition: all 0.4s;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s;
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212,160,23,0.25);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+}
+.service-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(212,160,23,0.1);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.4rem;
+}
+.service-icon svg {
+  width: 26px; height: 26px;
+  fill: none; stroke: var(--gold); stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; margin-bottom: 0.8rem; color: var(--blanc);
+}
+.service-card p {
+  color: var(--gris); font-size: 0.98rem; line-height: 1.7; font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+.service-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--gold); font-size: 0.88rem; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase;
+  text-decoration: none;
+  transition: gap 0.3s;
+}
+.service-link svg {
+  width: 16px; height: 16px;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.service-link:hover { gap: 0.9rem; color: var(--gold-light); }
+
+/* ─── ABOUT / SPLIT ─── */
+.split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; max-width: 1200px; margin: 0 auto; align-items: center;
+}
+.split-image { position: relative; }
+.split-image img {
+  width: 100%; height: 520px; object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid rgba(212,160,23,0.2);
+  filter: brightness(0.95);
+}
+.split-image--badge {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--gold); color: var(--noir);
+  padding: 1rem 1.6rem; border-radius: 8px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700; font-size: 1.1rem;
+  box-shadow: 0 14px 40px rgba(212,160,23,0.3);
+}
+.split-content h2 em { font-style: normal; color: var(--gold); }
+.split-content p {
+  color: var(--gris); line-height: 1.8; font-weight: 300;
+  margin-bottom: 1.2rem; font-size: 1.02rem;
+}
+.check-list {
+  list-style: none; margin: 1.5rem 0 2rem;
+  display: grid; gap: 0.8rem;
+}
+.check-list li {
+  display: flex; align-items: center; gap: 0.8rem;
+  color: var(--blanc); font-weight: 400; font-size: 0.98rem;
+}
+.check-list svg {
+  flex-shrink: 0; width: 22px; height: 22px;
+  fill: none; stroke: var(--gold); stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ─── PROCESS / WHY US ─── */
+.process-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+}
+.process-step {
+  background: var(--noir-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 2rem 1.6rem;
+  position: relative;
+  transition: all 0.3s;
+}
+.process-step:hover {
+  border-color: rgba(212,160,23,0.25);
+  transform: translateY(-4px);
+}
+.process-step h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; margin-bottom: 0.8rem;
+  color: var(--blanc) !important;
+}
+.process-step p {
+  color: rgba(255,255,255,0.65) !important;
+  font-size: 0.92rem; line-height: 1.65; font-weight: 300;
+}
+
+/* ─── CTA ─── */
+.cta-banner {
+  padding: 5rem 4%;
+  background: linear-gradient(135deg, var(--noir-light) 0%, #0a0a0a 100%);
+  border-top: 1px solid rgba(212,160,23,0.15);
+  border-bottom: 1px solid rgba(212,160,23,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.cta-banner > .container { position: relative; z-index: 2; }
+.cta-banner h2 { color: var(--blanc); margin-bottom: 1rem; }
+.cta-banner p { color: var(--gris); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; font-weight: 300; }
+
+/* ─── ZONES ─── */
+.zones-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1rem; max-width: 1100px; margin: 2.5rem auto 0;
+}
+.zone-card {
+  background: var(--noir-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+.zone-card:hover {
+  border-color: rgba(212,160,23,0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+.zone-icon {
+  width: 26px; height: 26px;
+  fill: none; stroke: var(--gold); stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+  margin: 0 auto 0.6rem;
+}
+.zone-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; margin-bottom: 0.3rem; color: var(--blanc);
+}
+.zone-card p {
+  color: var(--gris); font-size: 0.78rem; font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.footer-contact-item {
+  display: flex; align-items: flex-start; gap: 0.9rem;
+  color: var(--gris); font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+.footer-contact-item svg {
+  flex-shrink: 0; width: 20px; height: 20px;
+  fill: none; stroke: var(--gold); stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+  margin-top: 2px;
+}
+.footer-contact-item a { color: var(--gris); text-decoration: none; transition: color 0.3s; }
+.footer-contact-item a:hover { color: var(--gold); }
+.footer-contact-item strong { color: var(--blanc); font-weight: 500; }
+
+/* ─── FOOTER ─── */
+.site-footer {
+  background: #060606;
+  padding: 4rem 4% 0;
+  border-top: 1px solid rgba(212,160,23,0.15);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+}
+.footer-logo-img { height: 70px; width: auto; margin-bottom: 1rem; }
+.footer-brand p {
+  color: var(--gris); font-size: 0.92rem; line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 1.4rem;
+}
+.social-links { display: flex; gap: 0.7rem; }
+.social-link {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blanc); transition: all 0.3s;
+}
+.social-link svg { width: 18px; height: 18px; fill: currentColor; }
+.social-link:hover { background: var(--gold); border-color: var(--gold); color: var(--noir); }
+
+.footer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; color: var(--blanc);
+  margin-bottom: 1.2rem; font-weight: 600;
+  letter-spacing: 1px;
+}
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 0.6rem; }
+.footer-links a {
+  color: var(--gris); text-decoration: none;
+  font-size: 0.92rem; font-weight: 300;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 1.5rem 0;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+  max-width: 1200px; margin: 0 auto;
+  font-size: 0.85rem; color: var(--gris);
+}
+.footer-legal { display: flex; gap: 1.5rem; }
+.footer-legal a {
+  color: var(--gris); text-decoration: none;
+  font-size: 0.85rem; transition: color 0.3s;
+}
+.footer-legal a:hover { color: var(--gold); }
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 980px) {
+  .nav-list { display: none; }
+  .nav-toggle { display: inline-flex; }
+  .nav-list.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(13,13,13,0.97);
+    backdrop-filter: blur(20px);
+    padding: 1.5rem 4%;
+    border-bottom: 1px solid rgba(212,160,23,0.15);
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  .nav-list.open .nav-item { width: 100%; }
+  .nav-list.open .nav-link { display: block; padding: 0.7rem 0; }
+  .nav-dropdown {
+    position: static; opacity: 1; visibility: visible;
+    transform: none; background: transparent;
+    border: none; padding: 0 0 0 1rem;
+    margin: 0; min-width: 0;
+  }
+  .nav-list.open .nav-cta { margin-top: 0.5rem; }
+  .nav-list.open .btn { width: 100%; }
+
+  .split { grid-template-columns: 1fr; gap: 3rem; }
+  .split-image img { height: 380px; }
+  .split-image--badge { right: 20px; bottom: -20px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .zones-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stat { border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .stat:nth-child(2) { border-right: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-bottom { justify-content: center; text-align: center; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding-top: 7rem; }
+  .hero-logo { width: 110px; }
+  .section { padding: 4rem 4%; }
+  .process-grid { grid-template-columns: 1fr; }
+  .zones-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-buttons .btn { width: 100%; }
+}
+</style>
 </head>
 <body>
 
@@ -92,15 +620,15 @@
         <img src="images/8000 A 02 RECTO calibrage nouvelle carte recto HAUT 350 gr by pass   -07.png" alt="ALB Maître d'œuvre" class="logo-img">
       </a>
       <nav class="nav" id="nav">
-        <ul class="nav-list">
+        <ul class="nav-list" id="navList">
           <li class="nav-item"><a href="./" class="nav-link nav-link--active">Accueil</a></li>
           <li class="nav-item">
             <a href="prestations/" class="nav-link">Prestations</a>
             <ul class="nav-dropdown">
-              <li><a href="prestations/#etudes" class="nav-link">Études & Conception</a></li>
-              <li><a href="prestations/#permis" class="nav-link">Permis de Construire</a></li>
-              <li><a href="prestations/#preparation" class="nav-link">Préparation du Projet</a></li>
-              <li><a href="prestations/#suivi" class="nav-link">Suivi de Chantier</a></li>
+              <li><a href="prestations/#etudes">Études & Conception</a></li>
+              <li><a href="prestations/#permis">Permis de Construire</a></li>
+              <li><a href="prestations/#preparation">Préparation du Projet</a></li>
+              <li><a href="prestations/#suivi">Suivi de Chantier</a></li>
             </ul>
           </li>
           <li class="nav-item"><a href="realisations/" class="nav-link">Réalisations</a></li>
@@ -108,7 +636,7 @@
           <li class="nav-item nav-cta"><a href="contact/" class="btn btn--primary">Devis Gratuit</a></li>
         </ul>
       </nav>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
         <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
         <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
@@ -117,10 +645,11 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80')"></div>
+    <div class="hero-bg" style="background-image: url('images/01.jpg')"></div>
     <div class="hero-content">
-      <div class="hero-label">✦ Maître d'œuvre à La Réunion depuis 2020</div>
-      <h1>Votre projet immobilier entre de bonnes mains</h1>
+      <img src="images/8000 A 02 RECTO calibrage nouvelle carte recto HAUT 350 gr by pass   -07.png" alt="ALB Maître d'œuvre" class="hero-logo">
+      <p class="hero-label">Maître d'œuvre · La Réunion · Depuis 2020</p>
+      <h1>Votre projet immobilier<br>entre de <em>bonnes mains</em></h1>
       <p>De la conception à la livraison, ALB MOE vous accompagne dans tous vos projets de construction et de rénovation à La Réunion.</p>
       <div class="hero-buttons">
         <a href="contact/" class="btn btn--primary btn--lg">Demander un devis gratuit</a>
@@ -154,13 +683,13 @@
   <!-- Services -->
   <section class="section" id="services">
     <div class="container">
-      <div class="section-header text-center">
-        <div class="section-label">Nos prestations</div>
-        <h2 class="section-title">Un accompagnement complet pour votre projet</h2>
+      <div class="section-header">
+        <p class="section-label">Nos prestations</p>
+        <h2 class="section-title">Un accompagnement <em style="font-style:normal;color:var(--gold);">complet</em> pour votre projet</h2>
         <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">De l'étude de faisabilité à la réception des travaux, nous intervenons à chaque étape clé de votre projet immobilier.</p>
       </div>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
           </div>
@@ -168,7 +697,7 @@
           <p>Étude de faisabilité, définition du gabarit, budgétisation prévisionnelle et plans 2D/3D pour votre projet neuf ou en rénovation.</p>
           <a href="prestations/#etudes" class="service-link">En savoir plus <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
           </div>
@@ -176,7 +705,7 @@
           <p>Montage complet de votre dossier de permis de construire ou de déclaration préalable, dépôt en mairie et suivi jusqu'à obtention.</p>
           <a href="prestations/#permis" class="service-link">En savoir plus <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
@@ -184,7 +713,7 @@
           <p>Constitution du dossier de consultation, sélection rigoureuse des entreprises, arbitrage budgétaire et mise en place des contrats.</p>
           <a href="prestations/#preparation" class="service-link">En savoir plus <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
           </div>
@@ -200,13 +729,13 @@
   <section class="section section--light" id="about">
     <div class="container">
       <div class="split">
-        <div class="split-image">
-          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Chantier de construction à La Réunion" loading="lazy">
+        <div class="split-image reveal">
+          <img src="images/02.jpg" alt="Chantier de construction à La Réunion" loading="lazy">
           <div class="split-image--badge">Depuis 2020</div>
         </div>
-        <div class="split-content">
-          <div class="section-label">À propos</div>
-          <h2>Alan Le Bail, votre maître d'œuvre à La Réunion</h2>
+        <div class="split-content reveal">
+          <p class="section-label">À propos</p>
+          <h2>Alan Le Bail,<br>votre <em>maître d'œuvre</em><br>à La Réunion</h2>
           <p>Passionné par l'architecture et la construction, titulaire d'un Master en Génie Civil et gestion de projets (2014), j'ai acquis une solide expérience en conduite de travaux de réhabilitation à Paris puis en construction de villas à La Réunion.</p>
           <p>Aujourd'hui, je mets mes compétences techniques et financières au service de la conception et du suivi de vos projets immobiliers. La réussite d'un projet repose sur une conception soignée et une sélection rigoureuse des intervenants.</p>
           <ul class="check-list">
@@ -224,27 +753,27 @@
   <!-- Why Us -->
   <section class="section section--dark" id="pourquoi">
     <div class="container">
-      <div class="section-header text-center">
-        <div class="section-label">Pourquoi nous choisir</div>
-        <h2 class="section-title">Pourquoi faire appel à un maître d'œuvre&nbsp;?</h2>
-        <p class="section-subtitle" style="margin-left:auto;margin-right:auto;color:rgba(255,255,255,0.7);">Le maître d'œuvre garantit le respect des critères essentiels de coût, de qualité et de délais tout au long de votre projet.</p>
+      <div class="section-header">
+        <p class="section-label">Pourquoi nous choisir</p>
+        <h2 class="section-title">Pourquoi faire appel<br>à un <em style="font-style:normal;color:var(--gold);">maître d'œuvre</em>&nbsp;?</h2>
+        <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">Le maître d'œuvre garantit le respect des critères essentiels de coût, de qualité et de délais tout au long de votre projet.</p>
       </div>
       <div class="process-grid">
-        <div class="process-step">
-          <h3 style="color:var(--white)">Expertise technique</h3>
-          <p style="color:rgba(255,255,255,0.65)">Un accompagnement professionnel de la conception à l'exécution, avec une maîtrise complète des aspects techniques et réglementaires.</p>
+        <div class="process-step reveal">
+          <h3>Expertise technique</h3>
+          <p>Un accompagnement professionnel de la conception à l'exécution, avec une maîtrise complète des aspects techniques et réglementaires.</p>
         </div>
-        <div class="process-step">
-          <h3 style="color:var(--white)">Sélection des entreprises</h3>
-          <p style="color:rgba(255,255,255,0.65)">Création d'un groupement d'entreprises qualifiées, sélectionnées selon la qualité, le budget, la fiabilité et la disponibilité.</p>
+        <div class="process-step reveal">
+          <h3>Sélection des entreprises</h3>
+          <p>Création d'un groupement d'entreprises qualifiées, sélectionnées selon la qualité, le budget, la fiabilité et la disponibilité.</p>
         </div>
-        <div class="process-step">
-          <h3 style="color:var(--white)">Maîtrise du budget</h3>
-          <p style="color:rgba(255,255,255,0.65)">Budgétisation prévisionnelle, arbitrage financier et suivi rigoureux pour respecter l'enveloppe définie.</p>
+        <div class="process-step reveal">
+          <h3>Maîtrise du budget</h3>
+          <p>Budgétisation prévisionnelle, arbitrage financier et suivi rigoureux pour respecter l'enveloppe définie.</p>
         </div>
-        <div class="process-step">
-          <h3 style="color:var(--white)">Un seul interlocuteur</h3>
-          <p style="color:rgba(255,255,255,0.65)">Coordination de l'ensemble des intervenants pour vous simplifier la vie. Vous n'avez qu'un seul contact.</p>
+        <div class="process-step reveal">
+          <h3>Un seul interlocuteur</h3>
+          <p>Coordination de l'ensemble des intervenants pour vous simplifier la vie. Vous n'avez qu'un seul contact.</p>
         </div>
       </div>
     </div>
@@ -253,7 +782,7 @@
   <!-- CTA -->
   <section class="cta-banner">
     <div class="container text-center">
-      <h2>Vous avez un projet de construction ou de rénovation&nbsp;?</h2>
+      <h2>Vous avez un projet de construction<br>ou de <em style="font-style:normal;color:var(--gold);">rénovation</em>&nbsp;?</h2>
       <p>Contactez-nous dès aujourd'hui pour une première consultation gratuite et sans engagement.</p>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
         <a href="contact/" class="btn btn--primary btn--lg">Demander un devis gratuit</a>
@@ -265,36 +794,38 @@
   <!-- Zones d'intervention -->
   <section class="section" id="localisation">
     <div class="container">
-      <div class="section-label" style="text-align:center;">Notre zone d'intervention</div>
-      <h2 style="text-align:center;">Maître d'œuvre sur toute l'île de La Réunion</h2>
-      <p style="text-align:center;max-width:700px;margin:0 auto 2rem;">Basés à Piton Saint-Leu, nous intervenons dans toutes les communes de La Réunion. Où que soit votre projet, nous nous déplaçons à votre rencontre.</p>
+      <div class="section-header">
+        <p class="section-label">Notre zone d'intervention</p>
+        <h2 class="section-title">Maître d'œuvre sur toute <em style="font-style:normal;color:var(--gold);">l'île</em></h2>
+        <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">Basés aux Avirons, nous intervenons dans toutes les communes de La Réunion. Où que soit votre projet, nous nous déplaçons à votre rencontre.</p>
+      </div>
       <div class="zones-grid">
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Denis</h3><p>Chef-lieu de La Réunion</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Denis</h3><p>Chef-lieu</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Pierre</h3><p>Sous-préfecture du Sud</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Paul</h3><p>Côte Ouest</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Le Tampon</h3><p>Les Hauts du Sud</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Leu</h3><p>Notre commune d'implantation</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Le Tampon</h3><p>Hauts du Sud</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Leu</h3><p>Côte Ouest</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Louis</h3><p>Sud-Ouest</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-André</h3><p>Nord-Est</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Benoît</h3><p>Est de l'île</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Le Port</h3><p>Zone industrielle Ouest</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Benoît</h3><p>Est</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Le Port</h3><p>ZI Ouest</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>La Possession</h3><p>Entrée Ouest</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Sainte-Marie</h3><p>Nord</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Sainte-Suzanne</h3><p>Nord-Est</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>L'Étang-Salé</h3><p>Sud-Ouest littoral</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Les Avirons</h3><p>Sud-Ouest</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>L'Étang-Salé</h3><p>Sud-Ouest</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Les Avirons</h3><p>Notre implantation</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Petite-Île</h3><p>Sud</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Bras-Panon</h3><p>Est</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Cilaos</h3><p>Cirque de Cilaos</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Salazie</h3><p>Cirque de Salazie</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Entre-Deux</h3><p>Les Hauts</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Cilaos</h3><p>Cirque</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Salazie</h3><p>Cirque</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Entre-Deux</h3><p>Hauts</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Joseph</h3><p>Sud sauvage</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Saint-Philippe</h3><p>Sud-Est</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Sainte-Rose</h3><p>Est volcanique</p></div>
-        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>La Plaine-des-Palmistes</h3><p>Les Hauts de l'Est</p></div>
+        <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Plaine-des-Palmistes</h3><p>Hauts de l'Est</p></div>
         <div class="zone-card"><svg viewBox="0 0 24 24" class="zone-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Trois-Bassins</h3><p>Ouest</p></div>
       </div>
-      <div style="margin-top:2.5rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;align-items:center;">
+      <div style="margin-top:3rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;align-items:flex-start;">
         <div class="footer-contact-item">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           <div><strong>36 Bis Route de La Ravine Sèche</strong><br>97425 Les Avirons</div>
@@ -316,9 +847,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo" style="margin-bottom:0.5rem;">
-            <img src="images/LOGO ENTETE.jpg" alt="ALB Maître d'œuvre" class="footer-logo-img">
-          </div>
+          <img src="images/8000 A 02 RECTO calibrage nouvelle carte recto HAUT 350 gr by pass   -07.png" alt="ALB Maître d'œuvre" class="footer-logo-img">
           <p>Maître d'œuvre sur l'île de La Réunion. Un accompagnement sur mesure pour tous vos projets immobiliers, de la conception à la livraison.</p>
           <div class="social-links">
             <a href="https://www.facebook.com/Albmoe" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
@@ -374,7 +903,38 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+<script>
+  // Header scroll
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('open');
+    navList.classList.toggle('open');
+  });
+  navList.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navList.classList.remove('open');
+      navToggle.classList.remove('open');
+    });
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+</script>
 </body>
-</html> 
- 
+</html>
