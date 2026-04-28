@@ -793,7 +793,10 @@ img { display: block; max-width: 100%; }
           <p>Passionné par l'architecture et la construction depuis toujours, j'ai obtenu un Master en Génie Civil et gestion de projets à Lorient (56) en 2014.</p>
           <p>Au fil des années, de mon statut d'étudiant à mon poste d'ingénieur travaux, j'ai développé une solide compréhension des réalités de chantier, ainsi qu'une réelle capacité de pilotage et d'organisation des opérations.</p>
           <p>Aujourd'hui, j'accompagne mes clients dans la conception et le suivi de leurs opérations immobilières, avec une approche rigoureuse intégrant maîtrise technique, économie de la construction et sélection exigeante et adaptée des intervenants, afin de garantir la réussite de leurs projets.</p>
-          <a href="https://www.linkedin.com/in/alan-le-bail-389934104/" class="btn btn--outline-dark" target="_blank" rel="noopener" style="margin-top:1.5rem;">Voir mon profil LinkedIn</a>
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem;">
+            <a href="https://www.linkedin.com/in/alan-le-bail-389934104/" class="btn btn--outline-dark" target="_blank" rel="noopener">Voir mon profil LinkedIn</a>
+            <a href="https://www.facebook.com/Albmoe" class="btn btn--outline-dark" target="_blank" rel="noopener">Suivre ma page Facebook</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1056,41 +1059,66 @@ img { display: block; max-width: 100%; }
   }, { threshold: 0.12 });
   reveals.forEach(el => io.observe(el));
 
-  // Inject WhatsApp floating button
-  if (!document.querySelector('.wa-float')) {
+  // Inject floating contact stack (WhatsApp + Facebook)
+  if (!document.querySelector('.float-stack')) {
+    var stack = document.createElement('div');
+    stack.className = 'float-stack';
+
+    var fbLink = document.createElement('a');
+    fbLink.className = 'float-btn float-btn--fb';
+    fbLink.href = 'https://www.facebook.com/Albmoe';
+    fbLink.target = '_blank';
+    fbLink.rel = 'noopener';
+    fbLink.setAttribute('aria-label', 'Suivre ALB MOE sur Facebook');
+    fbLink.innerHTML = '<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12"/></svg>';
+    stack.appendChild(fbLink);
+
     var waLink = document.createElement('a');
-    waLink.className = 'wa-float';
+    waLink.className = 'float-btn float-btn--wa';
     waLink.href = 'https://wa.me/262693881521?text=' + encodeURIComponent("Bonjour, je vous contacte depuis le site albmaitredoeuvre.fr concernant un projet.");
     waLink.target = '_blank';
     waLink.rel = 'noopener';
     waLink.setAttribute('aria-label', 'Contacter ALB MOE par WhatsApp');
     waLink.innerHTML = '<svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39-.078 0-.155-.022-.222-.077-1.073-.638-2.121-1.398-2.998-2.355-.207-.231-.43-.45-.63-.685-.078-.092-.119-.197-.119-.299 0-.282.622-.685.825-.93.114-.146.181-.32.181-.503 0-.135-.041-.27-.119-.397-.207-.34-.622-1.165-.871-1.475-.249-.31-.456-.297-.622-.297-.166 0-.331-.014-.498-.014-.166 0-.456.063-.685.297-.249.249-.954.93-.954 2.265s.975 2.625 1.114 2.81c.139.184 1.911 2.92 4.633 4.118.622.27 1.107.43 1.487.553.622.197 1.197.166 1.652.103.498-.077 1.518-.622 1.738-1.218.207-.622.207-1.151.146-1.265-.063-.119-.249-.197-.498-.34zM26.576 5.363c-2.812-2.815-6.494-4.371-10.426-4.371C8.058.992 1.79 7.262 1.79 15.301c0 2.6.689 5.118 1.999 7.343L1.715 30.6l8.165-2.143c2.142 1.169 4.55 1.785 7.005 1.785 8.092 0 14.36-6.27 14.36-14.31 0-3.85-1.503-7.46-4.224-10.17l-.435-.4z"/></svg>';
-    document.body.appendChild(waLink);
+    stack.appendChild(waLink);
+
+    document.body.appendChild(stack);
   }
 </script>
 
 <!-- =========================================================
-     WhatsApp floating button styles (also on home page)
+     Floating contact stack styles (WhatsApp + Facebook)
      ========================================================= -->
 <style>
-.wa-float {
+.float-stack {
   position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 999;
+  display: flex; flex-direction: column; gap: 0.75rem;
+}
+.float-btn {
   width: 60px; height: 60px; border-radius: 50%;
-  background: #25D366; color: #FFFFFF;
   display: flex; align-items: center; justify-content: center;
-  text-decoration: none;
-  box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.2);
+  text-decoration: none; color: #FFFFFF;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.float-btn svg { color: #FFFFFF; }
+.float-btn:hover { transform: scale(1.08); }
+.float-btn--wa {
+  background: #25D366;
+  box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.2);
   animation: waPulseHome 2.4s ease-in-out infinite;
 }
-.wa-float:hover { transform: scale(1.08); }
+.float-btn--fb {
+  background: #1877F2;
+  box-shadow: 0 6px 24px rgba(24,119,242,0.45), 0 2px 8px rgba(0,0,0,0.2);
+}
 @keyframes waPulseHome {
   0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.2), 0 0 0 0 rgba(37,211,102,0.5); }
   50% { box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.2), 0 0 0 14px rgba(37,211,102,0); }
 }
 @media (max-width: 640px) {
-  .wa-float { width: 54px; height: 54px; right: 1rem; bottom: 1rem; }
-  .wa-float svg { width: 24px; height: 24px; }
+  .float-stack { right: 1rem; bottom: 1rem; gap: 0.6rem; }
+  .float-btn { width: 54px; height: 54px; }
+  .float-btn svg { width: 24px; height: 24px; }
 }
 </style>
 
