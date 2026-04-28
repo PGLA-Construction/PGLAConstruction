@@ -238,8 +238,10 @@ img { display: block; max-width: 100%; }
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0d0d0d;
   filter: brightness(0.85);
 }
 .hero::after {
