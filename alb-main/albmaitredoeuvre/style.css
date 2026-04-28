@@ -67,15 +67,16 @@ body {
 
 /* --- Typography --- */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 700;
   line-height: 1.25;
   color: var(--noir);
 }
 h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: -0.02em; }
-h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -0.01em; }
-h3 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); }
-h4 { font-size: 1.25rem; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); letter-spacing: -0.015em; }
+h3 { font-size: clamp(1.2rem, 2.2vw, 1.5rem); letter-spacing: -0.005em; }
+h4 { font-size: 1.15rem; letter-spacing: -0.005em; }
+.font-display { font-family: 'Playfair Display', Georgia, serif; }
 
 p { margin-bottom: 1em; }
 strong { font-weight: 600; color: var(--noir); }
