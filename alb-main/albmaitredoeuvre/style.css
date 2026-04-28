@@ -796,7 +796,7 @@ li { margin-bottom: 0.4em; }
 .page-header {
   background:
     linear-gradient(135deg, rgba(13,13,13,0.78) 0%, rgba(13,13,13,0.5) 50%, rgba(13,13,13,0.82) 100%),
-    url('images/04.jpg') center/cover no-repeat;
+    url('images/moe-coordination-equipe.jpg') center/cover no-repeat;
   padding: 7rem 0 4rem;
   margin-top: var(--header-height);
   text-align: center;
