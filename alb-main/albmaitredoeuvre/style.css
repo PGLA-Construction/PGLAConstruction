@@ -1345,48 +1345,70 @@ li { margin-bottom: 0.4em; }
   padding: 0 1.5rem 1.5rem;
 }
 
-/* --- Zones d'intervention --- */
-.zones-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+/* --- Carte interactive de La Réunion --- */
+.map-wrap {
+  max-width: 820px;
+  margin: 3rem auto 0;
 }
-.zone-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 1.4rem 1rem;
-  text-align: center;
-  transition: all var(--transition);
-}
-.zone-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: rgba(212,160,23,0.35);
-  transform: translateY(-3px);
-}
-.zone-icon {
-  width: 26px;
-  height: 26px;
-  fill: none;
-  stroke: var(--accent-dark);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  margin: 0 auto 0.6rem;
+.reunion-map {
+  width: 100%;
+  height: auto;
   display: block;
+  filter: drop-shadow(0 12px 30px rgba(13,13,13,0.18));
 }
-.zone-card h3 {
-  font-size: 1rem;
-  font-family: 'Playfair Display', serif;
+.reunion-map .pin circle {
+  fill: var(--accent, #D4A017);
+  transition: r 0.2s ease, fill 0.2s ease;
+  cursor: pointer;
+}
+.reunion-map .pin text {
+  fill: #1f1f1f;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: 0.2px;
+}
+.reunion-map .pin--interior text {
+  fill: #FAFAF7;
+}
+.reunion-map .pin--home circle {
+  fill: var(--accent, #D4A017);
+  stroke: var(--accent, #D4A017);
+  stroke-width: 5;
+  stroke-opacity: 0.3;
+  animation: pulse-home 2.4s ease-in-out infinite;
+}
+.reunion-map .pin--home text {
   font-weight: 700;
-  color: var(--noir);
-  margin-bottom: 0.25rem;
+  font-family: 'Playfair Display', serif;
+  fill: #1f1f1f;
 }
-.zone-card p {
-  font-size: 0.78rem;
+.reunion-map .pin:hover circle {
+  r: 9;
+  fill: #f0b528;
+}
+@keyframes pulse-home {
+  0%, 100% { stroke-opacity: 0.25; stroke-width: 5; }
+  50%      { stroke-opacity: 0.55; stroke-width: 9; }
+}
+.map-caption {
+  text-align: center;
+  margin: 1.5rem auto 0;
+  max-width: 620px;
   color: var(--text-light);
-  margin: 0;
-  letter-spacing: 0.3px;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+.map-caption__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent, #D4A017);
+  display: inline-block;
+  box-shadow: 0 0 0 4px rgba(212,160,23,0.18);
 }
 
 /* --- Responsive --- */
@@ -1434,7 +1456,6 @@ li { margin-bottom: 0.4em; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .hero { min-height: 70vh; }
-  .zones-grid { grid-template-columns: repeat(3, 1fr); }
   .doc-grid { grid-template-columns: 1fr; }
   .key-figures { grid-template-columns: repeat(2, 1fr); }
 }
@@ -1448,7 +1469,7 @@ li { margin-bottom: 0.4em; }
   .section { padding: 3.5rem 0; }
   .hero-buttons { flex-direction: column; }
   .hero-buttons .btn { width: 100%; justify-content: center; }
-  .zones-grid { grid-template-columns: repeat(2, 1fr); }
+  .reunion-map text { font-size: 26px; }
   .key-figures { grid-template-columns: 1fr 1fr; }
   .article-meta-box { flex-direction: column; gap: 0.75rem; }
   .article-block { padding: 1.5rem; }
