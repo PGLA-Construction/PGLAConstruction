@@ -47,7 +47,7 @@
   --radius-xl: 24px;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --max-width: 1200px;
-  --header-height: 80px;
+  --header-height: 92px;
 }
 
 /* --- Reset & Base --- */
@@ -245,7 +245,7 @@ li { margin-bottom: 0.4em; }
   letter-spacing: 0.1em;
   color: rgba(255,255,255,0.5);
 }
-.logo-img { height: 55px; width: auto; filter: drop-shadow(0 2px 12px rgba(212,160,23,0.25)); }
+.logo-img { height: 70px; width: auto; filter: drop-shadow(0 2px 12px rgba(212,160,23,0.25)); }
 .footer-logo-img { height: 60px; width: auto; border-radius: var(--radius-sm); }
 
 /* Nav (in dark header) */
@@ -1490,6 +1490,7 @@ li { margin-bottom: 0.4em; }
 }
 
 @media (max-width: 640px) {
+  .logo-img { height: 56px; }
   .stats-bar { grid-template-columns: 1fr 1fr; padding: 1.5rem; gap: 1.5rem; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
