@@ -470,48 +470,55 @@ img { display: block; max-width: 100%; }
 
 /* ─── CARTE INTERACTIVE LA RÉUNION ─── */
 .map-wrap {
-  max-width: 820px;
+  max-width: 880px;
   margin: 2.5rem auto 0;
 }
 .reunion-map {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 12px 30px rgba(13,13,13,0.18));
+  filter: drop-shadow(0 14px 30px rgba(13,13,13,0.20));
 }
+.reunion-map .commune {
+  transition: fill 0.25s ease;
+}
+.reunion-map .commune:hover { fill: #2a2a2a; }
 .reunion-map .pin circle {
   fill: var(--gold);
   transition: r 0.2s ease, fill 0.2s ease;
   cursor: pointer;
 }
 .reunion-map .pin text {
-  fill: #1f1f1f;
+  fill: #FAFAF7;
+  paint-order: stroke fill;
+  stroke: #0d0d0d;
+  stroke-width: 250;
+  stroke-linejoin: round;
   pointer-events: none;
   user-select: none;
-  letter-spacing: 0.2px;
+  letter-spacing: 1px;
 }
-.reunion-map .pin--interior text { fill: #FAFAF7; }
 .reunion-map .pin--home circle {
   fill: var(--gold);
   stroke: var(--gold);
-  stroke-width: 5;
-  stroke-opacity: 0.3;
+  stroke-width: 400;
+  stroke-opacity: 0.35;
   animation: pulse-home 2.4s ease-in-out infinite;
 }
 .reunion-map .pin--home text {
   font-weight: 700;
   font-family: 'Playfair Display', serif;
-  fill: #1f1f1f;
+  font-size: 2000px;
 }
-.reunion-map .pin:hover circle { r: 9; fill: #f0b528; }
+.reunion-map .pin:hover circle { r: 800; fill: #f0b528; }
 @keyframes pulse-home {
-  0%, 100% { stroke-opacity: 0.25; stroke-width: 5; }
-  50%      { stroke-opacity: 0.55; stroke-width: 9; }
+  0%, 100% { stroke-opacity: 0.3; stroke-width: 400; }
+  50%      { stroke-opacity: 0.65; stroke-width: 1200; }
 }
 .map-caption {
   text-align: center;
   margin: 1.5rem auto 0;
-  max-width: 620px;
+  max-width: 660px;
   color: var(--text-light);
   font-size: 0.95rem;
   display: flex;
@@ -527,6 +534,15 @@ img { display: block; max-width: 100%; }
   display: inline-block;
   box-shadow: 0 0 0 4px rgba(212,160,23,0.18);
 }
+.map-credit {
+  display: block;
+  width: 100%;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: rgba(13,13,13,0.45);
+  text-decoration: none;
+}
+.map-credit:hover { color: var(--gold-dark); text-decoration: underline; }
 
 /* Default: on light bg (zones section) */
 .footer-contact-item {
@@ -647,7 +663,8 @@ img { display: block; max-width: 100%; }
   .split-image--badge { right: 20px; bottom: -20px; }
   .services-grid { grid-template-columns: 1fr; }
   .process-grid { grid-template-columns: repeat(2, 1fr); }
-  .reunion-map text { font-size: 28px; }
+  .reunion-map text { font-size: 2400px; }
+  .reunion-map .pin--home text { font-size: 2700px; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .stat { border-bottom: 1px solid var(--border); }
   .stat:nth-child(2) { border-right: none; }
@@ -661,7 +678,8 @@ img { display: block; max-width: 100%; }
   .hero-logo { width: 110px; }
   .section { padding: 4rem 4%; }
   .process-grid { grid-template-columns: 1fr; }
-  .reunion-map text { font-size: 32px; }
+  .reunion-map text { font-size: 3000px; }
+  .reunion-map .pin--home text { font-size: 3300px; }
   .footer-grid { grid-template-columns: 1fr; }
   .hero-buttons .btn { width: 100%; }
 }
@@ -849,47 +867,57 @@ img { display: block; max-width: 100%; }
         <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">Basés aux Avirons, nous intervenons dans le Nord, l'Ouest, les Hauts et le Sud de La Réunion — de Saint-Philippe en passant par toutes les communes jusqu'à Sainte-Marie.</p>
       </div>
       <div class="map-wrap reveal">
-        <svg viewBox="0 0 760 660" class="reunion-map" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="map-title">
+        <svg viewBox="-800 -800 65887 58572" class="reunion-map" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="map-title">
           <title id="map-title">Carte de La Réunion : communes où ALB Maître d'œuvre intervient</title>
-          <defs>
-            <radialGradient id="island-grad" cx="40%" cy="35%" r="80%">
-              <stop offset="0%" stop-color="#1f1f1f"/>
-              <stop offset="100%" stop-color="#0d0d0d"/>
-            </radialGradient>
-          </defs>
-          <!-- Outline of La Réunion (approximation) -->
-          <path d="M 295 55 Q 410 45 530 95 Q 645 165 700 270 Q 745 380 720 470 Q 685 565 600 595 Q 500 625 380 615 Q 250 605 160 540 Q 80 470 55 360 Q 45 230 130 145 Q 215 75 295 55 Z"
-                fill="url(#island-grad)"
-                stroke="#D4A017"
-                stroke-width="2.5"
-                stroke-linejoin="round"/>
-          <g class="pins" font-family="'Outfit', sans-serif" font-size="20" font-weight="500">
-            <!-- Nord -->
-            <g class="pin"><title>Saint-Denis · Chef-lieu</title><circle cx="295" cy="62" r="6"/><text x="295" y="48" text-anchor="middle">Saint-Denis</text></g>
-            <g class="pin"><title>Sainte-Marie · Nord</title><circle cx="410" cy="80" r="6"/><text x="425" y="74" text-anchor="start">Sainte-Marie</text></g>
-            <!-- Nord-Ouest / Ouest -->
-            <g class="pin"><title>Le Port · ZI Ouest</title><circle cx="125" cy="125" r="6"/><text x="113" y="130" text-anchor="end">Le Port</text></g>
-            <g class="pin"><title>La Possession · Entrée Ouest</title><circle cx="178" cy="115" r="6"/><text x="195" y="108" text-anchor="start">La Possession</text></g>
-            <g class="pin"><title>Saint-Paul · Côte Ouest</title><circle cx="100" cy="200" r="6"/><text x="88" y="206" text-anchor="end">Saint-Paul</text></g>
-            <g class="pin"><title>Trois-Bassins · Ouest</title><circle cx="135" cy="298" r="6"/><text x="123" y="304" text-anchor="end">Trois-Bassins</text></g>
-            <g class="pin"><title>Saint-Leu · Côte Ouest</title><circle cx="125" cy="375" r="6"/><text x="113" y="381" text-anchor="end">Saint-Leu</text></g>
-            <!-- Sud-Ouest -->
-            <g class="pin pin--home"><title>Les Avirons · Notre implantation</title><circle cx="170" cy="455" r="9"/><text x="155" y="461" text-anchor="end">Les Avirons</text></g>
-            <g class="pin"><title>L'Étang-Salé · Sud-Ouest</title><circle cx="208" cy="475" r="6"/><text x="195" y="497" text-anchor="end">L'Étang-Salé</text></g>
-            <g class="pin"><title>Saint-Louis · Sud-Ouest</title><circle cx="258" cy="498" r="6"/><text x="258" y="525" text-anchor="middle">Saint-Louis</text></g>
-            <!-- Intérieur (Hauts) -->
-            <g class="pin pin--interior"><title>Cilaos · Cirque</title><circle cx="320" cy="335" r="6"/><text x="320" y="322" text-anchor="middle">Cilaos</text></g>
-            <g class="pin pin--interior"><title>Entre-Deux · Hauts</title><circle cx="320" cy="442" r="6"/><text x="320" y="430" text-anchor="middle">Entre-Deux</text></g>
-            <g class="pin pin--interior"><title>Le Tampon · Hauts du Sud</title><circle cx="375" cy="495" r="6"/><text x="375" y="483" text-anchor="middle">Le Tampon</text></g>
-            <!-- Sud -->
-            <g class="pin"><title>Saint-Pierre · Sous-préfecture du Sud</title><circle cx="330" cy="558" r="6"/><text x="315" y="585" text-anchor="end">Saint-Pierre</text></g>
-            <g class="pin"><title>Petite-Île · Sud</title><circle cx="425" cy="568" r="6"/><text x="425" y="595" text-anchor="middle">Petite-Île</text></g>
-            <g class="pin"><title>Saint-Joseph · Sud sauvage</title><circle cx="490" cy="600" r="6"/><text x="490" y="630" text-anchor="middle">Saint-Joseph</text></g>
-            <!-- Sud-Est -->
-            <g class="pin"><title>Saint-Philippe · Sud-Est</title><circle cx="650" cy="580" r="6"/><text x="667" y="586" text-anchor="start">Saint-Philippe</text></g>
+          <!-- Polygones des 24 communes (tracés réels, données Wikimedia Commons CC BY-SA 3.0) -->
+          <g class="commune-shapes" fill="#1a1a1a" stroke="#D4A017" stroke-width="80" stroke-opacity="0.45" stroke-linejoin="round">
+            <polygon class="commune" data-name="Les Avirons" points="16654,36845 14490,39130 14711,41055 14240,42553 11620,41776 11123,42350 10978,41888 12241,39502 12801,37634 17330,32799 17914,31782 19652,30246 19639,30531 19053,32328 18066,33453 17666,34845 17666,34845 17498,34220"/>
+            <polygon class="commune" data-name="Bras-Panon" points="47160,16093 46825,17556 44098,17884 41890,18645 38391,23379 37623,23389 35588,22212 34814,22186 35756,20956 35728,19381 35120,17994 35616,16501 37764,14869 38148,14221 40036,14182 40743,13847 41177,13206 42278,12937 44163,11578 45331,11666 47145,12336 50155,11601 50180,14622 50180,14622 47899,15165"/>
+            <polygon class="commune" data-name="Entre-Deux" points="25385,40489 25604,35794 27987,34714 28877,33982 30159,29615 32253,29159 31810,30227 32732,33597 32628,34365 31244,34899 30975,36429 30516,37060 30739,38953 30560,39300 29421,40349 28713,40638 28387,41630 27472,42355 26521,42975 26561,43744 26044,44777 24996,45859 24996,45859 25815,42829"/>
+            <polygon class="commune" data-name="L'Étang-Salé" points="13040,45420 12271,44572 12027,43066 11123,42350 11620,41776 14240,42553 14711,41055 14490,39130 16654,36845 17498,34220 17666,34845 17338,36354 18178,37632 17918,39950 18413,42618 17314,45494 18329,46657 18329,46657 15747,45789"/>
+            <polygon class="commune" data-name="Petite-Île" points="35756,55281 35007,55397 33441,54307 34553,49819 37765,48489 39348,46301 40435,45956 40463,47103 38939,48798 38708,49533 38505,50668 38974,51708 38957,53255 38830,54016 38292,54556 38320,55315 38320,55315 37232,55703"/>
+            <polygon class="commune" data-name="La Plaine-des-Palmistes" points="41958,34202 40783,34123 39083,33172 37904,29567 37002,28886 38191,27946 39654,28395 41116,27861 42837,26950 43829,25729 44962,25464 45951,26096 51885,33038 50811,33528 49646,34574 48094,34519 46209,36492 46209,36492 43587,32621"/>
+            <polygon class="commune" data-name="Le Port" points="7216,9540 6132,9705 7045,7274 7042,6205 7779,6131 10742,6861 11605,6348 11198,7410 11457,8074 10468,10929 10468,10929 9034,9821"/>
+            <polygon class="commune" data-name="La Possession" points="22883,24370 21390,24819 20677,24544 19605,23412 20482,22116 20610,21360 19355,19864 18970,17536 19227,16384 18812,15287 17567,14321 16435,14002 15810,13004 14320,11713 10468,10929 11457,8074 11198,7410 11605,6348 12983,5720 13850,4496 16291,2774 16500,3935 17525,5596 18074,7475 19498,9340 19328,12076 22931,13297 24174,14254 25289,15863 25355,17009 24586,17848 24541,20558 23807,21428 23817,21816 25699,23679 25699,23679 24169,23540"/>
+            <polygon class="commune" data-name="Saint-André" points="39306,10698 41963,9044 43101,8826 44133,7641 44330,7299 44063,6573 42803,5649 42603,4130 44475,4631 46472,5824 48293,7806 49702,10116 50155,11601 47145,12336 45331,11666 44163,11578 42278,12937 41177,13206 40743,13847 40036,14182 38148,14221 38148,14221 37020,13377"/>
+            <polygon class="commune" data-name="Saint-Benoît" points="44962,25464 43829,25729 42837,26950 41116,27861 39654,28395 38191,27946 37002,28886 35202,29403 34128,29069 32253,29159 30159,29615 29868,27719 28945,26493 29815,25201 31136,24373 31708,23362 32796,23191 34814,22186 35588,22212 37623,23389 38391,23379 41890,18645 44098,17884 46825,17556 47160,16093 47899,15165 50180,14622 50827,16873 52138,17693 53307,19268 53406,20428 53944,21478 57186,25385 55740,26704 54674,28339 54819,30219 53881,31926 53343,32487 51885,33038 51885,33038 45951,26096"/>
+            <polygon class="commune" data-name="Saint-Denis" points="22931,13297 19328,12076 19498,9340 18074,7475 17525,5596 16500,3935 16291,2774 18444,1107 21073,325 23011,525 24031,0 25953,1333 27895,1530 29407,1124 29910,4219 30535,5646 29514,6815 28369,10097 28403,12810 27411,13421 26089,15281 25289,15863 25289,15863 24174,14254"/>
+            <polygon class="commune" data-name="Saint-Joseph" points="47674,56288 46127,56463 45059,56972 43625,56394 40933,56806 38709,55247 38320,55315 38292,54556 38830,54016 38957,53255 38974,51708 38505,50668 38708,49533 38939,48798 40463,47103 40435,45956 40169,44223 40020,41922 40458,39656 41589,37186 43041,35892 43745,35593 45060,36427 45532,37497 45540,38623 44875,39981 45097,40288 48117,40578 48540,43290 49557,44466 49093,47957 50276,50872 50218,52443 50943,54262 51008,55051 50497,55652 50497,55652 48537,55509"/>
+            <polygon class="commune" data-name="Saint-Leu" points="6869,36888 7392,34574 7320,32208 5674,30569 5709,29384 6863,29186 10406,27631 13827,26953 20708,27821 19516,29552 19652,30246 17914,31782 17330,32799 12801,37634 12241,39502 10978,41888 10978,41888 8147,39782"/>
+            <polygon class="commune" data-name="Saint-Louis" points="17314,45494 18413,42618 17918,39950 18178,37632 17338,36354 17666,34845 18066,33453 19053,32328 19639,30531 20628,32617 22453,34598 23373,35276 25604,35794 25385,40489 25815,42829 24996,45859 21312,46865 19662,47848 19662,47848 18329,46657"/>
+            <polygon class="commune" data-name="Saint-Paul" points="10655,24563 8708,24878 3887,26560 1759,24801 542,23231 354,22466 641,20503 0,19057 8,18659 189,18304 1801,16553 2986,16553 4103,16140 6176,14314 6698,11598 6132,9705 7216,9540 9034,9821 10468,10929 14320,11713 15810,13004 16435,14002 17567,14321 18812,15287 19227,16384 18970,17536 19355,19864 20610,21360 20482,22116 19605,23412 20677,24544 21390,24819 22883,24370 24169,23540 25699,23679 24410,25517 21407,27124 21407,27124 18879,25244"/>
+            <polygon class="commune" data-name="Saint-Pierre" points="28206,53002 27327,52248 25800,52043 25453,51857 24452,50668 22137,50242 21102,49681 19662,47848 21312,46865 24996,45859 26044,44777 26561,43744 26521,42975 27472,42355 29902,45400 31140,46358 30994,47125 33130,48834 34645,48453 36984,47020 37925,45772 40169,44223 40435,45956 39348,46301 37765,48489 34553,49819 33441,54307 33441,54307 29772,53026"/>
+            <polygon class="commune" data-name="Saint-Philippe" points="50943,54262 50218,52443 50276,50872 49093,47957 49557,44466 48540,43290 48117,40578 61152,41812 60949,42964 61510,45645 61210,48388 61657,50710 61508,51077 60648,52408 58821,53923 58126,54302 57734,54356 56167,54228 55483,54620 50497,55652 51008,55051"/>
+            <polygon class="commune" data-name="Sainte-Marie" points="28403,12810 28369,10097 29514,6815 30535,5646 29910,4219 29407,1124 33565,2406 35497,2144 37046,2428 37211,3193 36748,4275 36740,5453 37288,7329 36348,8560 33547,14585 31303,15058 30104,14167 26089,15281 26089,15281 27411,13421"/>
+            <polygon class="commune" data-name="Sainte-Rose" points="45097,40288 44875,39981 45540,38623 45532,37497 46209,36492 48094,34519 49646,34574 50811,33528 51885,33038 53343,32487 53881,31926 54819,30219 54674,28339 55740,26704 57186,25385 58769,27599 60287,27847 61777,29116 63187,29772 64097,31504 64287,33832 64213,34218 63285,34859 63158,36421 62180,37613 61547,39831 61152,41812 61152,41812 48117,40578"/>
+            <polygon class="commune" data-name="Sainte-Suzanne" points="33547,14585 36348,8560 37288,7329 36740,5453 36748,4275 37211,3193 37046,2428 37738,2732 38848,2576 41847,4174 42603,4130 42803,5649 44063,6573 44330,7299 44133,7641 43101,8826 41963,9044 39306,10698 37020,13377 37020,13377 35072,14692"/>
+            <polygon class="commune" data-name="Salazie" points="25699,23679 23817,21816 23807,21428 24541,20558 24586,17848 25355,17009 25289,15863 26089,15281 30104,14167 31303,15058 33547,14585 35072,14692 37020,13377 38148,14221 37764,14869 35616,16501 35120,17994 35728,19381 35756,20956 34814,22186 32796,23191 31708,23362 31136,24373 29815,25201 28945,26493 28945,26493 26980,24411"/>
+            <polygon class="commune" data-name="Le Tampon" points="36984,47020 34645,48453 33130,48834 30994,47125 31140,46358 29902,45400 27472,42355 28387,41630 28713,40638 29421,40349 30560,39300 30739,38953 30516,37060 30975,36429 31244,34899 32628,34365 32732,33597 31810,30227 32253,29159 34128,29069 35202,29403 37002,28886 37904,29567 39083,33172 40783,34123 41958,34202 43587,32621 46209,36492 45532,37497 45060,36427 43745,35593 43041,35892 41589,37186 40458,39656 40020,41922 40169,44223 40169,44223 37925,45772"/>
+            <polygon class="commune" data-name="Les Trois-Bassins" points="3887,26560 8708,24878 10655,24563 18879,25244 21407,27124 20708,27821 13827,26953 10406,27631 6863,29186 5709,29384 5709,29384 4048,27280"/>
+            <polygon class="commune" data-name="Cilaos" points="22453,34598 20628,32617 19639,30531 19652,30246 19516,29552 20708,27821 21407,27124 24410,25517 25699,23679 26980,24411 28945,26493 29868,27719 30159,29615 28877,33982 27987,34714 25604,35794 25604,35794 23373,35276"/>
+          </g>
+          <!-- Marqueurs des 17 communes où ALB intervient -->
+          <g class="pins" font-family="'Outfit', sans-serif" font-size="1700" font-weight="500">
+            <g class="pin"><title>Saint-Denis · Chef-lieu</title><circle cx="24000" cy="3000" r="500"/><text x="24000" y="5000" text-anchor="middle">Saint-Denis</text></g>
+            <g class="pin"><title>Sainte-Marie · Nord</title><circle cx="32500" cy="6000" r="500"/><text x="32500" y="8000" text-anchor="middle">Sainte-Marie</text></g>
+            <g class="pin"><title>Le Port · ZI Ouest</title><circle cx="8500" cy="8500" r="500"/><text x="8500" y="10500" text-anchor="middle">Le Port</text></g>
+            <g class="pin"><title>La Possession · Entrée Ouest</title><circle cx="14000" cy="11500" r="500"/><text x="14500" y="13700" text-anchor="middle">La Possession</text></g>
+            <g class="pin"><title>Saint-Paul · Côte Ouest</title><circle cx="7000" cy="17500" r="500"/><text x="7000" y="19500" text-anchor="middle">Saint-Paul</text></g>
+            <g class="pin"><title>Les Trois-Bassins · Ouest</title><circle cx="9500" cy="27000" r="500"/><text x="9500" y="29000" text-anchor="middle">Trois-Bassins</text></g>
+            <g class="pin"><title>Saint-Leu · Côte Ouest</title><circle cx="9000" cy="33500" r="500"/><text x="9000" y="35500" text-anchor="middle">Saint-Leu</text></g>
+            <g class="pin pin--home"><title>Les Avirons · Notre implantation</title><circle cx="14500" cy="36500" r="800"/><text x="14500" y="38900" text-anchor="middle">Les Avirons</text></g>
+            <g class="pin"><title>L'Étang-Salé · Sud-Ouest</title><circle cx="14500" cy="43500" r="500"/><text x="14500" y="45500" text-anchor="middle">L'Étang-Salé</text></g>
+            <g class="pin"><title>Saint-Louis · Sud-Ouest</title><circle cx="21000" cy="42000" r="500"/><text x="21000" y="44000" text-anchor="middle">Saint-Louis</text></g>
+            <g class="pin"><title>Cilaos · Cirque</title><circle cx="24000" cy="30500" r="500"/><text x="24000" y="32500" text-anchor="middle">Cilaos</text></g>
+            <g class="pin"><title>Entre-Deux · Hauts</title><circle cx="28500" cy="39500" r="500"/><text x="28500" y="41500" text-anchor="middle">Entre-Deux</text></g>
+            <g class="pin"><title>Le Tampon · Hauts du Sud</title><circle cx="35000" cy="41500" r="500"/><text x="35000" y="43500" text-anchor="middle">Le Tampon</text></g>
+            <g class="pin"><title>Saint-Pierre · Sous-préfecture du Sud</title><circle cx="29000" cy="51500" r="500"/><text x="29000" y="53500" text-anchor="middle">Saint-Pierre</text></g>
+            <g class="pin"><title>Petite-Île · Sud</title><circle cx="37500" cy="53500" r="500"/><text x="37500" y="55500" text-anchor="middle">Petite-Île</text></g>
+            <g class="pin"><title>Saint-Joseph · Sud sauvage</title><circle cx="44000" cy="51500" r="500"/><text x="44000" y="53500" text-anchor="middle">Saint-Joseph</text></g>
+            <g class="pin"><title>Saint-Philippe · Sud-Est</title><circle cx="55500" cy="48500" r="500"/><text x="55500" y="50500" text-anchor="middle">Saint-Philippe</text></g>
           </g>
         </svg>
-        <p class="map-caption"><span class="map-caption__dot" aria-hidden="true"></span>Notre implantation : <strong>Les Avirons</strong> — interventions sur l'ensemble des 17 communes ci-dessus.</p>
+        <p class="map-caption"><span class="map-caption__dot" aria-hidden="true"></span>Notre implantation : <strong>Les Avirons</strong> — interventions sur l'ensemble de l'île. <a class="map-credit" href="https://commons.wikimedia.org/wiki/File:Blank_Map_of_R%C3%A9union_Department,_France,_with_Communes.svg" target="_blank" rel="noopener">Données géographiques © Wikimedia Commons (CC BY-SA 3.0)</a></p>
       </div>
       <div style="margin-top:3rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;align-items:flex-start;">
         <div class="footer-contact-item">

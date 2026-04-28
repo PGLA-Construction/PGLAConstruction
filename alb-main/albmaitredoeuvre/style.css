@@ -1345,55 +1345,60 @@ li { margin-bottom: 0.4em; }
   padding: 0 1.5rem 1.5rem;
 }
 
-/* --- Carte interactive de La Réunion --- */
+/* --- Carte interactive de La Réunion (geo-data Wikimedia CC BY-SA) --- */
 .map-wrap {
-  max-width: 820px;
+  max-width: 880px;
   margin: 3rem auto 0;
 }
 .reunion-map {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 12px 30px rgba(13,13,13,0.18));
+  filter: drop-shadow(0 14px 30px rgba(13,13,13,0.20));
 }
+.reunion-map .commune {
+  transition: fill 0.25s ease;
+}
+.reunion-map .commune:hover { fill: #2a2a2a; }
 .reunion-map .pin circle {
   fill: var(--accent, #D4A017);
   transition: r 0.2s ease, fill 0.2s ease;
   cursor: pointer;
 }
 .reunion-map .pin text {
-  fill: #1f1f1f;
+  fill: #FAFAF7;
+  paint-order: stroke fill;
+  stroke: #0d0d0d;
+  stroke-width: 250;
+  stroke-linejoin: round;
   pointer-events: none;
   user-select: none;
-  letter-spacing: 0.2px;
-}
-.reunion-map .pin--interior text {
-  fill: #FAFAF7;
+  letter-spacing: 1px;
 }
 .reunion-map .pin--home circle {
   fill: var(--accent, #D4A017);
   stroke: var(--accent, #D4A017);
-  stroke-width: 5;
-  stroke-opacity: 0.3;
+  stroke-width: 400;
+  stroke-opacity: 0.35;
   animation: pulse-home 2.4s ease-in-out infinite;
 }
 .reunion-map .pin--home text {
   font-weight: 700;
   font-family: 'Playfair Display', serif;
-  fill: #1f1f1f;
+  font-size: 2000px;
 }
 .reunion-map .pin:hover circle {
-  r: 9;
+  r: 800;
   fill: #f0b528;
 }
 @keyframes pulse-home {
-  0%, 100% { stroke-opacity: 0.25; stroke-width: 5; }
-  50%      { stroke-opacity: 0.55; stroke-width: 9; }
+  0%, 100% { stroke-opacity: 0.3; stroke-width: 400; }
+  50%      { stroke-opacity: 0.65; stroke-width: 1200; }
 }
 .map-caption {
   text-align: center;
   margin: 1.5rem auto 0;
-  max-width: 620px;
+  max-width: 660px;
   color: var(--text-light);
   font-size: 0.95rem;
   display: flex;
@@ -1410,6 +1415,15 @@ li { margin-bottom: 0.4em; }
   display: inline-block;
   box-shadow: 0 0 0 4px rgba(212,160,23,0.18);
 }
+.map-credit {
+  display: block;
+  width: 100%;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: rgba(13,13,13,0.45);
+  text-decoration: none;
+}
+.map-credit:hover { color: var(--accent-dark, #B8860B); text-decoration: underline; }
 
 /* --- Responsive --- */
 @media (max-width: 992px) {
@@ -1469,7 +1483,8 @@ li { margin-bottom: 0.4em; }
   .section { padding: 3.5rem 0; }
   .hero-buttons { flex-direction: column; }
   .hero-buttons .btn { width: 100%; justify-content: center; }
-  .reunion-map text { font-size: 26px; }
+  .reunion-map text { font-size: 2400px; }
+  .reunion-map .pin--home text { font-size: 2700px; }
   .key-figures { grid-template-columns: 1fr 1fr; }
   .article-meta-box { flex-direction: column; gap: 0.75rem; }
   .article-block { padding: 1.5rem; }
