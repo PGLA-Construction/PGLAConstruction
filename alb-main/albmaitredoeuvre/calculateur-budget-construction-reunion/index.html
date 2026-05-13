@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculateur de budget construction La Réunion | Estimation gratuite — ALB MOE</title>
+  <meta name="description" content="Estimez gratuitement votre budget de construction ou rénovation à La Réunion : terrain, études, travaux, MOE, piscine, aménagements extérieurs. TVA Réunion 2,1% / 8,5% appliquée automatiquement.">
+  <meta name="keywords" content="calculateur budget construction, estimation maison La Réunion, prix construction 974, budget rénovation Réunion, TVA Réunion 2.1 8.5, maître d'œuvre, ALB MOE">
+  <link rel="canonical" href="https://albmaitredoeuvre.fr/calculateur-budget-construction-reunion/">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Calculateur de budget construction La Réunion | ALB MOE">
+  <meta property="og:description" content="Outil d'estimation gratuit pour votre projet de construction ou de rénovation à La Réunion. TVA différenciée, frais de notaire, MOE, aléas — tout est calculé en direct.">
+  <meta property="og:url" content="https://albmaitredoeuvre.fr/calculateur-budget-construction-reunion/">
+  <meta property="og:site_name" content="ALB Maître d'œuvre">
+  <meta property="og:image" content="https://albmaitredoeuvre.fr/images/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculateur de budget construction La Réunion | ALB MOE">
+  <meta name="twitter:description" content="Outil d'estimation gratuit pour votre projet à La Réunion.">
+  <meta name="twitter:image" content="https://albmaitredoeuvre.fr/images/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/png" href="../images/8000 A 02 RECTO calibrage nouvelle carte recto HAUT 350 gr by pass   -07.png">
+  <link rel="apple-touch-icon" href="../images/8000 A 02 RECTO calibrage nouvelle carte recto HAUT 350 gr by pass   -07.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://albmaitredoeuvre.fr/"},
+      {"@type": "ListItem", "position": 2, "name": "Calculateur de budget", "item": "https://albmaitredoeuvre.fr/calculateur-budget-construction-reunion/"}
+    ]
+  }
+  </script>
+  <style>
+  /* =========================================================
+     CALCULATEUR DE BUDGET — Thème tropical / rêveur
+     Version standalone (page autonome, sans dépendance externe
+     hormis Google Fonts). Tous les styles sont scopés sous
+     .calc-app pour rester intégrables ailleurs si besoin.
+     ========================================================= */
+  /* Global box-sizing/typography/body/a rules removed — site style.css handles them */
+  body { background: #FAF6EC; }
+  /* Push calc content below the fixed site header (--header-height defined in style.css) */
+  main { padding-top: var(--header-height, 92px); }
+
+  .calc-app {
+    --c-bg: #FFFEF9;
+    --c-bg-soft: #FAF6EC;
+    --c-surface: #FFFCF6;
+    --c-surface-alt: #FAF6EC;
+    --c-border: rgba(212,160,23,0.16);
+    --c-border-strong: rgba(212,160,23,0.40);
+    --c-line: rgba(13,13,13,0.06);
+    --c-text: #1A1A1A;
+    --c-text-light: #4F4A3F;
+    --c-text-muted: #8A8270;
+
+    --c-noir: #0D0D0D;
+    --c-or: #B8860B;
+    --c-or-clair: #D4A017;
+    --c-or-pale: #FFF6D6;
+    --c-or-line: #E8C547;
+
+    --c-lagon: #4A8E94;
+    --c-lagon-light: #E5F3F4;
+    --c-vert: #527E72;
+    --c-vert-light: #E5EFE9;
+    --c-corail: #C66E4A;
+    --c-corail-light: #FBE6D7;
+
+    --c-shadow-sm: 0 1px 3px rgba(13,13,13,0.05);
+    --c-shadow: 0 8px 24px rgba(13,13,13,0.06), 0 1px 3px rgba(13,13,13,0.04);
+    --c-shadow-lg: 0 20px 60px rgba(13,13,13,0.12);
+
+    --c-radius: 14px;
+    --c-radius-sm: 8px;
+    --c-radius-lg: 22px;
+
+    color: var(--c-text);
+    font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.55;
+  }
+  .calc-app *, .calc-app *::before, .calc-app *::after { box-sizing: border-box; }
+
+  /* --- Hero/intro tropical au-dessus du calculateur --- */
+  .calc-hero {
+    position: relative;
+    background:
+      radial-gradient(circle at 18% 20%, rgba(212,160,23,0.12) 0%, transparent 50%),
+      radial-gradient(circle at 85% 75%, rgba(74,142,148,0.10) 0%, transparent 55%),
+      linear-gradient(180deg, #FFFCF1 0%, #FAF3E2 100%);
+    padding: 3.5rem 0 3rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .calc-hero::before,
+  .calc-hero::after {
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path fill='%23B8860B' opacity='0.10' d='M100 10c-3 25-18 40-44 50 26 8 41 25 44 50 3-25 18-42 44-50-26-10-41-25-44-50z'/><path fill='%23527E72' opacity='0.18' d='M22 130c30-8 55 4 75 30-22-30-32-58-30-90-22 18-40 38-45 60zm156 0c-30-8-55 4-75 30 22-30 32-58 30-90 22 18 40 38 45 60z'/></svg>") center/contain no-repeat;
+    opacity: 0.85;
+    pointer-events: none;
+  }
+  .calc-hero::before { top: -60px; left: -80px; transform: rotate(-15deg); }
+  .calc-hero::after  { bottom: -80px; right: -90px; transform: rotate(160deg); }
+  .calc-hero-inner {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  .calc-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(212,160,23,0.10);
+    border: 1px solid rgba(212,160,23,0.32);
+    color: var(--c-or);
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .calc-hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15;
+    color: var(--c-noir);
+    margin: 0 0 1rem;
+  }
+  .calc-hero h1 em { font-style: italic; color: var(--c-or); }
+  .calc-hero p {
+    font-size: 1.05rem;
+    color: var(--c-text-light);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .calc-hero-meta {
+    margin-top: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+  }
+  .calc-hero-pill {
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-light);
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+  }
+  .calc-hero-pill strong { color: var(--c-or); font-weight: 600; }
+  .calc-hero-nota {
+    margin: 1.4rem auto 0;
+    max-width: 680px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--c-text-muted);
+    font-style: italic;
+    padding: 0.7rem 1rem;
+    background: rgba(255,255,255,0.55);
+    border: 1px dashed rgba(212,160,23,0.32);
+    border-radius: var(--c-radius-sm);
+    backdrop-filter: blur(6px);
+  }
+  .calc-hero-nota .calc-nota-star {
+    color: var(--c-or);
+    font-weight: 700;
+    font-style: normal;
+    margin-right: 0.2rem;
+  }
+
+  /* --- Section calculateur --- */
+  .calc-section {
+    padding: 3rem 0 4rem;
+    background:
+      radial-gradient(circle at 95% 10%, rgba(74,142,148,0.06) 0%, transparent 40%),
+      radial-gradient(circle at 5% 95%, rgba(212,160,23,0.06) 0%, transparent 45%),
+      linear-gradient(180deg, var(--c-bg-soft) 0%, var(--c-bg) 70%);
+  }
+
+  /* --- Layout 2 colonnes --- */
+  .calc-wrapper {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .calc-layout {
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    gap: 1.75rem;
+    align-items: start;
+  }
+  @media (max-width: 980px) {
+    .calc-layout { grid-template-columns: 1fr; }
+    .calc-results { position: static !important; }
+  }
+
+  /* --- Légende code couleur --- */
+  .calc-app .legende-couleurs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.7rem 1rem;
+    background: rgba(255,255,255,0.65);
+    border: 1px solid var(--c-border);
+    border-radius: var(--c-radius-sm);
+    font-size: 0.78rem;
+    color: var(--c-text-light);
+    backdrop-filter: blur(6px);
+  }
+  .calc-app .legende-couleurs > span { display: inline-flex; align-items: center; }
+  .calc-app .legende-couleurs .puce {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    border: 1px solid;
+  }
+  .calc-app .legende-couleurs .puce-prix { background: #FFF7E0; border-color: var(--c-or-line); }
+  .calc-app .legende-couleurs .puce-qte  { background: var(--c-lagon-light); border-color: #B7DDDF; }
+
+  /* --- Panneaux (cartes) --- */
+  .calc-app .panel {
+    position: relative;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--c-radius);
+    padding: 1.5rem 1.5rem 1.25rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--c-shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+  }
+  .calc-app .panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--c-or), var(--c-or-line) 50%, transparent 100%);
+    opacity: 0.7;
+  }
+  .calc-app .panel:hover {
+    box-shadow: var(--c-shadow-lg);
+  }
+  .calc-app .panel h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0 0 1rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid var(--c-border);
+    color: var(--c-noir);
+    letter-spacing: 0;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .calc-app .panel h2::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--c-or-clair);
+    box-shadow: 0 0 0 4px rgba(212,160,23,0.16);
+    margin-right: 0.25rem;
+  }
+
+  /* --- Champs --- */
+  .calc-app .field { margin-bottom: 0.85rem; }
+  .calc-app .field:last-child { margin-bottom: 0; }
+  .calc-app label {
+    display: block;
+    font-size: 0.84rem;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+    color: var(--c-text);
+    letter-spacing: 0.01em;
+  }
+  .calc-app .hint {
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: var(--c-text-muted);
+    margin-top: 0.3rem;
+  }
+  .calc-app input[type="number"],
+  .calc-app select {
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid rgba(13,13,13,0.10);
+    border-radius: var(--c-radius-sm);
+    font-size: 0.92rem;
+    background: #FFFFFF;
+    font-family: 'Outfit', 'Inter', sans-serif;
+    color: var(--c-text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .calc-app input[type="number"]:focus,
+  .calc-app select:focus {
+    outline: none;
+    border-color: var(--c-or-clair);
+    box-shadow: 0 0 0 3px rgba(212,160,23,0.15);
+  }
+
+  /* Inputs PRIX (or pâle) */
+  .calc-app input.prix-input {
+    background: #FFF8E1 !important;
+    border-color: rgba(232,197,71,0.55) !important;
+  }
+  .calc-app input.prix-input:focus {
+    border-color: var(--c-or-clair) !important;
+    box-shadow: 0 0 0 3px rgba(212,160,23,0.18) !important;
+  }
+  /* Inputs QUANTITÉ (lagon pâle) */
+  .calc-app input.qte-input {
+    background: var(--c-lagon-light) !important;
+    border-color: rgba(74,142,148,0.30) !important;
+  }
+  .calc-app input.qte-input:focus {
+    border-color: var(--c-lagon) !important;
+    box-shadow: 0 0 0 3px rgba(74,142,148,0.18) !important;
+  }
+
+  /* --- Sous-totaux par panneau --- */
+  .calc-app .panel-soustotal {
+    margin-top: 1rem;
+    padding: 0.6rem 0.95rem;
+    background: linear-gradient(90deg, rgba(212,160,23,0.10), rgba(212,160,23,0.04));
+    border-left: 3px solid var(--c-or-clair);
+    border-radius: 0 var(--c-radius-sm) var(--c-radius-sm) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.86rem;
+  }
+  .calc-app .panel-soustotal-label {
+    color: var(--c-text-light);
+    font-weight: 500;
+  }
+  .calc-app .panel-soustotal-value {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--c-or);
+    font-weight: 700;
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .calc-app .panel-soustotal.empty {
+    background: rgba(13,13,13,0.02);
+    border-left-color: rgba(13,13,13,0.10);
+    opacity: 0.55;
+  }
+  .calc-app .panel-soustotal.empty .panel-soustotal-value {
+    color: var(--c-text-muted);
+    font-weight: 400;
+    font-family: inherit;
+  }
+
+  /* Sous-total inline en ligne */
+  .calc-app .row-soustotal {
+    display: inline-block;
+    min-width: 88px;
+    text-align: right;
+    padding: 0.25rem 0.55rem;
+    margin-left: 0.4rem;
+    background: rgba(212,160,23,0.10);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--c-or);
+    font-variant-numeric: tabular-nums;
+  }
+  .calc-app .row-soustotal.empty {
+    background: rgba(13,13,13,0.03);
+    color: var(--c-text-muted);
+    font-weight: 400;
+    opacity: 0.55;
+  }
+
+  /* --- Bouton aide ⓘ + notice contextuelle --- */
+  .calc-app .help-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(212,160,23,0.15);
+    color: var(--c-or);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    font-family: inherit;
+    user-select: none;
+    transition: all 0.2s;
+  }
+  .calc-app .help-btn:hover {
+    background: var(--c-or-clair);
+    color: #fff;
+  }
+  .calc-app .help-notice {
+    display: none;
+    margin-top: 0.6rem;
+    padding: 0.85rem 1rem;
+    background: linear-gradient(180deg, #FFF9E5 0%, #FFFCF1 100%);
+    border: 1px solid rgba(212,160,23,0.30);
+    border-left: 3px solid var(--c-or-clair);
+    border-radius: var(--c-radius-sm);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--c-text);
+  }
+  .calc-app .help-notice.open { display: block; }
+  .calc-app .help-notice-title {
+    font-weight: 600;
+    color: var(--c-or);
+    margin: 0 0 0.4rem;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .calc-app .help-notice-close {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: var(--c-text-muted);
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+  }
+  .calc-app .help-notice-close:hover { color: var(--c-or); }
+  .calc-app .help-notice ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+  .calc-app .help-notice li { margin-bottom: 0.3rem; color: var(--c-text); }
+  .calc-app .help-notice li strong { color: var(--c-or); }
+
+  /* --- Onglets --- */
+  .calc-app .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .calc-app .tab-btn {
+    flex: 1 1 calc(50% - 0.15rem);
+    min-width: 0;
+    padding: 0.55rem 0.7rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--c-text-muted);
+    font-family: inherit;
+    transition: all 0.2s;
+    text-align: center;
+    margin: 0;
+    border-radius: 6px 6px 0 0;
+  }
+  .calc-app .tab-btn:hover {
+    color: var(--c-or);
+    background: rgba(212,160,23,0.06);
+  }
+  .calc-app .tab-btn.active {
+    color: var(--c-or);
+    border-bottom-color: var(--c-or-clair);
+    background: rgba(212,160,23,0.10);
+    font-weight: 600;
+  }
+  .calc-app .tab-content { display: none; }
+  .calc-app .tab-content.active { display: block; }
+
+  .calc-app .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+  .calc-app .row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.65rem;
+  }
+
+  /* --- Lignes checkbox --- */
+  .calc-app .checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.7rem;
+    background: rgba(212,160,23,0.04);
+    border: 1px solid transparent;
+    border-radius: var(--c-radius-sm);
+    margin-bottom: 0.35rem;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .calc-app .checkbox-row:hover {
+    background: rgba(212,160,23,0.07);
+    border-color: rgba(212,160,23,0.18);
+  }
+  .calc-app .checkbox-row input[type="checkbox"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--c-or-clair);
+    cursor: pointer;
+  }
+  .calc-app .checkbox-row label {
+    margin: 0;
+    font-weight: 400;
+    flex: 1;
+    cursor: pointer;
+    font-size: 0.86rem;
+  }
+  .calc-app .checkbox-row .price {
+    font-size: 0.82rem;
+    color: var(--c-text-muted);
+    font-weight: 500;
+  }
+  .calc-app .checkbox-row.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .calc-app .checkbox-row.auto-checked {
+    background: rgba(212,160,23,0.12);
+    border-left: 3px solid var(--c-or-clair);
+  }
+
+  /* --- Badges TVA --- */
+  .calc-app .badge {
+    display: inline-block;
+    padding: 0.13rem 0.5rem;
+    border-radius: 50px;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-left: 0.2rem;
+  }
+  .calc-app .badge-2 { background: var(--c-vert-light); color: var(--c-vert); }
+  .calc-app .badge-8 { background: rgba(212,160,23,0.15); color: var(--c-or); }
+  .calc-app .auto-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    background: var(--c-or-clair);
+    color: var(--c-noir);
+    padding: 0.08rem 0.45rem;
+    border-radius: 3px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* --- Field-inline (label + input compact) --- */
+  .calc-app .field-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .calc-app .field-inline label { margin: 0; flex: 1; }
+  .calc-app .field-inline input { width: 100px; }
+
+  /* --- Mémo dépliable rénovation --- */
+  .calc-app .reno-memo {
+    margin-top: 0.7rem;
+    border: 1px solid var(--c-border);
+    border-radius: var(--c-radius-sm);
+    background: var(--c-surface);
+    overflow: hidden;
+  }
+  .calc-app .reno-memo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 0.95rem;
+    background: rgba(212,160,23,0.05);
+    cursor: pointer;
+    font-size: 0.84rem;
+    font-weight: 500;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: background 0.2s;
+  }
+  .calc-app .reno-memo-header:hover { background: rgba(212,160,23,0.10); }
+  .calc-app .reno-memo-header[aria-expanded="true"] { border-bottom-color: var(--c-border); }
+  .calc-app .reno-memo-toggle {
+    font-size: 0.78rem;
+    color: var(--c-text-muted);
+    font-weight: 400;
+  }
+  .calc-app .reno-memo-body {
+    display: none;
+    padding: 0.95rem 1rem;
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+  .calc-app .reno-memo-body.open { display: block; }
+  .calc-app .reno-memo-body .memo-cat {
+    font-weight: 700;
+    color: var(--c-or);
+    margin: 0.6rem 0 0.3rem;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .calc-app .reno-memo-body .memo-cat:first-child { margin-top: 0; }
+  .calc-app .reno-memo-body ul {
+    margin: 0 0 0 1rem;
+    padding: 0;
+    color: var(--c-text-light);
+  }
+  .calc-app .reno-memo-body li { margin-bottom: 0.15rem; }
+  .calc-app .reno-memo-body .memo-objectif {
+    background: rgba(212,160,23,0.10);
+    color: var(--c-or);
+    padding: 0.45rem 0.7rem;
+    border-radius: var(--c-radius-sm);
+    margin-bottom: 0.7rem;
+    font-style: italic;
+    font-size: 0.84rem;
+  }
+  .calc-app .reno-memo-body .memo-includes {
+    font-size: 0.74rem;
+    color: var(--c-text-muted);
+    font-style: italic;
+    margin-bottom: 0.55rem;
+  }
+  .calc-app .memo-level-legere  { border-left: 3px solid #639922; }
+  .calc-app .memo-level-moyenne { border-left: 3px solid var(--c-or-clair); }
+  .calc-app .memo-level-lourde  { border-left: 3px solid var(--c-corail); }
+
+  /* --- Sous-cartes Travaux principaux (rénovation vs neuf) --- */
+  .calc-app .travaux-card {
+    padding: 0.95rem 1rem 0.85rem;
+    border-radius: var(--c-radius-sm);
+    margin-bottom: 0.85rem;
+    border: 1px solid;
+    border-left-width: 4px;
+    position: relative;
+  }
+  .calc-app .travaux-card:last-of-type { margin-bottom: 0.4rem; }
+  .calc-app .travaux-card--reno {
+    background: linear-gradient(135deg, var(--c-vert-light) 0%, rgba(229,239,233,0.5) 100%);
+    border-color: rgba(82,126,114,0.18);
+    border-left-color: var(--c-vert);
+  }
+  .calc-app .travaux-card--neuf {
+    background: linear-gradient(135deg, rgba(212,160,23,0.08) 0%, rgba(212,160,23,0.02) 100%);
+    border-color: rgba(212,160,23,0.20);
+    border-left-color: var(--c-or-clair);
+  }
+  .calc-app .travaux-card-title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--c-noir);
+    margin: 0 0 0.7rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px dashed rgba(13,13,13,0.08);
+  }
+  .calc-app .travaux-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.6);
+  }
+
+  /* =====================================================
+     PANNEAU RÉSULTATS (dark — carnet d'architecte)
+     ===================================================== */
+  .calc-app .calc-results {
+    position: sticky;
+    top: 110px;
+    align-self: start;
+  }
+  .calc-app .calc-results .panel {
+    background: linear-gradient(180deg, var(--c-noir) 0%, #141312 100%);
+    border: 1px solid rgba(212,160,23,0.22);
+    color: rgba(255,255,255,0.92);
+    box-shadow: 0 24px 60px rgba(13,13,13,0.25);
+  }
+  .calc-app .calc-results .panel::before {
+    background: linear-gradient(90deg, var(--c-or-clair), transparent 70%);
+    opacity: 1;
+  }
+  .calc-app .calc-results .panel h2 {
+    color: #fff;
+    font-size: 1.15rem;
+    border-bottom-color: rgba(212,160,23,0.22);
+  }
+  .calc-app .calc-results .panel h2::before {
+    background: var(--c-or-clair);
+    box-shadow: 0 0 0 4px rgba(212,160,23,0.30);
+  }
+
+  .calc-app table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+  }
+  .calc-app table td {
+    padding: 0.45rem 0.25rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.85);
+  }
+  .calc-app table td:last-child {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+  .calc-app table tr.section td {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    color: var(--c-or-clair);
+    padding-top: 1rem;
+    text-transform: none;
+    font-size: 0.92rem;
+    letter-spacing: 0.01em;
+    border-bottom: 1px solid rgba(212,160,23,0.20);
+  }
+  .calc-app table tr.subtotal td {
+    font-weight: 600;
+    background: rgba(255,255,255,0.04);
+    color: #fff;
+  }
+  .calc-app table tr.total td {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--c-or-clair);
+    padding: 0.95rem 0.4rem;
+    background: linear-gradient(90deg, rgba(212,160,23,0.18), rgba(212,160,23,0.04));
+    border-bottom: none;
+    border-top: 2px solid var(--c-or-clair);
+    text-shadow: 0 0 24px rgba(212,160,23,0.30);
+  }
+
+  .calc-app .legend {
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.78);
+    padding: 0.7rem 0.95rem;
+    border-radius: var(--c-radius-sm);
+    font-size: 0.78rem;
+    line-height: 1.55;
+    margin-top: 1rem;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .calc-app .legend strong { color: var(--c-or-clair); }
+
+  .calc-app .actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+  .calc-app .actions button {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(255,255,255,0.20);
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--c-radius-sm);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Outfit', 'Inter', sans-serif;
+    color: rgba(255,255,255,0.92);
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .calc-app .actions button:hover {
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(212,160,23,0.40);
+    color: #fff;
+  }
+  .calc-app .actions button.primary {
+    background: var(--c-or-clair);
+    color: var(--c-noir);
+    border-color: var(--c-or-clair);
+  }
+  .calc-app .actions button.primary:hover {
+    background: #F0B528;
+    border-color: #F0B528;
+    box-shadow: 0 8px 20px rgba(212,160,23,0.35);
+    color: var(--c-noir);
+  }
+
+  /* === Print === */
+  @media print {
+    .site-header, .site-footer, .float-stack, .calc-hero,
+    .calc-app .actions, .calc-inputs { display: none !important; }
+    .calc-app { color: #000; }
+    .calc-app .calc-results .panel {
+      background: #fff !important;
+      color: #000 !important;
+      border: 1px solid #aaa !important;
+      box-shadow: none !important;
+    }
+    .calc-app .calc-results .panel h2 { color: #000 !important; }
+    .calc-app table td { color: #000 !important; border-color: #ddd !important; }
+    .calc-app table tr.section td { color: #B8860B !important; }
+    .calc-app table tr.total td { color: #B8860B !important; background: #FFF8E1 !important; text-shadow: none !important; }
+    .calc-app .legend { background: #f7f5ed !important; color: #444 !important; border: 1px solid #ddd !important; }
+    .calc-app .calc-layout { grid-template-columns: 1fr; }
+    .calc-app .calc-results { position: static; }
+  }
+
+  /* === CTA bas de page (standalone) === */
+  .calc-cta {
+    background: linear-gradient(135deg, #0D0D0D 0%, #060606 100%);
+    color: #fff;
+    padding: 3.5rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(212,160,23,0.20);
+    border-bottom: 1px solid rgba(212,160,23,0.20);
+  }
+  .calc-cta::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(212,160,23,0.10) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .calc-cta-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+  .calc-cta h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: #fff;
+    margin: 0 0 0.6rem;
+    line-height: 1.25;
+  }
+  .calc-cta p {
+    color: rgba(255,255,255,0.78);
+    font-size: 1.02rem;
+    font-weight: 300;
+    margin: 0 0 1.8rem;
+    line-height: 1.7;
+  }
+  .calc-cta-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .calc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 2rem;
+    font-family: 'Outfit','Inter',sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+  }
+  .calc-btn--primary {
+    background: #D4A017;
+    color: #0D0D0D;
+    border-color: #D4A017;
+  }
+  .calc-btn--primary:hover {
+    background: #E8C547;
+    border-color: #E8C547;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(212,160,23,0.35);
+    color: #0D0D0D;
+  }
+  .calc-btn--outline {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255,255,255,0.30);
+  }
+  .calc-btn--outline:hover {
+    border-color: #D4A017;
+    color: #D4A017;
+  }
+
+  /* === Footer (standalone) === */
+  .calc-footer {
+    background: #0D0D0D;
+    color: rgba(255,255,255,0.65);
+    padding: 2rem 1.5rem 1.5rem;
+  }
+  .calc-footer-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .calc-footer-brand {
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+  .calc-footer-brand strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #D4A017;
+    font-weight: 700;
+  }
+  .calc-footer-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 0.85rem;
+  }
+  .calc-footer-meta a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+  }
+  .calc-footer-meta a:hover { color: #D4A017; }
+  .calc-footer-meta span { color: rgba(255,255,255,0.30); }
+  .calc-footer-disclaimer {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.40);
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  /* === Responsive === */
+  @media (max-width: 640px) {
+    .calc-app .panel { padding: 1.1rem 1rem 1rem; }
+    .calc-app .calc-wrapper { padding: 0 1rem; }
+    .calc-section { padding: 2rem 0 3rem; }
+    .calc-hero { padding: 2.5rem 0 2rem; }
+    .calc-hero::before, .calc-hero::after { width: 200px; height: 200px; }
+    .calc-cta { padding: 2.5rem 1rem; }
+    .calc-cta-buttons { flex-direction: column; }
+    .calc-btn { width: 100%; }
+    .calc-footer-meta { font-size: 0.8rem; gap: 0.35rem; }
+  }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="../" class="logo"><img src="../images/8000 A 02 RECTO calibrage nouvelle carte recto HAUT 350 gr by pass   -07.png" alt="ALB Maître d'œuvre" class="logo-img"></a>
+      <nav class="nav" id="nav">
+        <ul class="nav-list" id="navList">
+          <li class="nav-item"><a href="../" class="nav-link">Accueil</a></li>
+          <li class="nav-item"><a href="../prestations/" class="nav-link">Prestations</a>
+            <ul class="nav-dropdown">
+              <li><a href="../prestations/#etudes" class="nav-link">Études & Conception</a></li>
+              <li><a href="../prestations/#permis" class="nav-link">Permis de Construire</a></li>
+              <li><a href="../prestations/#preparation" class="nav-link">Préparation du Projet</a></li>
+              <li><a href="../prestations/#suivi" class="nav-link">Suivi de Chantier</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="./" class="nav-link nav-link--active">Calculateur</a></li>
+          <li class="nav-item"><a href="../blog/" class="nav-link">Blog</a></li>
+          <li class="nav-item nav-cta"><a href="../contact/" class="btn btn--primary">Devis Gratuit</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg><svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero tropical au-dessus du calculateur -->
+    <section class="calc-app">
+      <div class="calc-hero">
+        <div class="calc-hero-inner">
+          <span class="calc-hero-eyebrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3zM3 11h18v10H3zM7 15h2M7 18h2M11 15h6M11 18h6"/></svg>
+            Outil gratuit · La Réunion 974
+          </span>
+          <h1>Estimez le budget de <em>votre projet</em></h1>
+          <p>Un calculateur précis pensé pour la spécificité réunionnaise — TVA différenciée, frais notariés, assurance dommage-ouvrage, aléas et taxe d'aménagement intégrés. Renseignez votre projet, ajustez les prix unitaires : votre estimation se met à jour en temps réel.</p>
+          <div class="calc-hero-meta">
+            <span class="calc-hero-pill"><strong>TVA 2,1%</strong> rénovation</span>
+            <span class="calc-hero-pill"><strong>TVA 8,5%</strong> neuf, études, extérieurs</span>
+            <span class="calc-hero-pill"><strong>+10%</strong> aléas chantier</span>
+            <span class="calc-hero-pill"><strong>Pente</strong> & dommage-ouvrage</span>
+          </div>
+          <p class="calc-hero-nota"><span class="calc-nota-star">Nota :</span> les prix unitaires proposés sont une moyenne des prix du marché, susceptibles de varier en fonction de différents paramètres (localisation du projet, accessibilité du chantier, complexité technique, prestations choisies, fluctuations du coût des matériaux).</p>
+        </div>
+      </div>
+
+      <!-- Calculateur -->
+      <div class="calc-section">
+        <div class="calc-wrapper">
+          <div class="calc-layout">
+            <div class="calc-inputs">
+
+              <div class="legende-couleurs">
+                <span><span class="puce puce-prix"></span>Prix HT (€) modifiable</span>
+                <span><span class="puce puce-qte"></span>Quantité (m², ml, %)</span>
+              </div>
+
+              <!-- TERRAIN & ÉTUDES -->
+              <div class="panel">
+                <h2>1. Terrain & études préalables</h2>
+
+                <div class="field">
+                  <label for="prixTerrain">Prix d'achat du terrain HT (€) <span style="font-size:0.7rem; color:var(--c-or); font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">· frais d'agence inclus</span></label>
+                  <input type="number" id="prixTerrain" min="0" step="1000" value="0" class="prix-input">
+                  <span class="hint">Saisir le prix net vendeur <strong>+ frais d'agence éventuels</strong>. Les frais de notaire (8% — hors TVA) sont calculés automatiquement par-dessus.</span>
+                </div>
+
+                <div class="field">
+                  <label for="pente">Pente du terrain (%) <button type="button" class="help-btn" id="penteHelpBtn" aria-label="Pourquoi un surcoût ?" title="Pourquoi un surcoût ?">i</button></label>
+                  <input type="number" id="pente" min="0" max="100" step="1" value="0" class="qte-input">
+                  <span class="hint">Surcoût proportionnel : <strong>+0,5% par % de pente</strong> sur Travaux + Piscine + Clôture + Stationnement (plafonné à 50%)</span>
+
+                  <div class="help-notice" id="penteHelpNotice">
+                    <div class="help-notice-title">
+                      <span>Pourquoi un terrain en pente coûte plus cher ?</span>
+                      <button type="button" class="help-notice-close" id="penteHelpClose" aria-label="Fermer">✕</button>
+                    </div>
+                    <p style="margin:0 0 0.4rem;">Construire sur un terrain en pente engendre des surcoûts techniques significatifs :</p>
+                    <ul>
+                      <li><strong>Complexité de réalisation</strong> — accès chantier difficile, manutention des matériaux contraignante, mise en place d'engins spécialisés (mini-pelle araignée, treuils), durée du chantier rallongée</li>
+                      <li><strong>Gestion des déblais et remblais</strong> — provision pour terrassement, évacuation des terres excédentaires en décharge agréée, ou apport de remblais compactés selon le projet</li>
+                      <li><strong>Gros béton et fondations en redan</strong> — fondations descendues en gradins ou en paliers (technique du « redan ») pour s'adapter au profil naturel du sol, augmentation des volumes de béton armé</li>
+                      <li><strong>Soubassements complémentaires</strong> — murs de soutènement, parois enterrées drainées, allongement des descentes de charge, parfois reprises en sous-œuvre</li>
+                      <li><strong>Réseaux EU/EP</strong> — gestion gravitaire ou par pompe de relevage selon la pente, regards et tampons supplémentaires</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label>Études techniques <span class="badge badge-8">TVA 8,5%</span></label>
+                  <div class="checkbox-row">
+                    <input type="checkbox" id="geo">
+                    <label for="geo">Étude géotechnique (G2)</label>
+                    <input type="number" id="geoPrix" min="0" step="100" value="2500" class="prix-input" style="width:90px;">
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label>Situation du terrain <span class="badge badge-8">TVA 8,5%</span></label>
+                  <span class="hint" style="margin-bottom:0.4rem;">Saisir les montants connus de devis (laisser à 0 si non concerné)</span>
+
+                  <div style="background:rgba(212,160,23,0.04); border:1px solid var(--c-border); border-radius:var(--c-radius-sm); padding:0.7rem; margin-bottom:0.5rem;">
+                    <div style="font-size:0.7rem; color:var(--c-text-muted); margin-bottom:0.4rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase;">Concessionnaires — terrain viabilisé</div>
+
+                    <div class="field-inline" style="margin-bottom:0.4rem;">
+                      <label for="raccEauQty">Eau — pose de compteur</label>
+                      <input type="number" id="raccEauQty" min="0" step="1" value="1" class="qte-input" style="width:55px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
+                      <input type="number" id="raccEauPrix" min="0" step="100" value="1000" class="prix-input" style="width:80px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
+                    </div>
+
+                    <div class="field-inline" style="margin-bottom:0.4rem;">
+                      <label for="raccElecQty">Élec — Pose de compteur + Raccordement</label>
+                      <input type="number" id="raccElecQty" min="0" step="1" value="1" class="qte-input" style="width:55px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
+                      <input type="number" id="raccElecPrix" min="0" step="100" value="1500" class="prix-input" style="width:80px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
+                    </div>
+
+                    <div class="field-inline" style="margin-bottom:0;">
+                      <label for="raccTelecomQty">Télécom</label>
+                      <input type="number" id="raccTelecomQty" min="0" step="1" value="1" class="qte-input" style="width:55px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
+                      <input type="number" id="raccTelecomPrix" min="0" step="100" value="0" class="prix-input" style="width:80px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
+                    </div>
+                  </div>
+
+                  <div class="checkbox-row" style="background:rgba(198,110,74,0.10); border:1px solid rgba(198,110,74,0.30); border-left:3px solid var(--c-corail);">
+                    <input type="checkbox" id="viabComplete">
+                    <label for="viabComplete"><strong>Viabilisation complète</strong> <span style="font-size:0.7rem;color:var(--c-corail);">(terrain non viabilisé)</span></label>
+                  </div>
+                  <div class="field" id="viabCompleteAmount" style="display:none; margin-left:1.4rem; margin-top:0.4rem; padding:0.7rem; background:var(--c-corail-light); border-left:3px solid var(--c-corail); border-radius:0 var(--c-radius-sm) var(--c-radius-sm) 0;">
+                    <div style="font-size:0.72rem; color:var(--c-corail); font-weight:600; margin-bottom:0.4rem; letter-spacing:0.04em; text-transform:uppercase;">Attention — Poste à risque budgétaire</div>
+                    <label for="viabCompletePrix">Montant estimé HT (€)</label>
+                    <input type="number" id="viabCompletePrix" min="0" step="500" value="8000" class="prix-input">
+                    <span class="hint" style="margin-top:0.4rem;">
+                      <strong>Ce forfait inclut l'étude EDF + travaux d'extension réseaux.</strong><br>
+                      Le coût peut <strong>chiffrer très vite</strong> selon la distance au point de livraison EDF le plus proche et l'infrastructure existante (poteau, transformateur, tranchée à créer). Demander un devis EDF/EEM avant validation.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <div class="checkbox-row">
+                    <input type="checkbox" id="fosse">
+                    <label for="fosse">Fosse septique / assainissement non collectif</label>
+                    <input type="number" id="fossePrix" min="0" step="100" value="9000" class="prix-input" style="width:90px;">
+                  </div>
+
+                  <div id="spancBloc" style="display:none; margin-left:1.4rem; margin-top:0.4rem; padding:0.7rem 0.85rem; background:rgba(212,160,23,0.04); border-left:3px solid var(--c-or-clair); border-radius:0 var(--c-radius-sm) var(--c-radius-sm) 0;">
+                    <div style="font-size:0.7rem; color:var(--c-text-muted); margin-bottom:0.4rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase;">Dossier SPANC — automatiquement requis avec fosse</div>
+                    <div class="checkbox-row" style="background:transparent; padding:0.3rem 0;">
+                      <input type="checkbox" id="spancDossier" checked>
+                      <label for="spancDossier">Dossier de conception SPANC</label>
+                      <input type="number" id="spancDossierPrix" min="0" step="50" value="800" class="prix-input" style="width:80px;">
+                    </div>
+                    <div class="checkbox-row" style="background:transparent; padding:0.3rem 0;">
+                      <input type="checkbox" id="spancEtude" checked>
+                      <label for="spancEtude">Étude de perméabilité + plans</label>
+                      <input type="number" id="spancEtudePrix" min="0" step="50" value="1500" class="prix-input" style="width:80px;">
+                    </div>
+                    <div class="checkbox-row" style="background:transparent; padding:0.3rem 0;">
+                      <input type="checkbox" id="spancControle" checked>
+                      <label for="spancControle">Contrôle de réalisation SPANC</label>
+                      <input type="number" id="spancControlePrix" min="0" step="50" value="300" class="prix-input" style="width:80px;">
+                    </div>
+                    <span class="hint" style="margin-top:0.3rem;">Cases décochables individuellement si une prestation est déjà couverte ailleurs</span>
+                  </div>
+                </div>
+
+                <div class="panel-soustotal" id="st_terrain">
+                  <span class="panel-soustotal-label">Sous-total terrain & études</span>
+                  <span class="panel-soustotal-value">0 €</span>
+                </div>
+              </div>
+
+              <!-- TRAVAUX -->
+              <div class="panel">
+                <h2>2. Travaux principaux</h2>
+
+                <!-- Sous-bloc Rénovation (TVA 2,1% — vert) -->
+                <div class="travaux-card travaux-card--reno">
+                  <div class="travaux-card-title">
+                    <span class="travaux-dot" style="background:var(--c-vert);"></span>
+                    Rénovation
+                    <span class="badge badge-2">TVA 2,1%</span>
+                  </div>
+                  <div style="display:grid; grid-template-columns:1fr 1.3fr 0.9fr; gap:0.55rem;">
+                    <div>
+                      <label for="renoSurface" style="font-weight:400; font-size:0.78rem;">Surface (m²)</label>
+                      <input type="number" id="renoSurface" min="0" step="1" value="0" class="qte-input">
+                    </div>
+                    <div>
+                      <label for="renoType" style="font-weight:400; font-size:0.78rem;">Type</label>
+                      <select id="renoType">
+                        <option value="aucune">— Aucune —</option>
+                        <option value="legere">Légère</option>
+                        <option value="moyenne">Moyenne</option>
+                        <option value="lourde">Lourde</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="renoPrixM2" style="font-weight:400; font-size:0.78rem;">Prix €/m²</label>
+                      <input type="number" id="renoPrixM2" min="0" step="50" value="0" placeholder="Auto" class="prix-input">
+                    </div>
+                  </div>
+                  <span class="hint">Prix indicatifs : Légère 500 / Moyenne 900 / Lourde 1 300 €/m² — modifiables selon devis</span>
+
+                  <div class="reno-memo" id="renoMemo" style="display:none;">
+                    <div class="reno-memo-header" id="renoMemoHeader" role="button" aria-expanded="false" tabindex="0">
+                      <span id="renoMemoTitle">Détail des prestations incluses</span>
+                      <span class="reno-memo-toggle" id="renoMemoToggle">▼ Voir le détail</span>
+                    </div>
+                    <div class="reno-memo-body" id="renoMemoBody"></div>
+                  </div>
+                </div>
+
+                <!-- Sous-bloc Construction neuve (TVA 8,5% — or) -->
+                <div class="travaux-card travaux-card--neuf">
+                  <div class="travaux-card-title">
+                    <span class="travaux-dot" style="background:var(--c-or-clair);"></span>
+                    Construction neuve
+                    <span class="badge badge-8">TVA 8,5%</span>
+                  </div>
+                  <div class="row">
+                    <div>
+                      <label for="neuf" style="font-weight:400; font-size:0.78rem;">Surface SHOB (m²)</label>
+                      <input type="number" id="neuf" min="0" step="1" value="0" class="qte-input">
+                    </div>
+                    <div>
+                      <label for="neufPrixM2" style="font-weight:400; font-size:0.78rem;">Prix €/m² HT</label>
+                      <input type="number" id="neufPrixM2" min="0" step="50" value="1550" class="prix-input">
+                    </div>
+                  </div>
+                  <span class="hint"><strong>1 550 €/m² HT</strong> par défaut, calculé sur la <strong>Surface Hors d'Œuvre Brute (SHOB)</strong> — modifiable selon prestations et localisation</span>
+                </div>
+
+                <div class="panel-soustotal" id="st_travaux">
+                  <span class="panel-soustotal-label">Sous-total travaux principaux HT</span>
+                  <span class="panel-soustotal-value">0 €</span>
+                </div>
+              </div>
+
+              <!-- ÉQUIPEMENTS / LOTS SPÉCIFIQUES -->
+              <div class="panel">
+                <h2>3. Équipements spécifiques (lots) <span class="badge badge-8">TVA 8,5%</span></h2>
+                <span class="hint" style="margin-bottom:0.6rem;">Cocher les équipements applicables et renseigner les quantités — montants modifiables</span>
+
+                <div class="checkbox-row">
+                  <input type="checkbox" id="equipCuisine" checked>
+                  <label for="equipCuisine">Cuisine équipée</label>
+                  <div class="field-inline" style="margin:0; gap:0.25rem;">
+                    <input type="number" id="equipCuisineQty" min="0" step="1" value="1" placeholder="qté" class="qte-input" style="width:55px;">
+                    <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
+                    <input type="number" id="equipCuisinePrix" min="0" step="100" value="10000" class="prix-input" style="width:80px;">
+                    <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
+                  </div>
+                  <span class="row-soustotal empty" id="st_equipCuisine">0 €</span>
+                </div>
+
+                <div class="checkbox-row">
+                  <input type="checkbox" id="equipSDB" checked>
+                  <label for="equipSDB">Salle de bain</label>
+                  <div class="field-inline" style="margin:0; gap:0.25rem;">
+                    <input type="number" id="equipSDBQty" min="0" step="1" value="1" placeholder="qté" class="qte-input" style="width:55px;">
+                    <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
+                    <input type="number" id="equipSDBPrix" min="0" step="100" value="7000" class="prix-input" style="width:80px;">
+                    <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
+                  </div>
+                  <span class="row-soustotal empty" id="st_equipSDB">0 €</span>
+                </div>
+
+                <div class="checkbox-row">
+                  <input type="checkbox" id="equipWC" checked>
+                  <label for="equipWC">WC indépendant</label>
+                  <div class="field-inline" style="margin:0; gap:0.25rem;">
+                    <input type="number" id="equipWCQty" min="0" step="1" value="1" placeholder="qté" class="qte-input" style="width:55px;">
+                    <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
+                    <input type="number" id="equipWCPrix" min="0" step="100" value="1000" class="prix-input" style="width:80px;">
+                    <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
+                  </div>
+                  <span class="row-soustotal empty" id="st_equipWC">0 €</span>
+                </div>
+
+                <div class="checkbox-row">
+                  <input type="checkbox" id="equipCES" checked>
+                  <label for="equipCES">Chauffe-eau solaire</label>
+                  <div class="field-inline" style="margin:0; gap:0.25rem;">
+                    <input type="number" id="equipCESQty" min="0" step="1" value="1" placeholder="qté" class="qte-input" style="width:55px;">
+                    <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
+                    <input type="number" id="equipCESPrix" min="0" step="100" value="2500" class="prix-input" style="width:80px;">
+                    <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
+                  </div>
+                  <span class="row-soustotal empty" id="st_equipCES">0 €</span>
+                </div>
+
+                <span class="hint" style="margin-top:0.5rem;">
+                  <strong>Cuisine 10 000 €/u</strong> : meubles, plan de travail, électroménager standard, raccordements.<br>
+                  <strong>Salle de bain 7 000 €/u</strong> : douche/baignoire, vasque, WC, robinetterie, faïence.<br>
+                  <strong>WC indépendant 1 000 €/u</strong> : cuvette, lave-mains, robinetterie.<br>
+                  <strong>Chauffe-eau solaire 2 500 €/u</strong> : capteur thermique, ballon, support, installation.
+                </span>
+
+                <div class="panel-soustotal" id="st_equipements">
+                  <span class="panel-soustotal-label">Sous-total équipements HT</span>
+                  <span class="panel-soustotal-value">0 €</span>
+                </div>
+              </div>
+
+              <!-- MAÎTRISE D'ŒUVRE & FRAIS D'ÉTUDES -->
+              <div class="panel">
+                <h2>4. Maîtrise d'œuvre & frais d'études <span class="badge badge-8">TVA 8,5%</span></h2>
+
+                <div class="field">
+                  <label>Bureaux d'études et contrôle</label>
+                  <span class="hint" style="margin-bottom:0.4rem;">Cocher les prestations applicables — montants modifiables</span>
+
+                  <div class="checkbox-row">
+                    <input type="checkbox" id="be">
+                    <label for="be">Bureau d'études (structure / thermique RT)</label>
+                    <input type="number" id="bePrix" min="0" step="100" value="3500" class="prix-input" style="width:90px;">
+                    <span class="row-soustotal empty" id="st_be">0 €</span>
+                  </div>
+                  <div class="checkbox-row">
+                    <input type="checkbox" id="csps">
+                    <label for="csps">CSPS — Coordination Sécurité Protection Santé</label>
+                    <input type="number" id="cspsPrix" min="0" step="100" value="2500" class="prix-input" style="width:90px;">
+                    <span class="row-soustotal empty" id="st_csps">0 €</span>
+                  </div>
+                  <div class="checkbox-row">
+                    <input type="checkbox" id="bcontrole">
+                    <label for="bcontrole">Bureau de contrôle technique</label>
+                    <input type="number" id="bcontrolePrix" min="0" step="100" value="4000" class="prix-input" style="width:90px;">
+                    <span class="row-soustotal empty" id="st_bcontrole">0 €</span>
+                  </div>
+                  <div class="checkbox-row">
+                    <input type="checkbox" id="geometre">
+                    <label for="geometre">Géomètre-expert (bornage / plan topographique)</label>
+                    <input type="number" id="geometrePrix" min="0" step="100" value="2000" class="prix-input" style="width:90px;">
+                    <span class="row-soustotal empty" id="st_geometre">0 €</span>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label>Conception architecturale</label>
+                  <span class="hint" style="margin-bottom:0.4rem;">Architecte obligatoire pour surface ≥ 150 m² (loi du 3 janvier 1977)</span>
+
+                  <div class="checkbox-row" id="dessinateurRow">
+                    <input type="checkbox" id="dessinateur">
+                    <label for="dessinateur">Frais dessinateur (projets &lt; 150 m²)</label>
+                    <div class="field-inline" style="margin:0; gap:0.25rem;">
+                      <input type="number" id="dessinateurPrixM2" min="0" step="1" value="15" class="prix-input" style="width:60px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m² HT</span>
+                    </div>
+                    <span class="row-soustotal empty" id="st_dessinateur">0 €</span>
+                  </div>
+                  <div class="checkbox-row" id="architecteRow">
+                    <input type="checkbox" id="architecte">
+                    <label for="architecte">Architecte (projets ≥ 150 m²) <button type="button" class="help-btn" id="archHelpBtn" aria-label="Détail prestation" title="Détail prestation">i</button></label>
+                    <div class="field-inline" style="margin:0; gap:0.25rem;">
+                      <input type="number" id="architectePrixM2" min="0" step="1" value="50" class="prix-input" style="width:60px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m² HT</span>
+                    </div>
+                    <span class="row-soustotal empty" id="st_architecte">0 €</span>
+                  </div>
+
+                  <div class="help-notice" id="archHelpNotice">
+                    <div class="help-notice-title">
+                      <span>Prestation architecte — détail (50 €/m²)</span>
+                      <button type="button" class="help-notice-close" id="archHelpClose" aria-label="Fermer">✕</button>
+                    </div>
+                    <p style="margin:0 0 0.4rem;">Le forfait architecte standard comprend :</p>
+                    <ul>
+                      <li><strong>Esquisse (ESQ)</strong> — études de faisabilité, premières propositions de plans</li>
+                      <li><strong>Avant-Projet Sommaire (APS)</strong> — plans de masse, plans, coupes, façades à l'échelle</li>
+                      <li><strong>Avant-Projet Définitif (APD)</strong> — plans détaillés, choix techniques, estimation provisoire</li>
+                      <li><strong>Dossier de Permis de Construire (PC)</strong> — montage du dossier complet, formulaires Cerfa, notice descriptive, plans réglementaires</li>
+                    </ul>
+                  </div>
+
+                  <div style="margin-top:0.7rem; padding:0.7rem 0.85rem; background:rgba(212,160,23,0.04); border:1px solid var(--c-border); border-radius:var(--c-radius-sm);">
+                    <div style="font-size:0.7rem; color:var(--c-text-muted); margin-bottom:0.4rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase;">Options complémentaires</div>
+                    <div class="checkbox-row" style="background:transparent; padding:0.3rem 0;">
+                      <input type="checkbox" id="archCCTP">
+                      <label for="archCCTP">CCTP — Cahier des Clauses Techniques Particulières</label>
+                      <input type="number" id="archCCTPPrix" min="0" step="1" value="8" class="prix-input" style="width:60px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m² HT</span>
+                      <span class="row-soustotal empty" id="st_archCCTP">0 €</span>
+                    </div>
+                    <div class="checkbox-row" style="background:transparent; padding:0.3rem 0;">
+                      <input type="checkbox" id="archAssistContrats">
+                      <label for="archAssistContrats">Assistance aux contrats de travaux (ACT)</label>
+                      <input type="number" id="archAssistContratsPrix" min="0" step="1" value="6" class="prix-input" style="width:60px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m² HT</span>
+                      <span class="row-soustotal empty" id="st_archAssistContrats">0 €</span>
+                    </div>
+                    <div class="hint" style="margin-top:0.3rem;">
+                      <strong>CCTP</strong> : rédaction des spécifications techniques par lot pour la consultation des entreprises.<br>
+                      <strong>ACT</strong> : analyse des offres, mise au point des marchés, signature des contrats avec les entreprises retenues.
+                    </div>
+                  </div>
+                  <span class="hint" id="archHint" style="margin-top:0.3rem;"></span>
+                </div>
+
+                <div class="field">
+                  <label>Maîtrise d'œuvre — Direction d'exécution des travaux (DET)</label>
+                  <div class="checkbox-row">
+                    <input type="checkbox" id="moeDET">
+                    <label for="moeDET">Honoraires MOE (DET)</label>
+                    <div class="field-inline" style="margin:0; gap:0.25rem;">
+                      <input type="number" id="moeDETPct" min="0" max="20" step="0.5" value="6" class="qte-input" style="width:50px;">
+                      <span style="font-size:0.7rem; color:var(--c-text-muted);">% HT travaux</span>
+                    </div>
+                    <span class="row-soustotal empty" id="st_moeDET">0 €</span>
+                  </div>
+                </div>
+
+                <div class="panel-soustotal" id="st_moe">
+                  <span class="panel-soustotal-label">Sous-total MOE & études HT</span>
+                  <span class="panel-soustotal-value">0 €</span>
+                </div>
+              </div>
+
+              <!-- PISCINE -->
+              <div class="panel">
+                <h2>5. Piscine <span class="badge badge-8">TVA 8,5%</span></h2>
+
+                <div style="display:grid; grid-template-columns:1.3fr 1fr 0.9fr; gap:0.55rem;">
+                  <div class="field">
+                    <label for="piscineType" style="font-weight:400; font-size:0.78rem;">Type</label>
+                    <select id="piscineType">
+                      <option value="aucune">Aucune</option>
+                      <option value="simple">Simple</option>
+                      <option value="debordement">À débordement</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="piscineSurface" style="font-weight:400; font-size:0.78rem;">Surface (m²)</label>
+                    <input type="number" id="piscineSurface" min="0" step="1" value="0" class="qte-input">
+                  </div>
+                  <div class="field">
+                    <label for="piscinePrixM2" style="font-weight:400; font-size:0.78rem;">Prix €/m²</label>
+                    <input type="number" id="piscinePrixM2" min="0" step="100" value="0" placeholder="Auto" class="prix-input">
+                  </div>
+                </div>
+                <span class="hint">Prix indicatifs : Simple 1 700 / Débordement 2 000 €/m² — modifiables selon prestations</span>
+
+                <div class="panel-soustotal" id="st_piscine">
+                  <span class="panel-soustotal-label">Sous-total piscine HT</span>
+                  <span class="panel-soustotal-value">0 €</span>
+                </div>
+              </div>
+
+              <!-- AMÉNAGEMENTS EXTÉRIEURS -->
+              <div class="panel">
+                <h2>6. Aménagements extérieurs <span class="badge badge-8">TVA 8,5%</span></h2>
+
+                <div class="tabs" role="tablist">
+                  <button type="button" class="tab-btn active" data-tab="cloture" role="tab">Clôture</button>
+                  <button type="button" class="tab-btn" data-tab="stationnement" role="tab">Stationnement</button>
+                  <button type="button" class="tab-btn" data-tab="portail" role="tab">Portail</button>
+                  <button type="button" class="tab-btn" data-tab="paysagisme" role="tab">Paysagisme</button>
+                </div>
+
+                <div class="tab-content active" data-content="cloture">
+                  <div class="field">
+                    <label>Bloc US — enduit + peinture 2 faces</label>
+                    <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:0.4rem;">
+                      <div>
+                        <label for="cloturePar" style="font-weight:400; font-size:0.78rem;">Linéaire (ml)</label>
+                        <input type="number" id="cloturePar" min="0" step="1" value="0" class="qte-input">
+                      </div>
+                      <div>
+                        <label for="cloturePrixPar" style="font-weight:400; font-size:0.78rem;">Prix €/ml</label>
+                        <input type="number" id="cloturePrixPar" min="0" step="10" value="350" class="prix-input">
+                      </div>
+                    </div>
+                    <span class="hint">350 €/ml — semelle + bloc US + enduit 2 faces + peinture 2 faces</span>
+                  </div>
+
+                  <div class="field">
+                    <label>Mur moellons (hauteur 2 m)</label>
+                    <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:0.4rem;">
+                      <div>
+                        <label for="clotureMoellons" style="font-weight:400; font-size:0.78rem;">Linéaire (ml)</label>
+                        <input type="number" id="clotureMoellons" min="0" step="1" value="0" class="qte-input">
+                      </div>
+                      <div>
+                        <label for="clotureMoellonsPrix" style="font-weight:400; font-size:0.78rem;">Prix €/ml</label>
+                        <input type="number" id="clotureMoellonsPrix" min="0" step="10" value="750" class="prix-input">
+                      </div>
+                    </div>
+                    <span class="hint">750 €/ml — mur en moellons apparents, hauteur 2 m, fondation comprise</span>
+                  </div>
+
+                  <div class="field">
+                    <label>Semi-rigide métallique</label>
+                    <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:0.4rem;">
+                      <div>
+                        <label for="clotureSR" style="font-weight:400; font-size:0.78rem;">Linéaire (ml)</label>
+                        <input type="number" id="clotureSR" min="0" step="1" value="0" class="qte-input">
+                      </div>
+                      <div>
+                        <label for="clotureSRPrix" style="font-weight:400; font-size:0.78rem;">Prix €/ml</label>
+                        <input type="number" id="clotureSRPrix" min="0" step="5" value="120" class="prix-input">
+                      </div>
+                    </div>
+                    <span class="hint">120 €/ml — panneau rigide métallique avec poteaux</span>
+                  </div>
+                </div>
+
+                <div class="tab-content" data-content="stationnement">
+                  <div class="row">
+                    <div class="field">
+                      <label for="statGravillon">Gravillon</label>
+                      <div style="display:grid; grid-template-columns:1fr 0.9fr; gap:0.4rem;">
+                        <input type="number" id="statGravillon" min="0" step="1" value="0" placeholder="m²" class="qte-input">
+                        <input type="number" id="statGravillonPrix" min="0" step="5" value="30" title="Prix HT €/m²" class="prix-input">
+                      </div>
+                      <span class="hint">30 €/m²</span>
+                    </div>
+                    <div class="field">
+                      <label for="statPaveHerbe">Pavé herbe</label>
+                      <div style="display:grid; grid-template-columns:1fr 0.9fr; gap:0.4rem;">
+                        <input type="number" id="statPaveHerbe" min="0" step="1" value="0" placeholder="m²" class="qte-input">
+                        <input type="number" id="statPaveHerbePrix" min="0" step="5" value="70" title="Prix HT €/m²" class="prix-input">
+                      </div>
+                      <span class="hint">70 €/m²</span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="field">
+                      <label for="statDallage">Dallage béton</label>
+                      <div style="display:grid; grid-template-columns:1fr 0.9fr; gap:0.4rem;">
+                        <input type="number" id="statDallage" min="0" step="1" value="0" placeholder="m²" class="qte-input">
+                        <input type="number" id="statDallagePrix" min="0" step="5" value="90" title="Prix HT €/m²" class="prix-input">
+                      </div>
+                      <span class="hint">90 €/m²</span>
+                    </div>
+                    <div class="field">
+                      <label for="statBetonDes">Béton désactivé</label>
+                      <div style="display:grid; grid-template-columns:1fr 0.9fr; gap:0.4rem;">
+                        <input type="number" id="statBetonDes" min="0" step="1" value="0" placeholder="m²" class="qte-input">
+                        <input type="number" id="statBetonDesPrix" min="0" step="5" value="120" title="Prix HT €/m²" class="prix-input">
+                      </div>
+                      <span class="hint">120 €/m²</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-content" data-content="portail">
+                  <div class="field">
+                    <label>Portail standard 3,70 m × 2 m</label>
+                    <span class="hint" style="margin-bottom:0.4rem;">Cocher les composants à inclure — montants modifiables</span>
+
+                    <div class="checkbox-row">
+                      <input type="checkbox" id="portailVantail">
+                      <label for="portailVantail">Portail (3,70 m × 2 m de haut)</label>
+                      <input type="number" id="portailVantailPrix" min="0" step="100" value="3500" class="prix-input" style="width:80px;">
+                      <span class="row-soustotal empty" id="st_portailVantail">0 €</span>
+                    </div>
+                    <div class="checkbox-row">
+                      <input type="checkbox" id="portailLongrine">
+                      <label for="portailLongrine">Longrine + scellement du rail</label>
+                      <input type="number" id="portailLongrinePrix" min="0" step="50" value="600" class="prix-input" style="width:80px;">
+                      <span class="row-soustotal empty" id="st_portailLongrine">0 €</span>
+                    </div>
+                    <div class="checkbox-row">
+                      <input type="checkbox" id="portailMotor">
+                      <label for="portailMotor">Motorisation</label>
+                      <input type="number" id="portailMotorPrix" min="0" step="50" value="1300" class="prix-input" style="width:80px;">
+                      <span class="row-soustotal empty" id="st_portailMotor">0 €</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-content" data-content="paysagisme">
+                  <div class="field">
+                    <label>Aménagements paysagers</label>
+                    <span class="hint" style="margin-bottom:0.4rem;">Cocher les prestations applicables — montants modifiables</span>
+
+                    <div class="checkbox-row">
+                      <input type="checkbox" id="paysEngazonnement">
+                      <label for="paysEngazonnement">Engazonnement</label>
+                      <div class="field-inline" style="margin:0; gap:0.25rem;">
+                        <input type="number" id="paysEngazonnementSurf" min="0" step="10" value="0" placeholder="m²" class="qte-input" style="width:70px;">
+                        <input type="number" id="paysEngazonnementPrix" min="0" step="1" value="12" class="prix-input" style="width:55px;">
+                        <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m²</span>
+                      </div>
+                      <span class="row-soustotal empty" id="st_paysEngazonnement">0 €</span>
+                    </div>
+
+                    <div class="checkbox-row">
+                      <input type="checkbox" id="paysPlantations">
+                      <label for="paysPlantations">Plantations (arbres, arbustes, massifs)</label>
+                      <input type="number" id="paysPlantationsPrix" min="0" step="100" value="1500" class="prix-input" style="width:80px;">
+                      <span class="row-soustotal empty" id="st_paysPlantations">0 €</span>
+                    </div>
+
+                    <div class="checkbox-row">
+                      <input type="checkbox" id="paysArrosage">
+                      <label for="paysArrosage">Système d'arrosage automatique</label>
+                      <input type="number" id="paysArrosagePrix" min="0" step="100" value="800" class="prix-input" style="width:80px;">
+                      <span class="row-soustotal empty" id="st_paysArrosage">0 €</span>
+                    </div>
+
+                    <div class="checkbox-row">
+                      <input type="checkbox" id="paysTerrassement">
+                      <label for="paysTerrassement">Terrassement végétal (terre végétale + nivellement)</label>
+                      <input type="number" id="paysTerrassementPrix" min="0" step="100" value="1200" class="prix-input" style="width:80px;">
+                      <span class="row-soustotal empty" id="st_paysTerrassement">0 €</span>
+                    </div>
+                  </div>
+
+                  <div class="field" style="margin-top:1rem; padding-top:0.85rem; border-top:1px dashed var(--c-border);">
+                    <label>Caillebotis bois (terrasse)</label>
+                    <span class="hint" style="margin-bottom:0.4rem;">Plots béton + structure compris dans le prix au m²</span>
+
+                    <div class="checkbox-row">
+                      <input type="checkbox" id="terrPin">
+                      <label for="terrPin">Pin classe 4 (traité autoclave)</label>
+                      <div class="field-inline" style="margin:0; gap:0.25rem;">
+                        <input type="number" id="terrPinSurf" min="0" step="1" value="0" placeholder="m²" class="qte-input" style="width:70px;">
+                        <input type="number" id="terrPinPrix" min="0" step="10" value="250" class="prix-input" style="width:60px;">
+                        <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m²</span>
+                      </div>
+                      <span class="row-soustotal empty" id="st_terrPin">0 €</span>
+                    </div>
+
+                    <div class="checkbox-row">
+                      <input type="checkbox" id="terrExo">
+                      <label for="terrExo">Bois exotique (ipé, cumaru, bangkirai...)</label>
+                      <div class="field-inline" style="margin:0; gap:0.25rem;">
+                        <input type="number" id="terrExoSurf" min="0" step="1" value="0" placeholder="m²" class="qte-input" style="width:70px;">
+                        <input type="number" id="terrExoPrix" min="0" step="10" value="350" class="prix-input" style="width:60px;">
+                        <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m²</span>
+                      </div>
+                      <span class="row-soustotal empty" id="st_terrExo">0 €</span>
+                    </div>
+
+                    <span class="hint" style="margin-top:0.4rem;">
+                      <strong>Pin classe 4 (250 €/m²)</strong> : plus économique, durabilité ~15-20 ans en climat tropical, entretien régulier (saturateur).<br>
+                      <strong>Bois exotique (350 €/m²)</strong> : durabilité ~30 ans, résistant naturellement aux insectes et champignons, prend une teinte grise s'il n'est pas saturé.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="panel-soustotal" id="st_exterieurs">
+                  <span class="panel-soustotal-label">Sous-total aménagements extérieurs HT</span>
+                  <span class="panel-soustotal-value">0 €</span>
+                </div>
+              </div>
+
+              <!-- ASSURANCE & TAXES -->
+              <div class="panel">
+                <h2>7. Assurance &amp; taxes</h2>
+
+                <div class="field">
+                  <label>Assurance construction <span class="badge badge-8">TVA 8,5%</span></label>
+                  <div class="checkbox-row">
+                    <input type="checkbox" id="includeDO" checked>
+                    <label for="includeDO">Inclure Dommage Ouvrage (2% du TTC travaux)</label>
+                  </div>
+                  <span class="hint">Obligatoire pour le maître d'ouvrage construisant pour son compte (loi Spinetta) — calculée automatiquement sur le TTC des travaux principaux (rénovation + neuf).</span>
+                </div>
+
+                <div class="field" style="margin-top:0.85rem; padding-top:0.85rem; border-top:1px dashed var(--c-border);">
+                  <label>Taxe d'aménagement <span class="badge" style="background:rgba(13,13,13,0.06); color:var(--c-text-muted);">Hors TVA</span></label>
+                  <span class="hint" style="margin-bottom:0.4rem;">Taxe d'urbanisme communale/départementale calculée sur la surface neuve construite</span>
+
+                  <div class="checkbox-row">
+                    <input type="checkbox" id="taxeAmenagement">
+                    <label for="taxeAmenagement">Inclure la taxe d'aménagement</label>
+                  </div>
+
+                  <div id="taxeAmenagementBloc" style="display:none; margin-left:1.4rem; margin-top:0.4rem; padding:0.7rem 0.85rem; background:rgba(212,160,23,0.04); border-left:3px solid var(--c-or-clair); border-radius:0 var(--c-radius-sm) var(--c-radius-sm) 0;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.55rem;">
+                      <div>
+                        <label for="taxeAmenagementValeurM2" style="font-weight:400; font-size:0.74rem; color:var(--c-text-muted);">Valeur forfaitaire €/m²</label>
+                        <input type="number" id="taxeAmenagementValeurM2" min="0" step="1" value="1036" class="prix-input">
+                      </div>
+                      <div>
+                        <label for="taxeAmenagementTaux" style="font-weight:400; font-size:0.74rem; color:var(--c-text-muted);">Taux communal %</label>
+                        <input type="number" id="taxeAmenagementTaux" min="0" max="20" step="0.1" value="3" class="qte-input">
+                      </div>
+                    </div>
+                    <span class="hint" style="margin-top:0.4rem;">
+                      <strong>Valeur forfaitaire 2025 : 1 036 €/m²</strong> (révisée chaque année par arrêté ministériel).<br>
+                      <strong>Taux variable selon les communes de La Réunion</strong> (généralement entre 1% et 5% — vérifier auprès du service urbanisme de la commune concernée).<br>
+                      Calcul : surface neuve × valeur forfaitaire × taux communal.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="panel-soustotal" id="st_assurtaxes">
+                  <span class="panel-soustotal-label">Sous-total assurance &amp; taxes</span>
+                  <span class="panel-soustotal-value">0 €</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- PANNEAU RÉSULTATS -->
+            <div class="calc-results">
+              <div class="panel">
+                <h2>Récapitulatif du projet</h2>
+                <table id="resultats">
+                  <!-- généré dynamiquement -->
+                </table>
+
+                <div class="legend">
+                  <strong>Logique de calcul :</strong> Le foncier (Terrain + Notaire 8%) est traité en TTC, hors champ TVA. Le bâti suit le flux : HT par poste → majoration pente → +10% aléas → TVA pondérée 2,1%/8,5% selon mix rénovation/neuf → TTC. La Dommage Ouvrage (2%) est calculée sur le TTC des travaux principaux uniquement.
+                </div>
+
+                <div class="actions">
+                  <button onclick="window.print()">Imprimer / PDF</button>
+                  <button class="primary" onclick="resetForm()">Réinitialiser</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bandeau de bas de page : contact direct -->
+    <section class="calc-cta">
+      <div class="calc-cta-inner">
+        <h2>Une estimation précise pour aller plus loin ?</h2>
+        <p>Confiez votre projet à un maître d'œuvre. Devis détaillé, suivi de chantier et tranquillité d'esprit — de la première esquisse à la remise des clés.</p>
+        <div class="calc-cta-buttons">
+          <a href="mailto:alb-moe@outlook.com" class="calc-btn calc-btn--primary">Demander un devis gratuit</a>
+          <a href="tel:+262693881521" class="calc-btn calc-btn--outline">0693 88 15 21</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo" style="margin-bottom:0.5rem;"><img src="../images/LOGO ENTETE.jpg" alt="ALB Maître d'œuvre" class="footer-logo-img"></div>
+          <p>Maître d'œuvre sur l'île de La Réunion. Accompagnement sur mesure de vos projets immobiliers, de la conception à la livraison.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/Albmoe" class="social-link" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="https://www.linkedin.com/in/alan-le-bail-389934104/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          </div>
+        </div>
+        <div><div class="footer-title">Navigation</div><ul class="footer-links"><li><a href="../">Accueil</a></li><li><a href="../prestations/">Prestations</a></li><li><a href="./">Calculateur de budget</a></li><li><a href="../blog/">Blog</a></li><li><a href="../contact/">Devis gratuit</a></li></ul></div>
+        <div><div class="footer-title">Nos services</div><ul class="footer-links"><li><a href="../prestations/#etudes">Études & Conception</a></li><li><a href="../prestations/#permis">Permis de Construire</a></li><li><a href="../prestations/#preparation">Préparation du Projet</a></li><li><a href="../prestations/#suivi">Suivi de Chantier</a></li></ul></div>
+        <div><div class="footer-title">Contact</div>
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>36 Bis Route de La Ravine Sèche<br>97425 Les Avirons</span></div>
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:+262693881521">0693 88 15 21</a></div>
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><a href="mailto:alb-moe@outlook.com">alb-moe@outlook.com</a></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>&copy; 2025 ALB Maître d'œuvre · SIREN 910 413 277 000 13 · Outil d'estimation à titre indicatif, document non contractuel</span><div class="footer-legal"><a href="../mentions-legales/">Mentions légales</a><a href="../politique-de-confidentialite/">Politique de confidentialité</a></div></div>
+    </div>
+  </footer>
+  <script src="../script.js"></script>
+
+  <script>
+    // ===================================================================
+    // CALCULATEUR BUDGET MOE — LA RÉUNION
+    // TVA différenciée : 2,1% (rénovation) / 8,5% (neuf, études, extérieurs)
+    // ===================================================================
+    const TVA_RENO = 0.021;
+    const TVA_AUTRE = 0.085;
+    const NOTAIRE_RATE = 0.08;
+    const DO_RATE = 0.02;
+    const ALEAS = 0.10;
+
+    const v = id => parseFloat(document.getElementById(id).value) || 0;
+    const c = id => document.getElementById(id).checked;
+    const fmt = n => Math.round(n).toLocaleString('fr-FR') + ' €';
+
+    function calculer() {
+      const prixTerrain = v('prixTerrain');
+      const fraisNotaire = prixTerrain * NOTAIRE_RATE;
+
+      let etudes = 0;
+      if (c('geo')) etudes += v('geoPrix');
+      if (c('fosse')) etudes += v('fossePrix');
+
+      const raccEau = v('raccEauQty') * v('raccEauPrix');
+      const raccElec = v('raccElecQty') * v('raccElecPrix');
+      const raccTelecom = v('raccTelecomQty') * v('raccTelecomPrix');
+      const raccordements = raccEau + raccElec + raccTelecom;
+      const viabComplete = c('viabComplete') ? v('viabCompletePrix') : 0;
+      const etudesEtViab = etudes + raccordements + viabComplete;
+
+      const renoSurface = v('renoSurface');
+      const renoType = document.getElementById('renoType').value;
+      const renoPrixM2 = v('renoPrixM2');
+      let renoLabel = '';
+      if (renoType === 'legere')       renoLabel = 'Rénovation légère';
+      else if (renoType === 'moyenne') renoLabel = 'Rénovation moyenne';
+      else if (renoType === 'lourde')  renoLabel = 'Rénovation lourde';
+      const totalReno = (renoType !== 'aucune') ? renoSurface * renoPrixM2 : 0;
+
+      const neuf = v('neuf') * v('neufPrixM2');
+      const totalTravaux = totalReno + neuf;
+
+      let frais_be = c('be') ? v('bePrix') : 0;
+      let frais_csps = c('csps') ? v('cspsPrix') : 0;
+      let frais_bcontrole = c('bcontrole') ? v('bcontrolePrix') : 0;
+      let frais_geometre = c('geometre') ? v('geometrePrix') : 0;
+
+      const surfaceConception = v('neuf') + v('renoSurface');
+
+      const dessinateurPrixM2 = v('dessinateurPrixM2');
+      let frais_dessinateur = c('dessinateur') ? surfaceConception * dessinateurPrixM2 : 0;
+
+      const architectePrixM2 = v('architectePrixM2');
+      let frais_architecte = c('architecte') ? surfaceConception * architectePrixM2 : 0;
+
+      const archCCTPPrixM2 = v('archCCTPPrix');
+      let frais_archCCTP = c('archCCTP') ? surfaceConception * archCCTPPrixM2 : 0;
+      const archAssistContratsPrixM2 = v('archAssistContratsPrix');
+      let frais_archAssistContrats = c('archAssistContrats') ? surfaceConception * archAssistContratsPrixM2 : 0;
+
+      const moeDETPct = v('moeDETPct') / 100;
+      let frais_moeDET = c('moeDET') ? totalTravaux * moeDETPct : 0;
+
+      let frais_spancDossier = c('spancDossier') ? v('spancDossierPrix') : 0;
+      let frais_spancEtude = c('spancEtude') ? v('spancEtudePrix') : 0;
+      let frais_spancControle = c('spancControle') ? v('spancControlePrix') : 0;
+      const total_spanc = frais_spancDossier + frais_spancEtude + frais_spancControle;
+
+      const total_moe_etudes = frais_be + frais_csps + frais_bcontrole + frais_geometre
+                            + frais_dessinateur + frais_architecte
+                            + frais_archCCTP + frais_archAssistContrats
+                            + frais_moeDET
+                            + total_spanc;
+
+      const piscineType = document.getElementById('piscineType').value;
+      const piscineSurface = v('piscineSurface');
+      const piscinePrixM2 = v('piscinePrixM2');
+      const piscine = (piscineType !== 'aucune') ? piscineSurface * piscinePrixM2 : 0;
+
+      const cloturePar = v('cloturePar') * v('cloturePrixPar');
+      const clotureMoellons = v('clotureMoellons') * v('clotureMoellonsPrix');
+      const clotureSR = v('clotureSR') * v('clotureSRPrix');
+      const totalClotures = cloturePar + clotureMoellons + clotureSR;
+
+      const stationnement =
+        v('statGravillon') * v('statGravillonPrix') +
+        v('statPaveHerbe') * v('statPaveHerbePrix') +
+        v('statDallage') * v('statDallagePrix') +
+        v('statBetonDes') * v('statBetonDesPrix');
+
+      const portail_vantail = c('portailVantail') ? v('portailVantailPrix') : 0;
+      const portail_longrine = c('portailLongrine') ? v('portailLongrinePrix') : 0;
+      const portail_motor = c('portailMotor') ? v('portailMotorPrix') : 0;
+      const totalPortail = portail_vantail + portail_longrine + portail_motor;
+
+      const pays_engazonnement = c('paysEngazonnement') ? v('paysEngazonnementSurf') * v('paysEngazonnementPrix') : 0;
+      const pays_plantations = c('paysPlantations') ? v('paysPlantationsPrix') : 0;
+      const pays_arrosage = c('paysArrosage') ? v('paysArrosagePrix') : 0;
+      const pays_terrassement = c('paysTerrassement') ? v('paysTerrassementPrix') : 0;
+      const totalPaysagisme = pays_engazonnement + pays_plantations + pays_arrosage + pays_terrassement;
+
+      const terr_pin_surf = c('terrPin') ? v('terrPinSurf') : 0;
+      const terr_pin = terr_pin_surf * v('terrPinPrix');
+      const terr_exo_surf = c('terrExo') ? v('terrExoSurf') : 0;
+      const terr_exo = terr_exo_surf * v('terrExoPrix');
+      const totalTerrasse = terr_pin + terr_exo;
+      const surfaceTerrasse = terr_pin_surf + terr_exo_surf;
+
+      const totalExterieurs = totalClotures + stationnement + totalPortail + totalPaysagisme + totalTerrasse;
+
+      // --- ÉQUIPEMENTS / LOTS SPÉCIFIQUES (TVA 8,5%) ---
+      const equipCuisineQty = c('equipCuisine') ? v('equipCuisineQty') : 0;
+      const equip_cuisine = equipCuisineQty * v('equipCuisinePrix');
+      const equipSDBQty = c('equipSDB') ? v('equipSDBQty') : 0;
+      const equip_sdb = equipSDBQty * v('equipSDBPrix');
+      const equipWCQty = c('equipWC') ? v('equipWCQty') : 0;
+      const equip_wc = equipWCQty * v('equipWCPrix');
+      const equipCESQty = c('equipCES') ? v('equipCESQty') : 0;
+      const equip_ces = equipCESQty * v('equipCESPrix');
+      const totalEquipements = equip_cuisine + equip_sdb + equip_wc + equip_ces;
+
+      const pente = v('pente');
+      const tauxMajoPente = Math.min(pente * 0.005, 0.50);
+      const majoActive = pente > 0;
+      const baseMajo = totalTravaux + piscine + totalClotures + stationnement + totalPortail + totalPaysagisme + totalTerrasse;
+      const surcoutPente = baseMajo * tauxMajoPente;
+
+      const partRenoBase = totalTravaux > 0 ? totalReno / totalTravaux : 0;
+      const partNeufBase = totalTravaux > 0 ? neuf / totalTravaux : 0;
+      const surcoutTravaux = totalTravaux * tauxMajoPente;
+      const surcoutReno = surcoutTravaux * partRenoBase;
+      const surcoutNeuf = surcoutTravaux * partNeufBase;
+      const surcoutAutres = (piscine + totalClotures + stationnement + totalPortail + totalPaysagisme + totalTerrasse) * tauxMajoPente;
+
+      const ht_2_1 = totalReno + surcoutReno;
+      const ht_8_5 = neuf + etudesEtViab + total_moe_etudes + piscine + totalClotures + stationnement + totalPortail + totalPaysagisme + totalTerrasse + totalEquipements + surcoutNeuf + surcoutAutres;
+
+      const ht_bati = ht_2_1 + ht_8_5;
+
+      const aleasBati = ht_bati * ALEAS;
+      const ht_bati_avec_aleas = ht_bati + aleasBati;
+
+      const part_2_1 = ht_bati > 0 ? ht_2_1 / ht_bati : 0;
+      const part_8_5 = ht_bati > 0 ? ht_8_5 / ht_bati : 0;
+      const tauxTvaPondere = part_2_1 * TVA_RENO + part_8_5 * TVA_AUTRE;
+
+      const tvaTotal = ht_bati_avec_aleas * tauxTvaPondere;
+      const tva_2_1 = ht_bati_avec_aleas * part_2_1 * TVA_RENO;
+      const tva_8_5 = ht_bati_avec_aleas * part_8_5 * TVA_AUTRE;
+
+      const ttc_bati = ht_bati_avec_aleas + tvaTotal;
+
+      const ht_travaux_bati = totalReno + surcoutReno + neuf + surcoutNeuf;
+      const ht_travaux_avec_aleas = ht_travaux_bati * (1 + ALEAS);
+      const tauxTvaTravaux = ht_travaux_bati > 0
+        ? (totalReno + surcoutReno) / ht_travaux_bati * TVA_RENO + (neuf + surcoutNeuf) / ht_travaux_bati * TVA_AUTRE
+        : 0;
+      const ttc_travaux = ht_travaux_avec_aleas * (1 + tauxTvaTravaux);
+      const damageOuvrage = c('includeDO') ? ttc_travaux * DO_RATE : 0;
+
+      const taxeAmenagement = c('taxeAmenagement')
+        ? v('neuf') * v('taxeAmenagementValeurM2') * (v('taxeAmenagementTaux') / 100)
+        : 0;
+
+      const totalFoncier = prixTerrain + fraisNotaire + taxeAmenagement;
+
+      const grandTotal = totalFoncier + ttc_bati + damageOuvrage;
+
+      let html = '';
+      const aProjet = ht_bati > 0 || prixTerrain > 0 || taxeAmenagement > 0;
+
+      if (!aProjet) {
+        html = `<tr><td colspan="2" style="text-align:center; padding:1.4rem 0.5rem; color:rgba(255,255,255,0.55); font-style:italic;">Renseignez les paramètres du projet pour voir l'estimation</td></tr>`;
+        document.getElementById('resultats').innerHTML = html;
+        ['st_terrain','st_travaux','st_moe','st_piscine','st_exterieurs','st_equipements','st_assurtaxes',
+         'st_be','st_csps','st_bcontrole','st_geometre','st_dessinateur','st_architecte',
+         'st_archCCTP','st_archAssistContrats','st_moeDET',
+         'st_portailVantail','st_portailLongrine','st_portailMotor',
+         'st_paysEngazonnement','st_paysPlantations','st_paysArrosage','st_paysTerrassement',
+         'st_terrPin','st_terrExo',
+         'st_equipCuisine','st_equipSDB','st_equipWC','st_equipCES'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.classList.add('empty');
+            const valSpan = el.querySelector('.panel-soustotal-value');
+            if (valSpan) valSpan.textContent = '0 €';
+            else el.textContent = '0 €';
+          }
+        });
+        return;
+      }
+
+      if (prixTerrain > 0 || taxeAmenagement > 0) {
+        html += `<tr class="section"><td colspan="2">1. Foncier (hors TVA)</td></tr>`;
+        if (prixTerrain > 0) {
+          html += `<tr><td>Prix d'achat du terrain</td><td>${fmt(prixTerrain)}</td></tr>`;
+          html += `<tr><td>Frais de notaire (8%)</td><td>${fmt(fraisNotaire)}</td></tr>`;
+        }
+        if (taxeAmenagement > 0) {
+          const _taux = v('taxeAmenagementTaux');
+          const _val = v('taxeAmenagementValeurM2');
+          html += `<tr><td>Taxe d'aménagement (${v('neuf')} m² × ${_val} €/m² × ${_taux}%)</td><td>${fmt(taxeAmenagement)}</td></tr>`;
+        }
+        html += `<tr class="subtotal"><td>Sous-total foncier</td><td>${fmt(totalFoncier)}</td></tr>`;
+      }
+
+      if (ht_bati > 0) {
+        html += `<tr class="section"><td colspan="2">2. Bâti & prestations (HT)</td></tr>`;
+
+        const sousTitre = (titre) => `<tr><td colspan="2" style="font-size:0.7rem; color:rgba(255,255,255,0.55); padding-top:0.7rem; padding-bottom:0.15rem; border-bottom:none; text-transform:uppercase; letter-spacing:0.05em; font-weight:600;">— ${titre} —</td></tr>`;
+        const pctMarche = (montant) => totalTravaux > 0 ? ` (${((montant / totalTravaux) * 100).toFixed(1)}% travaux)` : '';
+
+        const total_conception = frais_dessinateur + frais_architecte + frais_archCCTP + frais_archAssistContrats + frais_geometre + frais_be + (c('geo') ? v('geoPrix') : 0);
+        if (total_conception > 0) {
+          html += sousTitre('Conception & études');
+          if (frais_dessinateur > 0) html += `<tr><td>Dessinateur (${surfaceConception} m² × ${dessinateurPrixM2} €/m²)</td><td>${fmt(frais_dessinateur)}</td></tr>`;
+          if (frais_architecte > 0) html += `<tr><td>Architecte (${surfaceConception} m² × ${architectePrixM2} €/m²)</td><td>${fmt(frais_architecte)}</td></tr>`;
+          if (frais_archCCTP > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ CCTP (${surfaceConception} m² × ${archCCTPPrixM2} €/m²)</td><td>${fmt(frais_archCCTP)}</td></tr>`;
+          if (frais_archAssistContrats > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Assistance contrats travaux (${surfaceConception} m² × ${archAssistContratsPrixM2} €/m²)</td><td>${fmt(frais_archAssistContrats)}</td></tr>`;
+          if (frais_geometre > 0) html += `<tr><td>Géomètre-expert</td><td>${fmt(frais_geometre)}</td></tr>`;
+          if (frais_be > 0) html += `<tr><td>Bureau d'études (structure / fluides / thermique RT)</td><td>${fmt(frais_be)}</td></tr>`;
+          if (c('geo')) html += `<tr><td>Étude géotechnique (G2)</td><td>${fmt(v('geoPrix'))}</td></tr>`;
+        }
+
+        if (frais_csps > 0 || frais_bcontrole > 0) {
+          html += sousTitre('Contrôle & sécurité');
+          if (frais_csps > 0) html += `<tr><td>CSPS<span style="color:#E8C547;font-size:0.65rem;margin-left:0.2rem;" title="Optionnel selon type de marché">*</span>${pctMarche(frais_csps)}</td><td>${fmt(frais_csps)}</td></tr>`;
+          if (frais_bcontrole > 0) html += `<tr><td>Bureau de contrôle technique<span style="color:#E8C547;font-size:0.65rem;margin-left:0.2rem;" title="Optionnel selon type de marché">*</span>${pctMarche(frais_bcontrole)}</td><td>${fmt(frais_bcontrole)}</td></tr>`;
+          html += `<tr><td colspan="2" style="font-size:0.68rem; color:rgba(255,255,255,0.45); font-style:italic; padding-top:0.15rem; border-bottom:none;"><span style="color:#E8C547;">*</span> Optionnel selon le type de marché</td></tr>`;
+        }
+
+        const total_concess = raccEau + raccElec + raccTelecom + viabComplete;
+        if (total_concess > 0) {
+          html += sousTitre('Concessionnaires');
+          if (raccEau > 0) html += `<tr><td>Eau — pose de compteur (${v('raccEauQty')} <span style="color:#E8C547;">u</span> × ${v('raccEauPrix')} €/u)</td><td>${fmt(raccEau)}</td></tr>`;
+          if (raccElec > 0) html += `<tr><td>Élec — Pose de compteur + Raccordement (${v('raccElecQty')} <span style="color:#E8C547;">u</span> × ${v('raccElecPrix')} €/u)</td><td>${fmt(raccElec)}</td></tr>`;
+          if (raccTelecom > 0) html += `<tr><td>Télécom (${v('raccTelecomQty')} <span style="color:#E8C547;">u</span> × ${v('raccTelecomPrix')} €/u)</td><td>${fmt(raccTelecom)}</td></tr>`;
+          if (viabComplete > 0) html += `<tr><td>Viabilisation complète (terrain non viabilisé)</td><td>${fmt(viabComplete)}</td></tr>`;
+        }
+
+        if (totalTravaux > 0) {
+          html += sousTitre('Travaux principaux');
+          if (totalReno > 0) {
+            html += `<tr><td>${renoLabel} (${renoSurface} m² × ${renoPrixM2} €/m²) <span style="color:#9DC4B0;font-size:0.65rem;">[2,1%]</span></td><td>${fmt(totalReno)}</td></tr>`;
+          }
+          if (neuf > 0) {
+            html += `<tr><td>Construction neuve (${v('neuf')} m² × ${v('neufPrixM2')} €/m²) <span style="color:#E8C547;font-size:0.65rem;">[8,5%]</span></td><td>${fmt(neuf)}</td></tr>`;
+          }
+        }
+
+        if (frais_moeDET > 0) {
+          html += sousTitre("Maîtrise d'œuvre");
+          html += `<tr><td>MOE — Direction d'exécution (${(moeDETPct*100).toFixed(1)}% travaux)</td><td>${fmt(frais_moeDET)}</td></tr>`;
+        }
+
+        const total_assain = (c('fosse') ? v('fossePrix') : 0) + total_spanc;
+        if (total_assain > 0) {
+          html += sousTitre('Assainissement non collectif');
+          if (c('fosse')) html += `<tr><td>Fosse septique</td><td>${fmt(v('fossePrix'))}</td></tr>`;
+          if (frais_spancDossier > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ SPANC — Dossier conception</td><td>${fmt(frais_spancDossier)}</td></tr>`;
+          if (frais_spancEtude > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ SPANC — Étude perméabilité</td><td>${fmt(frais_spancEtude)}</td></tr>`;
+          if (frais_spancControle > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ SPANC — Contrôle réalisation</td><td>${fmt(frais_spancControle)}</td></tr>`;
+        }
+
+        if (piscine > 0 || totalClotures > 0 || stationnement > 0 || totalPortail > 0 || totalPaysagisme > 0 || totalTerrasse > 0) {
+          html += sousTitre('Aménagements extérieurs');
+          if (piscine > 0) html += `<tr><td>Piscine (${piscineSurface} <span style="color:#E8C547;">m²</span> × ${piscinePrixM2} €/m²)</td><td>${fmt(piscine)}</td></tr>`;
+          if (cloturePar > 0) html += `<tr><td>Clôture bloc US (${v('cloturePar')} <span style="color:#E8C547;">ml</span> × ${v('cloturePrixPar')} €/ml)</td><td>${fmt(cloturePar)}</td></tr>`;
+          if (clotureMoellons > 0) html += `<tr><td>Mur moellons hauteur 2 m (${v('clotureMoellons')} <span style="color:#E8C547;">ml</span> × ${v('clotureMoellonsPrix')} €/ml)</td><td>${fmt(clotureMoellons)}</td></tr>`;
+          if (clotureSR > 0) html += `<tr><td>Clôture semi-rigide métallique (${v('clotureSR')} <span style="color:#E8C547;">ml</span> × ${v('clotureSRPrix')} €/ml)</td><td>${fmt(clotureSR)}</td></tr>`;
+          if (majoActive && surcoutPente > 0) {
+            const pctAffiche = (tauxMajoPente * 100).toFixed(1).replace('.0','');
+            const noteSeuil = pente > 100 ? ' — plafonné à 50%' : '';
+            html += `<tr><td>Aléa de site <span style="color:rgba(255,255,255,0.50); font-size:0.72rem;">(pente ${pente}% → +${pctAffiche}%${noteSeuil})</span></td><td>${fmt(surcoutPente)}</td></tr>`;
+          }
+          if (stationnement > 0) {
+            html += `<tr><td>Stationnement</td><td>${fmt(stationnement)}</td></tr>`;
+            const _statGravillon = v('statGravillon') * v('statGravillonPrix');
+            const _statPaveHerbe = v('statPaveHerbe') * v('statPaveHerbePrix');
+            const _statDallage = v('statDallage') * v('statDallagePrix');
+            const _statBetonDes = v('statBetonDes') * v('statBetonDesPrix');
+            if (_statGravillon > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Gravillon (${v('statGravillon')} <span style="color:#E8C547;">m²</span> × ${v('statGravillonPrix')} €/m²)</td><td>${fmt(_statGravillon)}</td></tr>`;
+            if (_statPaveHerbe > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Pavé herbe (${v('statPaveHerbe')} <span style="color:#E8C547;">m²</span> × ${v('statPaveHerbePrix')} €/m²)</td><td>${fmt(_statPaveHerbe)}</td></tr>`;
+            if (_statDallage > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Dallage béton (${v('statDallage')} <span style="color:#E8C547;">m²</span> × ${v('statDallagePrix')} €/m²)</td><td>${fmt(_statDallage)}</td></tr>`;
+            if (_statBetonDes > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Béton désactivé (${v('statBetonDes')} <span style="color:#E8C547;">m²</span> × ${v('statBetonDesPrix')} €/m²)</td><td>${fmt(_statBetonDes)}</td></tr>`;
+          }
+          if (totalPortail > 0) {
+            html += `<tr><td>Portail 3,70 × 2 m</td><td>${fmt(totalPortail)}</td></tr>`;
+            if (portail_vantail > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Portail (vantail)</td><td>${fmt(portail_vantail)}</td></tr>`;
+            if (portail_longrine > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Longrine + scellement rail</td><td>${fmt(portail_longrine)}</td></tr>`;
+            if (portail_motor > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Motorisation</td><td>${fmt(portail_motor)}</td></tr>`;
+          }
+          if (totalPaysagisme > 0) {
+            html += `<tr><td>Paysagisme</td><td>${fmt(totalPaysagisme)}</td></tr>`;
+            if (pays_engazonnement > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Engazonnement (${v('paysEngazonnementSurf')} <span style="color:#E8C547;">m²</span> × ${v('paysEngazonnementPrix')} €/m²)</td><td>${fmt(pays_engazonnement)}</td></tr>`;
+            if (pays_plantations > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Plantations</td><td>${fmt(pays_plantations)}</td></tr>`;
+            if (pays_arrosage > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Arrosage automatique</td><td>${fmt(pays_arrosage)}</td></tr>`;
+            if (pays_terrassement > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Terrassement végétal</td><td>${fmt(pays_terrassement)}</td></tr>`;
+          }
+          if (totalTerrasse > 0) {
+            html += `<tr><td>Terrasse caillebotis bois</td><td>${fmt(totalTerrasse)}</td></tr>`;
+            if (terr_pin > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Pin classe 4 (${terr_pin_surf} <span style="color:#E8C547;">m²</span> × ${v('terrPinPrix')} €/m²)</td><td>${fmt(terr_pin)}</td></tr>`;
+            if (terr_exo > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Bois exotique (${terr_exo_surf} <span style="color:#E8C547;">m²</span> × ${v('terrExoPrix')} €/m²)</td><td>${fmt(terr_exo)}</td></tr>`;
+          }
+        }
+
+        // ÉQUIPEMENTS (cuisine / SDB / WC)
+        if (totalEquipements > 0) {
+          html += sousTitre('Équipements');
+          if (equip_cuisine > 0) html += `<tr><td>Cuisine équipée (${equipCuisineQty} <span style="color:#E8C547;">u</span> × ${v('equipCuisinePrix')} €/u)</td><td>${fmt(equip_cuisine)}</td></tr>`;
+          if (equip_sdb > 0) html += `<tr><td>Salle de bain (${equipSDBQty} <span style="color:#E8C547;">u</span> × ${v('equipSDBPrix')} €/u)</td><td>${fmt(equip_sdb)}</td></tr>`;
+          if (equip_wc > 0) html += `<tr><td>WC indépendant (${equipWCQty} <span style="color:#E8C547;">u</span> × ${v('equipWCPrix')} €/u)</td><td>${fmt(equip_wc)}</td></tr>`;
+          if (equip_ces > 0) html += `<tr><td>Chauffe-eau solaire (${equipCESQty} <span style="color:#E8C547;">u</span> × ${v('equipCESPrix')} €/u)</td><td>${fmt(equip_ces)}</td></tr>`;
+        }
+
+        html += `<tr class="subtotal"><td>Sous-total HT bâti</td><td>${fmt(ht_bati)}</td></tr>`;
+        html += `<tr><td>Provision aléas (+10%)</td><td>${fmt(aleasBati)}</td></tr>`;
+        html += `<tr class="subtotal"><td>Total HT bâti (avec aléas)</td><td>${fmt(ht_bati_avec_aleas)}</td></tr>`;
+
+        html += `<tr class="section"><td colspan="2">3. TVA Réunion</td></tr>`;
+
+        if (tva_2_1 > 0 && tva_8_5 > 0) {
+          const tauxAffiche = (tauxTvaPondere * 100).toFixed(2).replace('.', ',');
+          html += `<tr><td>TVA 2,1% (rénovation)</td><td>${fmt(tva_2_1)}</td></tr>`;
+          html += `<tr><td>TVA 8,5% (neuf, études, extérieurs)</td><td>${fmt(tva_8_5)}</td></tr>`;
+          html += `<tr class="subtotal"><td>Total TVA (taux moyen ${tauxAffiche}%)</td><td>${fmt(tvaTotal)}</td></tr>`;
+        } else if (tva_2_1 > 0) {
+          html += `<tr><td>TVA 2,1% (rénovation)</td><td>${fmt(tva_2_1)}</td></tr>`;
+          html += `<tr class="subtotal"><td>Total TVA</td><td>${fmt(tvaTotal)}</td></tr>`;
+        } else if (tva_8_5 > 0) {
+          html += `<tr><td>TVA 8,5% (neuf, études, extérieurs)</td><td>${fmt(tva_8_5)}</td></tr>`;
+          html += `<tr class="subtotal"><td>Total TVA</td><td>${fmt(tvaTotal)}</td></tr>`;
+        }
+
+        html += `<tr class="subtotal"><td>Sous-total bâti TTC</td><td>${fmt(ttc_bati)}</td></tr>`;
+
+        if (damageOuvrage > 0) {
+          html += `<tr class="section"><td colspan="2">4. Assurance</td></tr>`;
+          html += `<tr><td>Dommage Ouvrage (2% du TTC travaux)</td><td>${fmt(damageOuvrage)}</td></tr>`;
+        }
+      }
+
+      html += `<tr class="total"><td>TOTAL GÉNÉRAL DU PROJET</td><td>${fmt(grandTotal)}</td></tr>`;
+
+      html += `<tr><td colspan="2" style="padding-top:1rem; font-size:0.68rem; color:rgba(255,255,255,0.50); font-style:italic; text-align:center; border-bottom:none; line-height:1.55;">
+        * Document non contractuel. Prix unitaires fournis à titre informatif et susceptibles de varier en fonction de différentes conditions (localisation du projet, accessibilité du chantier, complexité technique, prestations choisies, fluctuations du marché et des matériaux).
+      </td></tr>`;
+
+      document.getElementById('resultats').innerHTML = html;
+
+      const setSousTotal = (id, montant) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const valSpan = el.querySelector('.panel-soustotal-value') || el;
+        if (montant > 0) {
+          el.classList.remove('empty');
+          valSpan.textContent = fmt(montant);
+        } else {
+          el.classList.add('empty');
+          valSpan.textContent = '0 €';
+        }
+      };
+
+      const st_terrain = prixTerrain + fraisNotaire + etudes + raccordements + viabComplete;
+      setSousTotal('st_terrain', st_terrain);
+      setSousTotal('st_assurtaxes', damageOuvrage + taxeAmenagement);
+      setSousTotal('st_travaux', totalTravaux);
+
+      const st_moe = total_moe_etudes - total_spanc;
+      setSousTotal('st_moe', st_moe);
+      setSousTotal('st_piscine', piscine);
+      setSousTotal('st_exterieurs', totalExterieurs);
+
+      setSousTotal('st_portailVantail', portail_vantail);
+      setSousTotal('st_portailLongrine', portail_longrine);
+      setSousTotal('st_portailMotor', portail_motor);
+
+      setSousTotal('st_paysEngazonnement', pays_engazonnement);
+      setSousTotal('st_paysPlantations', pays_plantations);
+      setSousTotal('st_paysArrosage', pays_arrosage);
+      setSousTotal('st_paysTerrassement', pays_terrassement);
+
+      setSousTotal('st_terrPin', terr_pin);
+      setSousTotal('st_terrExo', terr_exo);
+
+      setSousTotal('st_equipCuisine', equip_cuisine);
+      setSousTotal('st_equipSDB', equip_sdb);
+      setSousTotal('st_equipWC', equip_wc);
+      setSousTotal('st_equipCES', equip_ces);
+      setSousTotal('st_equipements', totalEquipements);
+
+      setSousTotal('st_be', frais_be);
+      setSousTotal('st_csps', frais_csps);
+      setSousTotal('st_bcontrole', frais_bcontrole);
+      setSousTotal('st_geometre', frais_geometre);
+      setSousTotal('st_dessinateur', frais_dessinateur);
+      setSousTotal('st_architecte', frais_architecte);
+      setSousTotal('st_archCCTP', frais_archCCTP);
+      setSousTotal('st_archAssistContrats', frais_archAssistContrats);
+      setSousTotal('st_moeDET', frais_moeDET);
+    }
+
+    function resetForm() {
+      document.querySelectorAll('.calc-app input[type="number"]').forEach(i => i.value = 0);
+      document.querySelectorAll('.calc-app input[type="checkbox"]').forEach(i => i.checked = false);
+      document.getElementById('includeDO').checked = true;
+      document.getElementById('piscineType').value = 'aucune';
+      document.getElementById('renoType').value = 'aucune';
+      document.getElementById('viabCompletePrix').value = 8000;
+      document.getElementById('viabCompleteAmount').style.display = 'none';
+      document.getElementById('raccEauQty').value = 1;
+      document.getElementById('raccEauPrix').value = 1000;
+      document.getElementById('raccElecQty').value = 1;
+      document.getElementById('raccElecPrix').value = 1500;
+      document.getElementById('raccTelecomQty').value = 1;
+      document.getElementById('raccTelecomPrix').value = 0;
+
+      document.getElementById('taxeAmenagementValeurM2').value = 1036;
+      document.getElementById('taxeAmenagementTaux').value = 3;
+      document.getElementById('taxeAmenagementBloc').style.display = 'none';
+
+      document.getElementById('geoPrix').value = 2500;
+      document.getElementById('fossePrix').value = 9000;
+
+      document.getElementById('renoPrixM2').value = 0;
+      document.getElementById('neufPrixM2').value = 1550;
+      document.getElementById('piscinePrixM2').value = 0;
+
+      document.getElementById('cloturePrixPar').value = 350;
+      document.getElementById('clotureMoellonsPrix').value = 750;
+      document.getElementById('clotureSRPrix').value = 120;
+
+      document.getElementById('statGravillonPrix').value = 30;
+      document.getElementById('statPaveHerbePrix').value = 70;
+      document.getElementById('statDallagePrix').value = 90;
+      document.getElementById('statBetonDesPrix').value = 120;
+
+      document.getElementById('portailVantailPrix').value = 3500;
+      document.getElementById('portailLongrinePrix').value = 600;
+      document.getElementById('portailMotorPrix').value = 1300;
+
+      document.getElementById('paysEngazonnementPrix').value = 12;
+      document.getElementById('paysPlantationsPrix').value = 1500;
+      document.getElementById('paysArrosagePrix').value = 800;
+      document.getElementById('paysTerrassementPrix').value = 1200;
+
+      document.getElementById('terrPinPrix').value = 250;
+      document.getElementById('terrExoPrix').value = 350;
+
+      document.getElementById('bePrix').value = 3500;
+      document.getElementById('cspsPrix').value = 2500;
+      document.getElementById('bcontrolePrix').value = 4000;
+      document.getElementById('geometrePrix').value = 2000;
+      document.getElementById('dessinateurPrixM2').value = 15;
+      document.getElementById('architectePrixM2').value = 50;
+      document.getElementById('archCCTPPrix').value = 8;
+      document.getElementById('archAssistContratsPrix').value = 6;
+      document.getElementById('moeDETPct').value = 6;
+      document.getElementById('equipCuisine').checked = true;
+      document.getElementById('equipSDB').checked = true;
+      document.getElementById('equipWC').checked = true;
+      document.getElementById('equipCES').checked = true;
+      document.getElementById('equipCuisineQty').value = 1;
+      document.getElementById('equipSDBQty').value = 1;
+      document.getElementById('equipWCQty').value = 1;
+      document.getElementById('equipCESQty').value = 1;
+      document.getElementById('equipCuisinePrix').value = 10000;
+      document.getElementById('equipSDBPrix').value = 7000;
+      document.getElementById('equipWCPrix').value = 1000;
+      document.getElementById('equipCESPrix').value = 2500;
+      document.getElementById('spancDossierPrix').value = 800;
+      document.getElementById('spancEtudePrix').value = 1500;
+      document.getElementById('spancControlePrix').value = 300;
+
+      updateArchAuto();
+      const memoBody = document.getElementById('renoMemoBody');
+      const memoToggle = document.getElementById('renoMemoToggle');
+      const memoHeader = document.getElementById('renoMemoHeader');
+      if (memoBody) memoBody.classList.remove('open');
+      if (memoToggle) memoToggle.textContent = '▼ Voir le détail';
+      if (memoHeader) memoHeader.setAttribute('aria-expanded', 'false');
+      renderRenoMemo();
+      if (typeof updateSpancBloc === 'function') updateSpancBloc();
+      calculer();
+    }
+
+    const RENO_MEMOS = {
+      legere: {
+        titre: 'Rénovation légère — Rafraîchissement',
+        objectif: 'Remettre au propre sans modifier l\'existant',
+        level: 'legere',
+        includes: '',
+        categories: [
+          { titre: 'Préparation', items: [
+            'Protection du chantier (sols, menuiseries)',
+            'Nettoyage et préparation des supports',
+            'Rebouchage fissures et petits défauts',
+            'Ponçage et enduits de finition',
+          ]},
+          { titre: 'Finitions', items: [
+            'Peinture murs et plafonds',
+            'Remplacement revêtements de sol (PVC, stratifié)',
+            'Remplacement plinthes',
+          ]},
+          { titre: 'Équipements légers', items: [
+            'Changement appareillages électriques (prises, interrupteurs)',
+            'Remplacement luminaires',
+            'Changement robinetterie / WC',
+          ]},
+          { titre: 'Livraison', items: [
+            'Nettoyage fin de chantier',
+          ]},
+        ],
+      },
+      moyenne: {
+        titre: 'Rénovation moyenne — Amélioration',
+        objectif: 'Moderniser et améliorer le confort',
+        level: 'moyenne',
+        includes: 'Inclut toutes les prestations de la rénovation légère, plus :',
+        categories: [
+          { titre: 'Dépose & préparation', items: [
+            'Dépose des anciens équipements (cuisine, SDB, sols)',
+            'Ragréage des sols',
+          ]},
+          { titre: 'Cloisons & plafonds', items: [
+            'Création ou modification de cloisons placo',
+            'Pose de faux plafonds',
+            'Isolation intérieure (thermique / acoustique)',
+          ]},
+          { titre: 'Réseaux partiels', items: [
+            'Réfection partielle électricité (tableau, circuits)',
+            'Réfection partielle plomberie',
+          ]},
+          { titre: 'Équipements & revêtements', items: [
+            'Installation cuisine équipée',
+            'Création ou rénovation complète salle de bain',
+            'Pose carrelage sols / murs',
+            'Remplacement menuiseries intérieures (portes)',
+            'Étanchéité pièces humides',
+            'Peinture complète du logement',
+          ]},
+        ],
+      },
+      lourde: {
+        titre: 'Rénovation lourde — Restructuration',
+        objectif: 'Transformer le bâtiment en profondeur',
+        level: 'lourde',
+        includes: 'Inclut toutes les prestations de la rénovation moyenne, plus :',
+        categories: [
+          { titre: 'Gros œuvre', items: [
+            'Démolition murs / planchers',
+            'Ouverture de mur porteur (avec étude structure)',
+            'Reprise de fondations si nécessaire',
+            'Création d\'extension / surélévation',
+          ]},
+          { titre: 'Structure & clos couvert', items: [
+            'Réfection toiture / charpente',
+            'Étanchéité toiture / terrasse',
+            'Ravalement de façade',
+          ]},
+          { titre: 'Réseaux complets', items: [
+            'Reprise complète de l\'électricité',
+            'Reprise complète de la plomberie',
+            'Mise aux normes assainissement',
+          ]},
+          { titre: 'Second œuvre complet', items: [
+            'Redistribution complète des pièces',
+            'Isolation complète',
+            'Menuiseries extérieures (fenêtres, baies)',
+            'Cloisons neuves',
+            'Revêtements sols et murs complets',
+          ]},
+          { titre: 'Spécifique La Réunion', items: [
+            'Gestion des eaux pluviales (EP)',
+            'Drainage périphérique',
+            'Protection cyclonique (fixations, toiture)',
+          ]},
+        ],
+      },
+    };
+
+    function renderRenoMemo() {
+      const type = document.getElementById('renoType').value;
+      const memo = document.getElementById('renoMemo');
+      const memoBody = document.getElementById('renoMemoBody');
+      const memoTitle = document.getElementById('renoMemoTitle');
+
+      if (!RENO_MEMOS[type]) {
+        memo.style.display = 'none';
+        return;
+      }
+
+      const data = RENO_MEMOS[type];
+      memo.style.display = 'block';
+      memo.className = 'reno-memo memo-level-' + data.level;
+      memoTitle.innerHTML = `<strong>${data.titre}</strong>`;
+
+      let html = `<div class="memo-objectif">${data.objectif}</div>`;
+      if (data.includes) {
+        html += `<div class="memo-includes">${data.includes}</div>`;
+      }
+      data.categories.forEach(cat => {
+        html += `<div class="memo-cat">${cat.titre}</div>`;
+        html += `<ul>`;
+        cat.items.forEach(item => { html += `<li>${item}</li>`; });
+        html += `</ul>`;
+      });
+      memoBody.innerHTML = html;
+    }
+
+    function toggleRenoMemo() {
+      const header = document.getElementById('renoMemoHeader');
+      const body = document.getElementById('renoMemoBody');
+      const toggle = document.getElementById('renoMemoToggle');
+      const isOpen = body.classList.toggle('open');
+      header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggle.textContent = isOpen ? '▲ Masquer le détail' : '▼ Voir le détail';
+    }
+
+    const PRIX_DEFAUT_RENO = { legere: 500, moyenne: 900, lourde: 1300 };
+    const PRIX_DEFAUT_PISCINE = { simple: 1700, debordement: 2000 };
+
+    document.getElementById('renoType').addEventListener('change', function() {
+      const type = this.value;
+      const champPrix = document.getElementById('renoPrixM2');
+      if (PRIX_DEFAUT_RENO[type] !== undefined) {
+        champPrix.value = PRIX_DEFAUT_RENO[type];
+      } else {
+        champPrix.value = 0;
+      }
+      renderRenoMemo();
+      calculer();
+    });
+
+    document.getElementById('piscineType').addEventListener('change', function() {
+      const type = this.value;
+      const champPrix = document.getElementById('piscinePrixM2');
+      if (PRIX_DEFAUT_PISCINE[type] !== undefined) {
+        champPrix.value = PRIX_DEFAUT_PISCINE[type];
+      } else {
+        champPrix.value = 0;
+      }
+      calculer();
+    });
+
+    document.getElementById('renoMemoHeader').addEventListener('click', toggleRenoMemo);
+    document.getElementById('renoMemoHeader').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleRenoMemo(); }
+    });
+    renderRenoMemo();
+
+    document.getElementById('viabComplete').addEventListener('change', function(e) {
+      document.getElementById('viabCompleteAmount').style.display = e.target.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('taxeAmenagement').addEventListener('change', function(e) {
+      document.getElementById('taxeAmenagementBloc').style.display = e.target.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('penteHelpBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('penteHelpNotice').classList.toggle('open');
+    });
+    document.getElementById('penteHelpClose').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('penteHelpNotice').classList.remove('open');
+    });
+
+    document.getElementById('archHelpBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('archHelpNotice').classList.toggle('open');
+    });
+    document.getElementById('archHelpClose').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('archHelpNotice').classList.remove('open');
+    });
+
+    document.querySelectorAll('.calc-app .tab-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const target = this.getAttribute('data-tab');
+        const tabsContainer = this.closest('.panel');
+        tabsContainer.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        tabsContainer.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        tabsContainer.querySelector(`[data-content="${target}"]`).classList.add('active');
+      });
+    });
+
+    function updateSpancBloc() {
+      const fosseCochee = document.getElementById('fosse').checked;
+      const bloc = document.getElementById('spancBloc');
+      bloc.style.display = fosseCochee ? 'block' : 'none';
+      document.getElementById('spancDossier').checked = fosseCochee;
+      document.getElementById('spancEtude').checked = fosseCochee;
+      document.getElementById('spancControle').checked = fosseCochee;
+    }
+    document.getElementById('fosse').addEventListener('change', function() {
+      updateSpancBloc();
+      calculer();
+    });
+    updateSpancBloc();
+
+    function updateArchAuto() {
+      const surfaceNeuf = parseFloat(document.getElementById('neuf').value) || 0;
+      const surfaceReno = parseFloat(document.getElementById('renoSurface').value) || 0;
+      const surface = surfaceNeuf + surfaceReno;
+      const hint = document.getElementById('archHint');
+      if (!hint) return;
+
+      if (surface === 0) {
+        hint.textContent = '';
+      } else if (surface < 150) {
+        hint.innerHTML = `→ Surface totale = <strong>${surface} m²</strong> · Dessinateur recommandé (architecte non obligatoire en dessous de 150 m²)`;
+        hint.style.color = '#527E72';
+        hint.style.fontWeight = '500';
+      } else {
+        hint.innerHTML = `→ Surface totale = <strong>${surface} m²</strong> · Architecte OBLIGATOIRE (loi du 3 janvier 1977 — seuil 150 m²)`;
+        hint.style.color = '#C66E4A';
+        hint.style.fontWeight = '600';
+      }
+    }
+    document.getElementById('neuf').addEventListener('input', updateArchAuto);
+    document.getElementById('renoSurface').addEventListener('input', updateArchAuto);
+    updateArchAuto();
+
+    document.querySelectorAll('.calc-app input, .calc-app select').forEach(el => {
+      el.addEventListener('input', calculer);
+      el.addEventListener('change', calculer);
+    });
+
+    document.querySelectorAll('.calc-app input[type="number"]').forEach(el => {
+      el.addEventListener('focus', function() {
+        if (this.value === '0' || this.value === '' || parseFloat(this.value) === 0) {
+          this.select();
+        }
+      });
+      el.addEventListener('click', function() {
+        if (this.value === '0' || parseFloat(this.value) === 0) {
+          this.select();
+        }
+      });
+    });
+
+    calculer();
+  </script>
+</body>
+</html>
