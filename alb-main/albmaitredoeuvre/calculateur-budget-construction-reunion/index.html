@@ -2191,7 +2191,7 @@
 
                 <div class="fourchette">
                   <div class="fourchette-head">
-                    <span>Budget travaux <span style="font-weight:400; opacity:0.65; text-transform:none; letter-spacing:0;">· pour la publication</span></span>
+                    <span>Budget travaux <span style="font-weight:400; opacity:0.65; text-transform:none; letter-spacing:0;">· assurance DO incluse</span></span>
                     <span class="fourchette-margin">Aléas ± <input type="number" id="fourchettePct" min="0" max="50" step="1" value="15"> %</span>
                   </div>
                   <div class="fourchette-grid">
@@ -2222,7 +2222,7 @@
                 <div class="legend">
                   Comment est calculé ce budget ? <button type="button" class="help-btn" data-help="calcLogicHelp" aria-label="Logique de calcul">?</button>
                   <div class="help-notice" id="calcLogicHelp" style="text-align:left;">
-                    <strong>Logique de calcul :</strong> Le foncier (Terrain + Notaire 8%) est traité en TTC, hors champ TVA. Le bâti suit le flux : HT par poste → majoration pente → TVA pondérée 2,1%/8,5% <strong>sur le HT</strong> → TTC. La Dommage Ouvrage (2,5%) est calculée sur le TTC des travaux principaux uniquement. L'incertitude est portée par la <strong>fourchette budgétaire</strong> : une marge d'aléas (modifiable) appliquée de part et d'autre de l'estimation pour cadrer le budget réaliste.
+                    <strong>Logique de calcul :</strong> Le foncier (Terrain + Notaire 8%) est traité en TTC, hors champ TVA. Le bâti suit le flux : HT par poste → majoration pente → TVA pondérée 2,1%/8,5% <strong>sur le HT</strong> → TTC. La Dommage Ouvrage (2,5%) est calculée sur le TTC des travaux principaux uniquement ; comme elle est proportionnelle au chantier, elle est intégrée au <strong>Coût travaux</strong> et varie donc avec les aléas (le budget transmis aux artisans lors de la publication, lui, reste hors assurance). L'incertitude est portée par la <strong>fourchette budgétaire</strong> : une marge d'aléas (modifiable) appliquée de part et d'autre de l'estimation pour cadrer le budget réaliste.
                   </div>
                 </div>
 
@@ -2420,7 +2420,7 @@
       const _sel = document.querySelector('.type-card.selected');
       const _pt = _sel ? _sel.dataset.type : '';
       const typeLabel = { neuf: 'Construction neuve', reno: 'Rénovation', both: 'Neuf + rénovation' }[_pt] || 'Non précisé';
-      const travaux = _txtNum('fMid');
+      const travaux = lastBudget.total || _txtNum('fMid');  // hors DO
       const recap = {
         'Type de projet': typeLabel,
         'Budget estimé': (lastBudget.lowK && lastBudget.highK) ? (lastBudget.lowK.toLocaleString('fr-FR') + ' – ' + lastBudget.highK.toLocaleString('fr-FR') + ' k€') : '—',
@@ -2447,7 +2447,7 @@
       const _num = id => { const el = document.getElementById(id); const n = parseFloat((el && el.value) || ''); return isFinite(n) ? n : 0; };
       const _txtNum = id => { const el = document.getElementById(id); return el ? (parseFloat((el.textContent || '').replace(/[^\d]/g, '')) || 0) : 0; };
       const prixTerrain = _num('prixTerrain');
-      const travaux = _txtNum('fMid');             // estimation travaux (médiane)
+      const travaux = lastBudget.total || _txtNum('fMid');  // estimation travaux (médiane, hors DO)
       const budgetGlobal = travaux + prixTerrain;  // approximation travaux + foncier
       const eur = n => n ? Math.round(n).toLocaleString('fr-FR') + ' €' : '';
       // Cible : métiers destinataires (CSV) + libellé d'affichage. Défaut = agents immobiliers.
@@ -2757,7 +2757,12 @@
       //     Alan 2026-07-15).
       // HORS foncier (terrain/notaire/taxe, pas des travaux) et HORS assurance DO.
       // C'est ce budget travaux qui part en publication.
-      const coutTravaux = ttc_bati + ttc_raccord;
+      const coutTravauxHorsDO = ttc_bati + ttc_raccord;
+      // La Dommage Ouvrage est un % du TTC travaux : elle bouge avec le chantier.
+      // Elle entre donc dans le « Coût travaux » affiché et suit les aléas.
+      // La publication vers les artisans reste HORS DO (c'est l'assurance du
+      // maître d'ouvrage, pas une prestation que l'artisan chiffre).
+      const coutTravaux = coutTravauxHorsDO + damageOuvrage;
       const fPctRaw = parseFloat(document.getElementById('fourchettePct').value);
       const fPct = (isNaN(fPctRaw) ? 0 : fPctRaw) / 100;
       document.getElementById('fMid').textContent = fmt(coutTravaux);
@@ -2768,16 +2773,17 @@
 
       // Budget travaux mémorisé pour le bouton « Publier mon projet » (en k€)
       lastBudget = {
-        lowK:  Math.round(coutTravaux * (1 - fPct) / 1000),
-        highK: Math.round(coutTravaux * (1 + fPct) / 1000),
-        total: coutTravaux
+        lowK:  Math.round(coutTravauxHorsDO * (1 - fPct) / 1000),
+        highK: Math.round(coutTravauxHorsDO * (1 + fPct) / 1000),
+        total: coutTravauxHorsDO,   // enveloppe travaux seule (sert aussi au calcul DO)
+        totalAvecDO: coutTravaux
       };
       const pubBtn = document.getElementById('publishProjectBtn');
       const pubSub = document.getElementById('publishCtaSub');
       if (pubBtn) {
-        if (coutTravaux > 0) {
+        if (coutTravauxHorsDO > 0) {
           pubBtn.disabled = false;
-          pubSub.textContent = `Budget travaux ${fmt(coutTravaux * (1 - fPct))} – ${fmt(coutTravaux * (1 + fPct))} pré-rempli`;
+          pubSub.textContent = `Budget travaux ${fmt(coutTravauxHorsDO * (1 - fPct))} – ${fmt(coutTravauxHorsDO * (1 + fPct))} pré-rempli`;
         } else {
           pubBtn.disabled = true;
           pubSub.textContent = 'Renseignez vos travaux pour activer la publication';
