@@ -1554,3 +1554,23 @@ li { margin-bottom: 0.4em; }
   .float-btn { width: 54px; height: 54px; }
   .float-btn svg { width: 24px; height: 24px; }
 }
+
+/* ─── EN-TÊTE BLANC (25/10/2026) : le logo est la version « fond clair » (traits noirs), invisible sur fond noir ─── */
+.site-header { background: rgba(255,255,255,0.97); border-bottom: 1px solid rgba(212,160,23,0.35); box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+.site-header.scrolled { background: #ffffff; box-shadow: 0 4px 24px rgba(0,0,0,0.12); }
+.logo-img { filter: none; }
+.logo, .logo-name { color: #0D0D0D; }
+.logo-tagline { color: rgba(13,13,13,0.55); }
+.nav-link { color: rgba(13,13,13,0.72); }
+.nav-link:hover, .nav-link--active { color: #0D0D0D; }
+.nav-dropdown { background: #ffffff; border: 1px solid rgba(212,160,23,0.35); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+.nav-dropdown .nav-link { color: #333333; }
+.nav-dropdown .nav-link:hover { background: rgba(212,160,23,0.1); color: #9a7410; }
+.nav-toggle { color: #0D0D0D; }
+.header-phone { color: #0D0D0D; }
+@media (min-width: 993px) { .logo-img { height: 80px; } }
+@media (max-width: 992px) {
+  .nav.active { background: rgba(255,255,255,0.99); border-bottom: 1px solid rgba(212,160,23,0.35); }
+  .nav.active .nav-link { color: rgba(13,13,13,0.85); border-bottom-color: rgba(0,0,0,0.08); }
+  .nav.active .nav-dropdown { background: transparent; }
+}
