@@ -1419,6 +1419,281 @@
   .calc-app .publish-cta-main { font-size: 1rem; font-weight: 800; letter-spacing: 0.01em; }
   .calc-app .publish-cta-sub { font-size: 0.74rem; font-weight: 500; opacity: 0.92; }
   .calc-app .publish-cta:disabled .publish-cta-sub { opacity: 0.7; }
+  /* Impression : nom du PDF et détail des postes */
+  .calc-app .imp-options { margin-top: 1rem; display: grid; gap: 0.4rem; }
+  .calc-app .imp-options input[type="text"] { width: 100%; min-height: 44px; padding: 0.5rem 0.75rem; border: 1px solid rgba(255,255,255,0.25); border-radius: var(--c-radius-sm); background: rgba(255,255,255,0.08); color: inherit; font: inherit; font-size: 0.9rem; }
+  .calc-app .imp-options label { margin: 0; color: inherit; }
+  .calc-app .imp-options .imp-check { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; font-weight: 400; cursor: pointer; min-height: 32px; }
+  .calc-app .imp-options .imp-check input { width: 18px; height: 18px; margin: 0; flex: none; accent-color: var(--c-or-clair); }
+  
+  /* =========================================================
+     TRAVAUX — styles du calculateur RUN MAP BTP (16/10/2026),
+     limités aux conteneurs #rmType et #rmTravaux.
+     ========================================================= */
+  :is(#rmType, #rmTravaux) { font-size: 0.86rem; line-height: 1.4; color: var(--txt); }
+  :is(#rmType, #rmTravaux) [hidden] { display: none !important; }
+  :is(#rmType, #rmTravaux) label { display: revert; margin: 0; font-size: inherit; letter-spacing: 0; }
+  :is(#rmType, #rmTravaux) .row label { display: block; }
+  #rmTravaux .rm-attente { margin: 0 0 0.6rem; padding: 0.7rem 0.9rem; border: 1px dashed var(--c-border, #ddd); border-radius: 10px; color: var(--c-text-muted, #6b7280); font-size: 0.84rem; }
+  :is(#rmType, #rmTravaux) .rm-ajout { display: block; width: 100%; margin: 8px 0 6px; min-height: 40px; border: 1px solid var(--acc); border-radius: 9px; color: var(--acc); background: var(--acc-p); font: inherit; font-weight: 600; cursor: pointer; }
+  :is(#rmType, #rmTravaux) .rm-ajout:hover { background: #fde9c4; }
+  :is(#rmType, #rmTravaux) {
+    --acc: #0f766e; --acc-l: #14b8a6; --acc-p: #e7f6f3; --acc-b: #b7e4dc;
+    --txt: #1f2937; --txt2: #475569; --gris: #6b7280; --bord: #e5e7eb; --fond: #f4f6f8;
+    --c: var(--acc); --cp: var(--acc-p);
+  }
+
+
+
+
+
+  :is(#rmType, #rmTravaux) .grille { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 900px) {
+    :is(#rmType, #rmTravaux) .grille { grid-template-columns: 1fr 1fr; }
+    :is(#rmType, #rmTravaux) .carte.large { grid-column: 1 / -1; }
+  }
+
+  /* Cartes */
+  :is(#rmType, #rmTravaux) .carte { background: #fff; border: 1px solid var(--bord); border-radius: 12px; overflow: hidden; transition: opacity .2s;
+    box-shadow: 0 1px 2px rgba(17,24,39,.04); }
+  /* 🎨 Une couleur par étape (2026-09-15, Alan « améliore le design niveau
+     couleur ») : chaque carte redéfinit --acc*, tout le reste (badge, cases
+     cochées, focus, totaux) suit. Palette de l'application. */
+  :is(#rmType, #rmTravaux) .carte.type { --acc: #0f766e; --acc-l: #14b8a6; --acc-p: #e7f6f3; --acc-b: #b7e4dc; }   /* cyan   : type de projet */
+  :is(#rmType, #rmTravaux) .carte.bati { --acc: #1d4ed8; --acc-l: #3b82f6; --acc-p: #eef4ff; --acc-b: #c7d7fe; }   /* bleu   : surfaces */
+  :is(#rmType, #rmTravaux) .carte#qAjust { --acc: #6d28d9; --acc-l: #8b5cf6; --acc-p: #f3efff; --acc-b: #ddd0fe; }   /* violet : ajustements */
+  :is(#rmType, #rmTravaux) .carte.ext { --acc: #15803d; --acc-l: #22c55e; --acc-p: #edf9f0; --acc-b: #bbe9c8; }   /* vert   : extérieur */
+  :is(#rmType, #rmTravaux) .carte.metier { --acc: #b45309; --acc-l: #f59e0b; --acc-p: #fff7e8; --acc-b: #fde3b3; }   /* ambre  : corps de métiers */
+  :is(#rmType, #rmTravaux) .carte.res { --acc: #1e3a8a; --acc-l: #2563eb; --acc-p: #eef2ff; --acc-b: #c7d2fe; }   /* navy   : budget */
+  :is(#rmType, #rmTravaux) .carte-t { display: flex; align-items: center; gap: 9px; padding: 10px 14px; border-bottom: 1px solid var(--acc-b); font-weight: 700; font-size: 14px; color: var(--acc);
+    background: linear-gradient(to right, var(--acc-p), #fff 70%); }
+  :is(#rmType, #rmTravaux) .carte-t .n { width: 22px; height: 22px; border-radius: 50%; background: var(--acc); color: #fff; font-size: 11.5px; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  :is(#rmType, #rmTravaux) .carte-t .taux { margin-left: auto; font-size: 11.5px; font-weight: 500; color: var(--gris); background: var(--fond); padding: 2px 8px; border-radius: 999px; }
+  :is(#rmType, #rmTravaux) .carte-c { padding: 8px 14px; }
+  :is(#rmType, #rmTravaux) .carte.attente { opacity: .5; pointer-events: none; }
+  :is(#rmType, #rmTravaux) .commencer { margin-left: auto; font-size: 11.5px; font-weight: 600; color: var(--acc); background: var(--acc-p); padding: 3px 9px; border-radius: 999px; }
+
+  /* Aide (?) et détail (i) */
+  :is(#rmType, #rmTravaux) .info, :is(#rmType, #rmTravaux) .help { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px;
+    border-radius: 50%; border: 1px solid #cbd5e1; background: #fff; color: var(--gris); font: italic 600 10.5px/1 Georgia, serif; cursor: pointer; padding: 0; flex-shrink: 0; }
+  :is(#rmType, #rmTravaux) .info { margin-left: 5px; vertical-align: 1px; }
+  :is(#rmType, #rmTravaux) .help { font-style: normal; font-weight: 700; font-family: inherit; width: 18px; height: 18px; font-size: 11.5px; }
+  :is(#rmType, #rmTravaux) .info:hover, :is(#rmType, #rmTravaux) .info:focus-visible, :is(#rmType, #rmTravaux) .help:hover, :is(#rmType, #rmTravaux) .help:focus-visible { border-color: var(--acc); color: var(--acc); background: var(--acc-p); outline: none; }
+  @media (hover: hover) and (pointer: fine) {
+    :is(#rmType, #rmTravaux) .info::after { content: attr(data-titre) ' : ' attr(data-bulle); position: absolute; left: -8px; bottom: calc(100% + 8px); width: 260px;
+      padding: 8px 10px; border-radius: 8px; background: #1f2937; color: #fff; font: 400 12px/1.45 -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-style: normal; text-align: left; white-space: normal; box-shadow: 0 8px 24px rgba(17,24,39,.22); opacity: 0; pointer-events: none; transition: opacity .12s; z-index: 5; }
+    :is(#rmType, #rmTravaux) .info::before { content: ''; position: absolute; left: 4px; bottom: calc(100% + 3px); border: 5px solid transparent; border-top-color: #1f2937; opacity: 0; transition: opacity .12s; }
+    :is(#rmType, #rmTravaux) .info:hover::after, :is(#rmType, #rmTravaux) .info:hover::before { opacity: 1; }
+  }
+  :is(#rmType, #rmTravaux) .voile { position: fixed; inset: 0; background: rgba(17,24,39,.45); display: flex; align-items: flex-end; justify-content: center; z-index: 50; }
+  @media (min-width: 640px) { :is(#rmType, #rmTravaux) .voile { align-items: center; padding: 20px; } }
+  :is(#rmType, #rmTravaux) .fen { background: #fff; width: 100%; max-width: 460px; max-height: 90vh; overflow: auto; border-radius: 14px 14px 0 0; box-shadow: 0 -8px 30px rgba(17,24,39,.25); }
+  @media (min-width: 640px) { :is(#rmType, #rmTravaux) .fen { border-radius: 14px; } }
+  :is(#rmType, #rmTravaux) .fen-t { padding: 12px 44px 12px 16px; background: var(--acc-p); color: var(--acc); font-weight: 700; font-size: 15px; position: relative; }
+  :is(#rmType, #rmTravaux) .fen-x { position: absolute; top: 8px; right: 10px; width: 30px; height: 30px; border: 1px solid var(--acc-b); border-radius: 8px; background: #fff; color: var(--acc); font-size: 20px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  :is(#rmType, #rmTravaux) .fen-x:hover { background: var(--acc-b); }
+  :is(#rmType, #rmTravaux) .fen-t small { display: block; font-weight: 400; font-size: 12px; color: var(--txt2); }
+  :is(#rmType, #rmTravaux) .fen ul { margin: 0; padding: 10px 16px 4px 32px; font-size: 13.5px; }
+  :is(#rmType, #rmTravaux) .fen li { margin: 0 0 6px; }
+  :is(#rmType, #rmTravaux) .fen .bloc { margin: 10px 16px 0; border: 1px solid var(--bord); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; }
+  :is(#rmType, #rmTravaux) .fen .bloc b { display: block; margin-bottom: 3px; }
+  :is(#rmType, #rmTravaux) .fen .bloc b.i { display: inline; margin: 0; }
+  :is(#rmType, #rmTravaux) .fen .bloc ul { padding: 2px 0 0 16px; font-size: 12.5px; }
+  :is(#rmType, #rmTravaux) .fen .bloc li { margin: 1px 0; }
+  :is(#rmType, #rmTravaux) .fen .t21, :is(#rmType, #rmTravaux) .fen .t85 { background: #fafafa; } :is(#rmType, #rmTravaux) .fen .t21 > b, :is(#rmType, #rmTravaux) .fen .t85 > b { color: var(--acc); }
+  :is(#rmType, #rmTravaux) .fen-ok { display: block; width: calc(100% - 32px); margin: 10px 16px 16px; min-height: 44px; border: 0; border-radius: 9px; background: var(--acc);
+    color: #fff; font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; }
+
+  /* Type de projet : tuiles */
+  :is(#rmType, #rmTravaux) .rm-types { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  @media (max-width: 640px) { :is(#rmType, #rmTravaux) .rm-types { grid-template-columns: 1fr 1fr; } }
+  :is(#rmType, #rmTravaux) .rm-type { min-height: 52px; border: 1px solid var(--bord); border-radius: 10px; background: #fff; font: inherit; font-weight: 600;
+    font-size: 13.5px; color: var(--txt); cursor: pointer; padding: 7px 8px; text-align: center; transition: border-color .12s, background .12s; }
+  :is(#rmType, #rmTravaux) .rm-type small { display: block; font-weight: 400; color: var(--gris); font-size: 11px; margin-top: 2px; }
+  :is(#rmType, #rmTravaux) .rm-type:hover { border-color: var(--acc-l); }
+  :is(#rmType, #rmTravaux) .rm-type.selected { border-color: var(--acc); background: var(--acc-p); color: var(--acc); box-shadow: inset 0 0 0 1px var(--acc); }
+  :is(#rmType, #rmTravaux) .rm-type.selected small { color: var(--acc); }
+
+  /* Sous-titres et blocs */
+  :is(#rmType, #rmTravaux) .bloc-p { padding: 2px 0; margin: 2px 0 8px; }
+  :is(#rmType, #rmTravaux) .sub { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; color: var(--gris); text-transform: uppercase; letter-spacing: .06em; margin: 4px 0 3px; }
+  :is(#rmType, #rmTravaux) .sub .taux { margin-left: auto; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--gris); }
+
+  /* Lignes libellé / champ */
+  :is(#rmType, #rmTravaux) .row { display: grid; grid-template-columns: 1fr 116px; gap: 8px; align-items: center; padding: 3px 0; border-bottom: 1px solid #f1f3f5; }
+  :is(#rmType, #rmTravaux) .row.sel { grid-template-columns: 1fr 150px; }
+  :is(#rmType, #rmTravaux) .row:last-child { border-bottom: 0; }
+  :is(#rmType, #rmTravaux) .row label { font-weight: 400; color: var(--txt); }
+  :is(#rmType, #rmTravaux) .row.chk { grid-template-columns: 1fr; }
+  :is(#rmType, #rmTravaux) .row.chk label { display: flex; align-items: center; gap: 8px; min-height: 36px; cursor: pointer; }
+  :is(#rmType, #rmTravaux) .row.chk input { width: 18px; height: 18px; margin: 0; flex: none; accent-color: var(--acc); }
+  :is(#rmType, #rmTravaux) .u { color: var(--gris); font-size: 11px; font-weight: 400; margin-left: 4px; }
+  :is(#rmType, #rmTravaux) input[type=number], :is(#rmType, #rmTravaux) select { width: 100%; height: 32px; border: 1px solid #d1d5db; border-radius: 8px; padding: 0 9px; font: inherit;
+    font-weight: 600; font-size: 14px; color: var(--txt); background: #fff; text-align: right; }
+  :is(#rmType, #rmTravaux) select { text-align: left; font-weight: 500; }
+  :is(#rmType, #rmTravaux) input[type=number]:focus, :is(#rmType, #rmTravaux) select:focus { outline: none; border-color: var(--acc-l); box-shadow: 0 0 0 3px var(--acc-p); }
+  :is(#rmType, #rmTravaux) .prix-input { color: var(--txt2); font-weight: 500; }
+  :is(#rmType, #rmTravaux) .retenu { text-align: right; font-weight: 600; color: var(--acc); padding-right: 8px; }
+
+  /* Lignes cochables */
+  :is(#rmType, #rmTravaux) .eq { display: grid; grid-template-columns: 20px 1fr 60px 14px 90px; gap: 6px; align-items: center; padding: 5px 8px; border: 1px solid transparent;
+    border-radius: 8px; margin-bottom: 2px; background: transparent; cursor: pointer; }
+  :is(#rmType, #rmTravaux) .eq:hover { background: #fafafa; }
+  :is(#rmType, #rmTravaux) .eq input[type=checkbox] { width: 17px; height: 17px; accent-color: var(--acc); margin: 0; cursor: pointer; }
+  :is(#rmType, #rmTravaux) .eq label { min-width: 0; cursor: pointer; font-weight: 400; color: var(--txt2); font-size: 13px; }
+  :is(#rmType, #rmTravaux) .eq .x { text-align: center; color: var(--gris); font-size: 11px; }
+  :is(#rmType, #rmTravaux) .eq input[type=number], :is(#rmType, #rmTravaux) .eq select { height: 29px; padding: 0 7px; font-size: 13px; opacity: .55; }
+  :is(#rmType, #rmTravaux) .eq.on { background: var(--acc-p); border-color: var(--acc-b); }
+  :is(#rmType, #rmTravaux) .eq.on label { color: var(--txt); font-weight: 500; }
+  :is(#rmType, #rmTravaux) .eq.on input[type=number], :is(#rmType, #rmTravaux) .eq.on select { opacity: 1; }
+  :is(#rmType, #rmTravaux) .eq.sel { grid-template-columns: 20px 1fr 150px 90px; }
+  :is(#rmType, #rmTravaux) .eq.sel.q { grid-template-columns: 20px minmax(0, 1fr) 110px 52px 14px 90px; }
+
+  /* Extérieur : bandeaux déroulants, postes composés */
+  :is(#rmType, #rmTravaux) .grp2 { display: grid; grid-template-columns: 1fr; gap: 6px; }
+  :is(#rmType, #rmTravaux) details.sl { border: 1px solid var(--bord); border-radius: 10px; background: #fff; overflow: hidden; }
+  :is(#rmType, #rmTravaux) details.sl > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 9px 12px; font-weight: 600; font-size: 13px; color: var(--txt); user-select: none; }
+  :is(#rmType, #rmTravaux) details.sl > summary::-webkit-details-marker { display: none; }
+  :is(#rmType, #rmTravaux) details.sl > summary::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--acc-l); flex-shrink: 0; }
+  :is(#rmType, #rmTravaux) details.sl > summary .chev { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--acc); }
+  :is(#rmType, #rmTravaux) details.sl > summary .chev i { font-style: normal; color: var(--gris); transition: transform .15s; font-size: 12px; }
+  :is(#rmType, #rmTravaux) details.sl[open] > summary .chev i { transform: rotate(180deg); }
+  :is(#rmType, #rmTravaux) details.sl[open] > summary { border-bottom: 1px solid var(--bord); background: #fafafa; }
+  :is(#rmType, #rmTravaux) details.sl .sl-c { padding: 6px 8px; }
+  :is(#rmType, #rmTravaux) .eq.comp { grid-template-columns: 20px 1fr 76px 100px; }
+  :is(#rmType, #rmTravaux) .eq .tot { text-align: right; font-weight: 600; font-size: 13px; color: var(--txt); padding-right: 4px; }
+  :is(#rmType, #rmTravaux) .eq .params { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 2px 0 2px 26px; }
+  :is(#rmType, #rmTravaux) .eq .params label { font-size: 12px; font-weight: 400; color: var(--txt2); display: flex; align-items: center; gap: 6px; }
+  :is(#rmType, #rmTravaux) .eq .params input { width: 80px; height: 29px; }
+  :is(#rmType, #rmTravaux) .eq .regle { grid-column: 1 / -1; font-size: 11.5px; color: var(--gris); padding: 0 0 2px 26px; }
+  :is(#rmType, #rmTravaux) .sous { grid-column: 1 / -1; display: none; padding: 4px 0 2px 26px; border-top: 1px solid var(--acc-b); margin-top: 3px; }
+  :is(#rmType, #rmTravaux) .eq.on .sous { display: block; }
+  :is(#rmType, #rmTravaux) .sous .li { display: grid; grid-template-columns: 18px 1fr 92px 14px 84px 82px; gap: 6px; align-items: center; padding: 2px 0; font-size: 12.5px; color: var(--txt2); }
+  :is(#rmType, #rmTravaux) .sous .li .q { text-align: right; color: var(--gris); font-variant-numeric: tabular-nums; }
+  :is(#rmType, #rmTravaux) .sous .li .x { text-align: center; color: var(--gris); font-size: 11px; }
+  :is(#rmType, #rmTravaux) .sous .li .m { text-align: right; font-weight: 600; color: var(--txt); font-variant-numeric: tabular-nums; }
+  :is(#rmType, #rmTravaux) .sous .li input[type=number] { height: 27px; font-size: 12.5px; padding: 0 6px; opacity: 1; }
+  :is(#rmType, #rmTravaux) .sous .li input[type=checkbox] { width: 15px; height: 15px; margin: 0; accent-color: var(--acc); }
+  :is(#rmType, #rmTravaux) .sous .li select.faces { display: inline-block; width: auto; height: 24px; padding: 0 4px; margin-left: 4px; font-size: 12px; opacity: 1; vertical-align: middle; }
+  :is(#rmType, #rmTravaux) .sous .li.off .m, :is(#rmType, #rmTravaux) .sous .li.off .q { opacity: .4; }
+  /* Prix unitaires des sous-lignes : cachés au client (écran et impression) ; seules
+     les options restent (faces d'enduit / peinture, plots). L'admin les déplie poste
+     par poste avec « Détail des prix », et ce qui est déplié s'imprime (Alan, 15/10). */
+  :is(#rmType, #rmTravaux) .eq:not(.ouvert) .sous .li:not(.opt), :is(#rmType, #rmTravaux) .eq:not(.ouvert) .sous.sans-opt { display: none !important; }
+  :is(#rmType, #rmTravaux) .eq:not(.ouvert) .sous .li .q, :is(#rmType, #rmTravaux) .eq:not(.ouvert) .sous .li .x, :is(#rmType, #rmTravaux) .eq:not(.ouvert) .sous .li input[type=number], :is(#rmType, #rmTravaux) .eq:not(.ouvert) .sous .li .m { visibility: hidden; }
+  :is(#rmType, #rmTravaux) .det-prix { display: none; grid-column: 1 / -1; justify-self: start; margin: 1px 0 0 26px; padding: 2px 0; border: 0; background: none; color: var(--acc); font: inherit; font-size: 12px; cursor: pointer; }
+  :is(#rmType, #rmTravaux) body.admin .eq.on .det-prix { display: inline-block; }
+  @media (max-width: 640px) { :is(#rmType, #rmTravaux) .sous .li { grid-template-columns: 18px 1fr 70px; } :is(#rmType, #rmTravaux) .sous .li .x, :is(#rmType, #rmTravaux) .sous .li input[type=number] { display: none; } :is(#rmType, #rmTravaux) .sous .li .m { grid-column: 3; } :is(#rmType, #rmTravaux) .eq .params { grid-template-columns: 1fr; } }
+  :is(#rmType, #rmTravaux) .stot { display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; background: #fafafa; border-top: 1px solid var(--bord);
+    font-weight: 600; color: var(--txt); font-size: 13.5px; }
+  :is(#rmType, #rmTravaux) .stot span:last-child { color: var(--acc); font-weight: 700; }
+  :is(#rmType, #rmTravaux) .stot .vv { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.25; }
+  :is(#rmType, #rmTravaux) .stot.sous { background: #fff; padding-top: 5px; padding-bottom: 5px; font-size: 13px; }
+  :is(#rmType, #rmTravaux) .stot.sous span:first-child { color: var(--txt2); }
+  :is(#rmType, #rmTravaux) .stot.sous .vv { color: var(--txt); font-weight: 600; }
+  :is(#rmType, #rmTravaux) small.ttc { font-size: 11px; font-weight: 400; color: var(--gris); white-space: nowrap; }
+  :is(#rmType, #rmTravaux) small.ttc:empty { display: none; }
+
+  /* Métier par famille : couleurs de l'application */
+  :is(#rmType, #rmTravaux) .familles { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 8px; }
+  :is(#rmType, #rmTravaux) .familles button { --fc: var(--gris); border: 1px solid var(--bord); color: var(--txt2); background: #fff; border-radius: 999px; padding: 5px 11px; font: inherit; font-size: 12px; font-weight: 500; cursor: pointer; min-height: 30px; display: inline-flex; align-items: center; gap: 6px; }
+  :is(#rmType, #rmTravaux) .familles button::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--fc); }
+  :is(#rmType, #rmTravaux) .familles button.on { border-color: var(--fc); color: var(--fc); background: color-mix(in srgb, var(--fc) 10%, #fff); font-weight: 600; }
+  :is(#rmType, #rmTravaux) .puces { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  :is(#rmType, #rmTravaux) .puces button { --fc: var(--gris); border: 1px solid var(--bord); color: var(--txt); background: #fff; border-radius: 8px; padding: 5px 10px; font: inherit; font-size: 12.5px; font-weight: 400; cursor: pointer; min-height: 32px; }
+  :is(#rmType, #rmTravaux) .puces button:hover { border-color: var(--fc); }
+  :is(#rmType, #rmTravaux) .puces button.on { background: var(--fc); border-color: var(--fc); color: #fff; font-weight: 600; }
+  :is(#rmType, #rmTravaux) .src { font-size: 11.5px; color: var(--gris); margin: 0 0 6px; }
+  :is(#rmType, #rmTravaux) .rm-ajout { width: 100%; margin: 8px 0 6px; min-height: 38px; border-color: var(--acc); color: var(--acc); background: var(--acc-p); font-weight: 600; }
+  :is(#rmType, #rmTravaux) .rm-ajout:hover { background: #d8f0ea; }
+  :is(#rmType, #rmTravaux) .panier { display: flex; flex-direction: column; gap: 4px; margin-bottom: 6px; }
+  :is(#rmType, #rmTravaux) .panier .pl { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; align-items: center; padding: 6px 8px 6px 10px; border: 1px solid var(--acc-b); background: var(--acc-p); border-radius: 8px; font-size: 13px; }
+  :is(#rmType, #rmTravaux) .panier .pl .nom { font-weight: 600; color: var(--txt); }
+  :is(#rmType, #rmTravaux) .panier .pl .det { display: block; font-size: 11.5px; color: var(--txt2); font-weight: 400; }
+  :is(#rmType, #rmTravaux) .panier .pl .mt { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  :is(#rmType, #rmTravaux) .panier .pl .sup { width: 26px; height: 26px; border: 0; border-radius: 50%; background: transparent; color: var(--gris); font: inherit; font-size: 16px; cursor: pointer; }
+  :is(#rmType, #rmTravaux) .panier .pl .sup:hover { background: #fff; color: #b91c1c; }
+  :is(#rmType, #rmTravaux) .panier .vide { font-size: 12px; color: var(--gris); padding: 2px 0; }
+
+  /* Résultat */
+  :is(#rmType, #rmTravaux) .res .carte-t { justify-content: space-between; }
+  :is(#rmType, #rmTravaux) .aleas { display: inline-flex; align-items: center; gap: 5px; font-weight: 400; font-size: 12px; color: var(--gris); }
+  :is(#rmType, #rmTravaux) .aleas input { width: 56px; height: 27px; font-size: 13px; }
+  :is(#rmType, #rmTravaux) .non-contractuel { margin: 0; padding: 0 14px 10px; font-size: 11.5px; line-height: 1.45; color: var(--txt2); }
+  :is(#rmType, #rmTravaux) .non-contractuel b { color: var(--txt); }
+  :is(#rmType, #rmTravaux) .fourch { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 14px 10px; }
+  :is(#rmType, #rmTravaux) .fourch > div { border: 1px solid var(--acc-b); background: var(--acc-p); border-radius: 10px; color: var(--acc); }
+  :is(#rmType, #rmTravaux) .fourch > div:first-child { border-color: #bbe9c8; background: #edf9f0; color: #15803d; }   /* prix bas  : vert */
+  :is(#rmType, #rmTravaux) .fourch > div:last-child { border-color: #fde3b3; background: #fff7e8; color: #b45309; }   /* prix haut : ambre */
+  :is(#rmType, #rmTravaux) .fourch div { padding: 8px 10px; text-align: center; }
+  :is(#rmType, #rmTravaux) .fourch .k { display: block; font-size: 10.5px; color: var(--txt2); text-transform: uppercase; letter-spacing: .06em; font-weight: 500; }
+  :is(#rmType, #rmTravaux) .fourch .v { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+  :is(#rmType, #rmTravaux) .fourch .s { display: block; font-size: 11px; color: var(--gris); font-weight: 400; }
+  :is(#rmType, #rmTravaux) .decompte { padding: 4px 14px 8px; }
+  :is(#rmType, #rmTravaux) .decompte .l { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid #f1f3f5; }
+  :is(#rmType, #rmTravaux) .decompte .l:last-child { border-bottom: 0; }
+  :is(#rmType, #rmTravaux) .decompte .l .k { font-weight: 400; color: var(--txt); display: flex; align-items: center; gap: 6px; }
+  :is(#rmType, #rmTravaux) .decompte .l .k i { display: none; }
+  :is(#rmType, #rmTravaux) .decompte .l .k small { color: var(--gris); font-weight: 400; font-size: 11.5px; }
+  :is(#rmType, #rmTravaux) .decompte .l .v { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; text-align: right; }
+  :is(#rmType, #rmTravaux) .decompte .l .v small.ttc { display: block; }
+  :is(#rmType, #rmTravaux) .decompte .l.tva { padding-left: 14px; }
+  :is(#rmType, #rmTravaux) .decompte .l.tva .k, :is(#rmType, #rmTravaux) .decompte .l.tva .v { font-weight: 400; color: var(--gris); font-size: 12px; }
+  :is(#rmType, #rmTravaux) .decompte .l.ht { border-top: 1px solid var(--bord); margin-top: 2px; }
+  :is(#rmType, #rmTravaux) .decompte .l.ht .k { font-weight: 600; }
+  :is(#rmType, #rmTravaux) .decompte .l.ttc { background: linear-gradient(135deg, #1e3a8a, #0f766e); margin: 4px -14px 0; padding: 10px 14px; border: 0; }
+  :is(#rmType, #rmTravaux) .decompte .l.ttc .k, :is(#rmType, #rmTravaux) .decompte .l.ttc .v { color: #fff !important; }
+  :is(#rmType, #rmTravaux) .decompte .l.ttc .k, :is(#rmType, #rmTravaux) .decompte .l.ttc .v { font-size: 15px; font-weight: 700; color: var(--acc); }
+  :is(#rmType, #rmTravaux) .actions { display: flex; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--bord); flex-wrap: wrap; }
+  :is(#rmType, #rmTravaux) .btn { flex: 1; min-height: 42px; border-radius: 9px; border: 1px solid #d1d5db; background: #fff; font: inherit; font-weight: 500; color: var(--txt); cursor: pointer; padding: 0 12px; }
+  :is(#rmType, #rmTravaux) .btn:hover { background: #fafafa; border-color: #9ca3af; }
+  :is(#rmType, #rmTravaux) .btn.pub { flex: 2.4; background: var(--acc); border-color: var(--acc); color: #fff; font-size: 15px; font-weight: 600; }
+  :is(#rmType, #rmTravaux) .btn.pub:hover { background: #0b5f59; }
+  :is(#rmType, #rmTravaux) .btn.pub:disabled { background: #cbd5e1; border-color: #cbd5e1; color: #fff; cursor: default; }
+  :is(#rmType, #rmTravaux) .btn.pub small { display: block; font-weight: 400; font-size: 11px; opacity: .92; }
+
+  @media (max-width: 520px) { :is(#rmType, #rmTravaux) .actions .btn.pub { flex: 1 1 100%; } }
+  @media (max-width: 400px) {
+    :is(#rmType, #rmTravaux) .row { grid-template-columns: 1fr 100px; }
+    :is(#rmType, #rmTravaux) .row.sel { grid-template-columns: 1fr 128px; }
+    :is(#rmType, #rmTravaux) .eq { grid-template-columns: 20px 1fr 48px 12px 76px; gap: 5px; }
+    :is(#rmType, #rmTravaux) .eq.sel { grid-template-columns: 20px 1fr 120px 76px; }
+    :is(#rmType, #rmTravaux) .eq.sel.q { grid-template-columns: 20px minmax(0, 1fr) 84px 44px 12px 76px; }
+    :is(#rmType, #rmTravaux) .eq.comp { grid-template-columns: 20px 1fr 64px 84px; }
+    :is(#rmType, #rmTravaux) .rm-types { gap: 5px; }
+    :is(#rmType, #rmTravaux) .rm-type { font-size: 12.5px; padding: 6px 4px; }
+    :is(#rmType, #rmTravaux) .rm-type small { font-size: 10px; }
+  }
+  :is(#rmType, #rmTravaux) .opt-imp { flex: 1 1 100%; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--txt2); cursor: pointer; min-height: 32px; }
+  :is(#rmType, #rmTravaux) .opt-imp input { width: 18px; height: 18px; margin: 0; flex: none; accent-color: var(--acc); }
+  :is(#rmType, #rmTravaux) .opt-imp.titre { cursor: default; }
+  :is(#rmType, #rmTravaux) .opt-imp.admin-seul { display: none; }
+  :is(#rmType, #rmTravaux) body.admin .opt-imp.admin-seul { display: flex; }
+  :is(#rmType, #rmTravaux) .opt-imp.titre input { flex: 1; min-width: 0; width: auto; height: 36px; padding: 0 10px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; font-size: 13px; color: var(--txt); text-align: left; }
+  :is(#rmType, #rmTravaux) .imp-detail { display: none; }
+  :is(#rmType, #rmTravaux) .imp-entete, :is(#rmType, #rmTravaux) .imp-filigrane { display: none; }
+  :is(#rmType, #rmTravaux) .places { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 4px 8px 8px; font-size: 13px; }
+  :is(#rmType, #rmTravaux) .places input { width: 64px; height: 32px; }
+  :is(#rmType, #rmTravaux) .places .regle { flex: 1 1 100%; font-size: 11.5px; color: var(--gris); }
+  :is(#rmType, #rmTravaux) .mt-imp { display: none; }
+
+  /* La colonne de saisie du site est étroite : une carte par ligne, tuiles
+     sur deux colonnes si besoin, sous-lignes des postes composés en version
+     compacte (libellé + option + montant) quelle que soit la largeur d'écran */
+  @media (min-width: 900px) { #rmTravaux .grille { grid-template-columns: 1fr; } }
+  #rmType .rm-types { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+  #rmTravaux .sous .li { grid-template-columns: 18px 1fr 70px; }
+  #rmTravaux .sous .li .x, #rmTravaux .sous .li input[type=number] { display: none; }
+  #rmTravaux .sous .li .m { grid-column: 3; }
+  #rmTravaux .carte-t .taux { white-space: nowrap; }
+  @media (max-width: 560px) {
+    #rmTravaux .carte-c { padding: 6px 8px; }
+    #rmTravaux details.sl .sl-c { padding: 4px 2px; }
+    #rmTravaux .eq { padding: 5px 4px; }
+  }
+
   </style>
 </head>
 <body>
@@ -1469,29 +1744,17 @@
           <div class="calc-layout">
             <div class="calc-inputs">
 
-              <!-- ÉTAPE 1 — TYPE DE PROJET -->
+              <!-- ÉTAPE 1 — TYPE DE PROJET : tuiles cumulables du calculateur RUN MAP -->
               <div class="panel wizard-step" id="wizardTypeStep">
                 <h2>Type de projet <button type="button" class="help-btn" data-help="typeProjetHelp" aria-label="Aide">?</button></h2>
-                <div class="help-notice" id="typeProjetHelp">Indiquez la nature de votre projet. Les étapes suivantes s'adaptent automatiquement à votre choix.</div>
-                <div class="type-choices">
-                  <button type="button" class="type-card" data-type="neuf">
-                    <span class="type-ic">🏗️</span>
-                    <span class="type-title">Construction neuve</span>
-                    <span class="type-desc">Bâtir sur un terrain</span>
-                    <span class="badge badge-8">TVA 8,5%</span>
-                  </button>
-                  <button type="button" class="type-card" data-type="reno">
-                    <span class="type-ic">🛠️</span>
-                    <span class="type-title">Rénovation</span>
-                    <span class="type-desc">Rénover un existant</span>
-                    <span class="badge badge-2">TVA 2,1%</span>
-                  </button>
-                  <button type="button" class="type-card" data-type="both">
-                    <span class="type-ic">🏠</span>
-                    <span class="type-title">Les deux</span>
-                    <span class="type-desc">Neuf + rénovation</span>
-                    <span class="badge badge-8" style="background:rgba(82,126,114,0.15); color:var(--c-lagon);">Mixte</span>
-                  </button>
+                <div class="help-notice" id="typeProjetHelp">Un ou plusieurs choix : construction neuve, rénovation et aménagements extérieurs se cumulent. « Sélection des corps de métiers » sert à chiffrer un ou plusieurs postes précis (elle remplace les autres choix). L'étape Travaux s'adapte à votre sélection.</div>
+                <div id="rmType">
+                  <div class="rm-types">
+                    <button type="button" class="rm-type" data-type="neuf">Construction neuve<small>TVA 8,5 %</small></button>
+                    <button type="button" class="rm-type" data-type="reno">Rénovation<small>TVA 2,1 %</small></button>
+                    <button type="button" class="rm-type" data-type="ext">Aménagements extérieurs<small>TVA 8,5 %</small></button>
+                    <button type="button" class="rm-type" data-type="metier">Sélection des corps de métiers<small>un ou plusieurs postes précis</small></button>
+                  </div>
                 </div>
               </div>
 
@@ -1520,7 +1783,7 @@
                       <span>Pourquoi un terrain en pente coûte plus cher ?</span>
                       <button type="button" class="help-notice-close" id="penteHelpClose" aria-label="Fermer">✕</button>
                     </div>
-                    <p style="margin:0 0 0.4rem;"><strong>Règle appliquée ici :</strong> +0,5% de surcoût par % de pente, sur Travaux + Piscine + Clôture + Stationnement (plafonné à 50%).</p>
+                    <p style="margin:0 0 0.4rem;"><strong>Règle appliquée ici :</strong> +0,5% de surcoût par % de pente, sur les travaux (rénovation, neuf, corps de métiers) et les aménagements extérieurs (plafonné à 50%).</p>
                     <p style="margin:0 0 0.4rem;">Construire sur un terrain en pente engendre des surcoûts techniques significatifs :</p>
                     <ul>
                       <li><strong>Complexité de réalisation</strong> — accès chantier difficile, manutention des matériaux contraignante, mise en place d'engins spécialisés (mini-pelle araignée, treuils), durée du chantier rallongée</li>
@@ -1644,143 +1907,127 @@
                 </div>
               </div>
 
-              <!-- TRAVAUX -->
+              <!-- TRAVAUX — cartes du calculateur RUN MAP BTP (surfaces, travaux & équipements
+                   spécifiques, aménagements extérieurs, corps de métiers) -->
               <div class="panel">
-                <h2>2. Travaux principaux</h2>
-                <div class="hint" style="margin-bottom:0.5rem;">Les prix au m² ci-dessous s'entendent <strong>hors équipements spécifiques</strong> (cuisine, SDB, WC, chauffe-eau…), chiffrés plus bas dans cette même section.</div>
-
-                <!-- Sous-bloc Rénovation (TVA 2,1% — vert) -->
-                <div class="travaux-card travaux-card--reno">
-                  <div class="travaux-card-title">
-                    <span class="travaux-dot" style="background:var(--c-vert);"></span>
-                    Rénovation
-                    <span class="badge badge-2">TVA 2,1%</span>
+                <h2>Travaux</h2>
+                <div id="rmTravaux">
+                  <p class="rm-attente" id="rmAttente">Choisissez d'abord le type de projet (étape 1) : les postes de travaux s'affichent ensuite ici.</p>
+                  <div class="grille">
+              <!-- 2. Surfaces -->
+              <section class="carte bati attente" id="qSurfaces">
+                <div class="carte-t"><span class="n">2</span>Quelle surface ?
+                  <button type="button" class="help" data-titre="Quelle surface ?" data-info="Rénovation : la surface à rénover et l'ampleur des travaux donnent le prix au m² (bouton i sur l'ampleur pour les définitions) ; la varangue à rénover a son propre prix au m², le garde-corps (case à cocher) son matériau et son prix au mètre linéaire.|À l'impression, cochez « détail des postes » pour joindre ce que comprend chaque poste.|Construction neuve : surface de plancher et varangue couverte × prix au m². Le nombre de logements pré-remplit les travaux &amp; équipements spécifiques (une cuisine, une salle de bain, un WC, un chauffe-eau par logement).|Les prix au m² HT sont des moyennes tous corps d'état à La Réunion, modifiables." aria-label="Aide">?</button>
+                </div>
+                <div class="carte-c">
+                  <div class="bloc-p reno" id="blocReno">
+                    <div class="sub">Rénovation<span class="taux">TVA 2,1 %</span></div>
+                    <div class="row"><label for="renoLogements">Nombre de logements à rénover<button type="button" class="info" data-titre="Logements à rénover" data-info="1 pour une maison ; plusieurs pour des appartements. Les travaux &amp; équipements spécifiques (cuisine, salle de bain, WC, chauffe-eau) prennent ce nombre comme quantité quand vous les cochez." aria-label="Logements à rénover">i</button></label>
+                      <input type="number" id="renoLogements" min="1" step="1" value="1" inputmode="numeric"></div>
+                    <div class="row"><label for="renoSurface">Surface à rénover<span class="u">m²</span></label>
+                      <input type="number" id="renoSurface" min="0" step="1" value="0" inputmode="numeric" placeholder="0"></div>
+                    <div class="row sel"><label for="renoType">Ampleur<button type="button" class="info" data-titre="Ampleur des travaux" data-info="Légère : rafraîchissement. Peintures, revêtements de sol, petites réparations, sans toucher aux réseaux ni aux cloisons.|Moyenne : second œuvre. Électricité et plomberie reprises en partie, menuiseries, cloisons déplacées, revêtements (la cuisine et la salle de bain sont dans les travaux &amp; équipements spécifiques).|Lourde : rénovation complète. Réseaux entièrement refaits, cloisons et plafonds, parfois structure ou toiture, remise à neuf totale." aria-label="Définition des ampleurs">i</button><span class="u" id="renoPaliersTxt"></span></label>
+                      <select id="renoType"><option value="legere">Légère</option><option value="moyenne" selected>Moyenne</option><option value="lourde">Lourde</option></select></div>
+                    <div class="row"><label for="renoPrixM2">Prix<span class="u">€/m² HT</span></label>
+                      <input type="number" id="renoPrixM2" class="prix-input" min="0" step="50" value="700" inputmode="numeric"></div>
+                    <div class="row"><label for="renoVarangue">Varangue à rénover<span class="u">m²</span><button type="button" class="info" data-titre="Varangue à rénover" data-info="Varangue existante à reprendre : carrelage, plafond, garde-corps, peinture…" aria-label="Ce que comprend Varangue à rénover">i</button></label>
+                      <input type="number" id="renoVarangue" min="0" step="1" value="0" inputmode="numeric" placeholder="0"></div>
+                    <div class="row"><label for="renoPrixVarangue">Prix varangue<span class="u">€/m² HT</span></label>
+                      <input type="number" id="renoPrixVarangue" class="prix-input" min="0" step="10" value="300" inputmode="numeric"></div>
+                    <div class="row chk"><label for="renoGC"><input type="checkbox" id="renoGC">Garde-corps<span class="u">en option</span><button type="button" class="info" data-titre="Garde-corps" data-info="Garde-corps fourni et posé, fixations comprises.|Le prix au mètre linéaire suit le matériau choisi : aluminium, bois, acier ou vitré." aria-label="Ce que comprend Garde-corps">i</button></label></div>
+                    <div class="row sel gc" hidden><label for="renoGCType">Matériau</label>
+                      <select id="renoGCType"><option value="alu" selected>Aluminium</option><option value="bois">Bois</option><option value="acier">Acier</option><option value="vitre">Vitré</option></select></div>
+                    <div class="row gc" hidden><label for="renoGardeCorps">Longueur<span class="u">ml</span></label>
+                      <input type="number" id="renoGardeCorps" min="0" step="0.5" value="0" inputmode="decimal" placeholder="0"></div>
+                    <div class="row gc" hidden><label for="renoPrixGardeCorps">Prix garde-corps<span class="u">€/ml HT</span></label>
+                      <input type="number" id="renoPrixGardeCorps" class="prix-input" min="0" step="10" value="300" inputmode="numeric"></div>
                   </div>
-                  <div style="display:grid; grid-template-columns:1fr 1.3fr 0.9fr; gap:0.55rem;">
-                    <div>
-                      <label for="renoSurface" style="font-weight:400; font-size:0.78rem;">Surface (m²)</label>
-                      <input type="number" id="renoSurface" min="0" step="1" value="0" class="qte-input">
-                    </div>
-                    <div>
-                      <label for="renoType" style="font-weight:400; font-size:0.78rem;">Type</label>
-                      <select id="renoType">
-                        <option value="aucune">— Aucune —</option>
-                        <option value="legere">Légère</option>
-                        <option value="moyenne">Moyenne</option>
-                        <option value="lourde">Lourde</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label for="renoPrixM2" style="font-weight:400; font-size:0.78rem;">Prix €/m²</label>
-                      <input type="number" id="renoPrixM2" min="0" step="50" value="0" placeholder="Auto" class="prix-input">
-                    </div>
-                  </div>
-                  <span class="hint">Prix indicatifs : Légère 250 / Moyenne 600 / Lourde 950 €/m² — modifiables selon devis</span>
-
-                  <div class="reno-memo" id="renoMemo" style="display:none;">
-                    <div class="reno-memo-header" id="renoMemoHeader" role="button" aria-expanded="false" tabindex="0">
-                      <span id="renoMemoTitle">Détail des prestations incluses</span>
-                      <span class="reno-memo-toggle" id="renoMemoToggle">▼ Voir le détail</span>
-                    </div>
-                    <div class="reno-memo-body" id="renoMemoBody"></div>
+                  <div class="bloc-p" id="blocNeuf">
+                    <div class="sub">Construction neuve<span class="taux">TVA 8,5 %</span></div>
+                    <div class="row"><label for="neufLogements">Nombre de logements<button type="button" class="info" data-titre="Nombre de logements" data-info="1 pour une maison.|Plusieurs pour un immeuble ou des appartements : chaque logement a sa cuisine, sa salle de bain, son WC et son chauffe-eau — les travaux &amp; équipements spécifiques se pré-remplissent avec ce nombre." aria-label="Nombre de logements">i</button></label>
+                      <input type="number" id="neufLogements" min="1" step="1" value="1" inputmode="numeric"></div>
+                    <div class="row"><label for="neuf">Surface de plancher<span class="u">m²</span><button type="button" class="info" data-titre="Surface de plancher" data-info="Somme des surfaces closes et couvertes, sous plus de 1,80 m de hauteur, mesurée au nu intérieur des murs.|Elle remplace la SHOB et la SHON depuis le 1er mars 2012." aria-label="Ce que comprend Surface de plancher">i</button></label>
+                      <input type="number" id="neuf" min="0" step="1" value="0" inputmode="numeric" placeholder="0"></div>
+                    <div class="row"><label for="neufVarangue">Varangue couverte<span class="u">m²</span><button type="button" class="info" data-titre="Varangue couverte" data-info="Terrasse sous toiture, ouverte sur l'extérieur (non close).|Hors surface de plancher, mais c'est de la dalle et de la couverture à construire." aria-label="Ce que comprend Varangue couverte">i</button></label>
+                      <input type="number" id="neufVarangue" min="0" step="1" value="0" inputmode="numeric" placeholder="0"></div>
+                    <div class="row"><label for="neufPrixM2">Prix plancher<span class="u">€/m² HT</span></label>
+                      <input type="number" id="neufPrixM2" class="prix-input" min="0" step="50" value="1500" inputmode="numeric"></div>
+                    <div class="row"><label for="neufPrixVarangue">Prix varangue<span class="u">€/m² HT</span></label>
+                      <input type="number" id="neufPrixVarangue" class="prix-input" min="0" step="50" value="1350" inputmode="numeric"></div>
                   </div>
                 </div>
-
-                <!-- Sous-bloc Construction neuve (TVA 8,5% — or) -->
-                <div class="travaux-card travaux-card--neuf">
-                  <div class="travaux-card-title">
-                    <span class="travaux-dot" style="background:var(--c-or-clair);"></span>
-                    Construction neuve
-                    <span class="badge badge-8">TVA 8,5%</span>
-                  </div>
-                  <div class="row">
-                    <div>
-                      <label for="neuf" style="font-weight:400; font-size:0.78rem;">Surface SHOB (m²)</label>
-                      <input type="number" id="neuf" min="0" step="1" value="0" class="qte-input">
-                    </div>
-                    <div>
-                      <label for="neufPrixM2" style="font-weight:400; font-size:0.78rem;">Prix €/m² HT</label>
-                      <input type="number" id="neufPrixM2" min="0" step="50" value="1500" class="prix-input">
-                    </div>
-                  </div>
-                  <span class="hint"><strong>1 500 €/m² HT</strong> par défaut, calculé sur la <strong>Surface Hors d'Œuvre Brute (SHOB)</strong> — modifiable selon prestations et localisation</span>
+                <div class="stot sous" id="stLogement" hidden><span>Logement HT</span><span class="vv"><span id="sTotLogement">0 €</span><small class="ttc" id="sTotLogementTtc"></small></span></div>
+                <div class="stot sous" id="stVarangue" hidden><span>Varangue HT</span><span class="vv"><span id="sTotVarangue">0 €</span><small class="ttc" id="sTotVarangueTtc"></small></span></div>
+                <div class="stot"><span>Total surfaces HT</span><span class="vv"><span id="sTotSurf">0 €</span><small class="ttc" id="sTotSurfTtc"></small></span></div>
+              </section>
+          
+              <!-- 3. Ajustements du prix de construction -->
+              <section class="carte bati attente" id="qAjust">
+                <div class="carte-t"><span class="n">3</span>Travaux &amp; équipements spécifiques
+                  <button type="button" class="help" data-titre="Travaux &amp; équipements spécifiques" data-info="Postes fournis et posés qui s'ajoutent au prix au m², en HT : cuisine, salle de bain, WC, chauffe-eau.|Pré-cochés en construction neuve ; le bouton i de chaque ligne dit ce qu'elle comprend.|TVA 2,1 % en rénovation seule, 8,5 % sinon." aria-label="Aide">?</button>
+                  <span class="taux" id="tauxAjustTitre">TVA 8,5 %</span></div>
+                <div class="carte-c">
+                  <div class="eq"><input type="checkbox" id="equipCuisine"><label for="equipCuisine">Cuisine équipée<button type="button" class="info" data-titre="Cuisine équipée" data-info="Fourniture et pose|Plaque électrique|Four|Évier|Hotte aspirante" aria-label="Ce que comprend Cuisine équipée">i</button></label>
+                    <input type="number" id="equipCuisineQty" min="0" step="1" value="1" inputmode="numeric" aria-label="Nombre de cuisines"><span class="x">×</span>
+                    <input type="number" id="equipCuisinePrix" class="prix-input" min="0" step="100" value="10000" inputmode="numeric" aria-label="Prix HT d'une cuisine"></div>
+                  <div class="eq"><input type="checkbox" id="equipSDB"><label for="equipSDB">Salle de bain<button type="button" class="info" data-titre="Salle de bain" data-info="Porte|Électricité|Équipement sanitaire : caniveau de douche, robinetterie, lave-mains standard, paroi de douche, miroir|Étanchéité de la zone de douche|Faïences" aria-label="Ce que comprend Salle de bain">i</button></label>
+                    <input type="number" id="equipSDBQty" min="0" step="1" value="1" inputmode="numeric" aria-label="Nombre de salles de bain"><span class="x">×</span>
+                    <input type="number" id="equipSDBPrix" class="prix-input" min="0" step="100" value="7000" inputmode="numeric" aria-label="Prix HT d'une salle de bain"></div>
+                  <div class="eq"><input type="checkbox" id="equipWC"><label for="equipWC">WC indépendant<button type="button" class="info" data-titre="WC indépendant" data-info="Porte|Électricité|WC|Lave-mains|Faïences" aria-label="Ce que comprend WC indépendant">i</button></label>
+                    <input type="number" id="equipWCQty" min="0" step="1" value="1" inputmode="numeric" aria-label="Nombre de WC"><span class="x">×</span>
+                    <input type="number" id="equipWCPrix" class="prix-input" min="0" step="100" value="1000" inputmode="numeric" aria-label="Prix HT d'un WC"></div>
+                  <div class="eq"><input type="checkbox" id="equipCES"><label for="equipCES">Chauffe-eau solaire<button type="button" class="info" data-titre="Chauffe-eau solaire" data-info="Fourniture et pose" aria-label="Ce que comprend Chauffe-eau solaire">i</button></label>
+                    <input type="number" id="equipCESQty" min="0" step="1" value="1" inputmode="numeric" aria-label="Nombre de chauffe-eau"><span class="x">×</span>
+                    <input type="number" id="equipCESPrix" class="prix-input" min="0" step="100" value="2500" inputmode="numeric" aria-label="Prix HT d'un chauffe-eau"></div>
                 </div>
-
+                <div class="stot"><span>Total travaux &amp; équipements HT</span><span class="vv"><span id="sTotAjust">0 €</span><small class="ttc" id="sTotAjustTtc"></small></span></div>
+              </section>
+          
+              <!-- 4. Aménagement extérieur : lignes générées par le script (table EXT) -->
+              <section class="carte large ext attente" id="qExt" hidden>
+                <div class="carte-t"><span class="n">4</span>Aménagements extérieurs
+                  <button type="button" class="help" data-titre="Aménagements extérieurs" data-info="Ouvrez un sous-lot, cochez un poste, indiquez la quantité. Les postes composés déplient leur détail : un stationnement comprend couche de forme, géotextile et revêtement ; une terrasse propose l'option plots béton (1 pour 5 m²) ; un mur de clôture se calcule à partir de sa longueur et de sa hauteur (semelle, soubassement, moellons ou bloc US, enduit et peinture sur 2 faces, 1 face ou aucune) — la règle s'affiche sous le mur.|Prix HT : bibliothèque ALB DPGF quand elle chiffre le poste, sinon ordre de grandeur ; tous modifiables.|Varangue et dalle extérieures : surface × prix au m², garde-corps au mètre linéaire.|Maçonnerie extérieure : pas japonais à l'unité, escalier à la marche (bois, béton ou moellons).|La piscine et l'assainissement ont un menu qui fixe le prix ; cocher l'assainissement coche aussi les frais SPANC.|TVA 8,5 %." aria-label="Aide">?</button>
+                  <span class="taux">TVA 8,5 %</span></div>
+                <div class="carte-c"><div class="grp2" id="extGroupes"></div></div>
+                <div class="stot"><span>Total extérieur HT</span><span class="vv"><span id="sTotExt">0 €</span><small class="ttc" id="sTotExtTtc"></small></span></div>
+              </section>
+          
+              <!-- 4b. Sélection des corps de métiers : un panier de postes (métier, quantité, prix) -->
+              <section class="carte large metier attente" id="qMetier" hidden>
+                <div class="carte-t"><span class="n">2</span>Quels corps de métiers ?
+                  <button type="button" class="help" data-titre="Sélection des corps de métiers" data-info="Choisissez un métier dans sa famille, indiquez la quantité dans son unité (m², ml, unité…), puis « Ajouter » : le poste rejoint la liste en dessous. Recommencez pour chaque métier ; une croix retire un poste.|Prix unitaire HT proposé et le prix unitaire HT proposé — tiré de la bibliothèque de prix ALB DPGF (référence réunionnaise) quand elle chiffre le poste, sinon un ordre de grandeur ; la source s'affiche sous le menu, le prix reste modifiable.|La marge se règle avec les aléas ± en bas : la fourchette transmise = TTC ± aléas.|TVA : 2,1 % si les travaux portent sur un logement achevé depuis plus de 2 ans, 8,5 % sinon (neuf, extérieur).|À la publication, les métiers de la liste sont présélectionnés dans l'annonce." aria-label="Aide">?</button>
+                  <span class="taux" id="tauxMetierTitre">TVA 2,1 %</span></div>
+                <div class="carte-c">
+                  <div class="familles" id="metierFamilles"></div>
+                  <div class="puces" id="metierPuces"></div>
+                  <div class="row sel" hidden><label for="metierSel">Corps de métier</label><select id="metierSel"></select></div>
+                  <div class="src" id="metierSource"></div>
+                  <div class="row"><label for="metierQte">Quantité<span class="u" id="metierUnite">m²</span></label>
+                    <input type="number" id="metierQte" min="0" step="1" value="0" inputmode="decimal" placeholder="0"></div>
+                  <div class="row"><label for="metierPrix">Prix unitaire<span class="u" id="metierPrixUnite">€/m² HT</span></label>
+                    <input type="number" id="metierPrix" class="prix-input" min="0" step="5" value="0" inputmode="numeric"></div>
+                  <button type="button" class="rm-ajout" id="metierAjouter">+ Ajouter ce poste à la sélection</button>
+                  <div class="panier" id="metierPanier"></div>
+                  <div class="row sel"><label for="metierTva">TVA</label>
+                    <select id="metierTva"><option value="reno" selected>Existant — 2,1 %</option><option value="neuf">Neuf — 8,5 %</option></select></div>
+                </div>
+                <div class="stot"><span>Total sélection HT</span><span class="vv"><span id="sTotMetier">0 €</span><small class="ttc" id="sTotMetierTtc"></small></span></div>
+              </section>
+          
+                  </div>
+                  <!-- Fenêtre commune aux boutons i et ? -->
+                  <div class="voile" id="infoVoile" hidden>
+                    <div class="fen" role="dialog" aria-modal="true" aria-labelledby="infoTitre">
+                      <div class="fen-t"><span id="infoTitre">Détail</span><button type="button" class="fen-x" id="infoX" aria-label="Fermer">×</button></div>
+                      <div id="infoCorps"></div>
+                      <button type="button" class="fen-ok" id="infoOk">Compris</button>
+                    </div>
+                  </div>
+                </div>
                 <div class="panel-soustotal" id="st_travaux">
-                  <span class="panel-soustotal-label">Sous-total travaux principaux HT</span>
+                  <span class="panel-soustotal-label">Sous-total travaux HT</span>
                   <span class="panel-soustotal-value">0 €</span>
                 </div>
-
-              <!-- ── Équipements spécifiques : FUSIONNÉS dans « Travaux principaux » pour
-                   rappeler que les prix au m² ci-dessus n'incluent PAS ces lots. ── -->
-              <div id="panelEquipements" style="margin-top:1rem; padding-top:1rem; border-top:1px dashed rgba(13,13,13,0.18);">
-                <h3 style="font-size:0.98rem; font-weight:700; margin:0 0 0.2rem;">Équipements spécifiques (lots) <span class="badge badge-8">TVA 8,5%</span> <span style="color:#dc2626;font-size:0.75rem;font-weight:700;margin-left:6px;">* au moins 1 requis</span></h3>
-                <div class="hint" style="color:#b45309;font-weight:600;margin-bottom:0.5rem;">⚠️ Non compris dans les prix au m² ci-dessus — chiffrés à part ci-dessous.</div>
-                <span class="hint" style="margin-bottom:0.6rem;">Cochez au moins un équipement applicable (cuisine, salle de bain, WC ou chauffe-eau) — obligatoire pour publier le projet.</span>
-
-                <div class="checkbox-row">
-                  <input type="checkbox" id="equipCuisine">
-                  <label for="equipCuisine">Cuisine équipée</label>
-                  <div class="field-inline" style="margin:0; gap:0.25rem;">
-                    <input type="number" id="equipCuisineQty" min="0" step="1" value="0" placeholder="qté" class="qte-input" style="width:55px;">
-                    <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
-                    <input type="number" id="equipCuisinePrix" min="0" step="100" value="10000" class="prix-input" style="width:80px;">
-                    <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
-                  </div>
-                  <span class="row-soustotal empty" id="st_equipCuisine">0 €</span>
-                </div>
-
-                <div class="checkbox-row">
-                  <input type="checkbox" id="equipSDB">
-                  <label for="equipSDB">Salle de bain</label>
-                  <span title="Inclus dans le prix/u : douche ou baignoire, vasque, WC, robinetterie, faïence, étanchéité (sous carrelage), porte, électricité (points lumineux + prises), plomberie (alimentation + évacuation)." style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid var(--c-text-muted,#A9A08C);color:var(--c-text-muted,#A9A08C);font-size:9.5px;font-weight:700;cursor:help;margin-left:4px;flex-shrink:0;">?</span>
-                  <div class="field-inline" style="margin:0; gap:0.25rem;">
-                    <input type="number" id="equipSDBQty" min="0" step="1" value="0" placeholder="qté" class="qte-input" style="width:55px;">
-                    <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
-                    <input type="number" id="equipSDBPrix" min="0" step="100" value="7000" class="prix-input" style="width:80px;">
-                    <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
-                  </div>
-                  <span class="row-soustotal empty" id="st_equipSDB">0 €</span>
-                </div>
-
-                <div class="checkbox-row">
-                  <input type="checkbox" id="equipWC">
-                  <label for="equipWC">WC indépendant</label>
-                  <span title="Inclus dans le prix/u : cuvette, lave-mains, robinetterie, porte, électricité (point lumineux + prise), plomberie (alimentation + évacuation)." style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid var(--c-text-muted,#A9A08C);color:var(--c-text-muted,#A9A08C);font-size:9.5px;font-weight:700;cursor:help;margin-left:4px;flex-shrink:0;">?</span>
-                  <div class="field-inline" style="margin:0; gap:0.25rem;">
-                    <input type="number" id="equipWCQty" min="0" step="1" value="0" placeholder="qté" class="qte-input" style="width:55px;">
-                    <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
-                    <input type="number" id="equipWCPrix" min="0" step="100" value="1000" class="prix-input" style="width:80px;">
-                    <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
-                  </div>
-                  <span class="row-soustotal empty" id="st_equipWC">0 €</span>
-                </div>
-
-                <div class="checkbox-row">
-                  <input type="checkbox" id="equipCES">
-                  <label for="equipCES">Chauffe-eau solaire</label>
-                  <div class="field-inline" style="margin:0; gap:0.25rem;">
-                    <input type="number" id="equipCESQty" min="0" step="1" value="0" placeholder="qté" class="qte-input" style="width:55px;">
-                    <span style="font-size:0.7rem; color:var(--c-text-muted);">×</span>
-                    <input type="number" id="equipCESPrix" min="0" step="100" value="2500" class="prix-input" style="width:80px;">
-                    <span style="font-size:0.7rem; color:var(--c-text-muted);">€/u</span>
-                  </div>
-                  <span class="row-soustotal empty" id="st_equipCES">0 €</span>
-                </div>
-
-                <span class="hint" style="margin-top:0.5rem;">Ce que couvre chaque prix unitaire <button type="button" class="help-btn" data-help="equipHelp" aria-label="Détail des équipements">?</button></span>
-                <div class="help-notice" id="equipHelp">
-                  <strong>Cuisine 10 000 €/u</strong> : meubles, plan de travail, électroménager standard, raccordements.<br>
-                  <strong>Salle de bain 7 000 €/u</strong> : douche/baignoire, vasque, WC, robinetterie, faïence, étanchéité, porte, électricité, plomberie.<br>
-                  <strong>WC indépendant 1 000 €/u</strong> : cuvette, lave-mains, robinetterie, porte, électricité, plomberie.<br>
-                  <strong>Chauffe-eau solaire 2 500 €/u</strong> : capteur thermique, ballon, support, installation.
-                </div>
-
-                <div class="panel-soustotal" id="st_equipements">
-                  <span class="panel-soustotal-label">Sous-total équipements HT</span>
-                  <span class="panel-soustotal-value">0 €</span>
-                </div>
-              </div>
               </div>
 
               <!-- MAÎTRISE D'ŒUVRE & FRAIS D'ÉTUDES -->
@@ -1909,231 +2156,6 @@
                 </div>
               </div>
 
-              <!-- AMÉNAGEMENTS EXTÉRIEURS (Piscine intégrée en onglet) -->
-              <div class="panel">
-                <h2>5. Aménagements extérieurs</h2>
-
-                <div class="tabs" role="tablist">
-                  <button type="button" class="tab-btn active" data-tab="cloture" role="tab">Clôture</button>
-                  <button type="button" class="tab-btn" data-tab="stationnement" role="tab">Stationnement</button>
-                  <button type="button" class="tab-btn" data-tab="portail" role="tab">Portail</button>
-                  <button type="button" class="tab-btn" data-tab="paysagisme" role="tab">Paysagisme</button>
-                  <button type="button" class="tab-btn" data-tab="piscine" role="tab">Piscine</button>
-                </div>
-
-                <div class="tab-content active" data-content="cloture">
-                  <div class="field">
-                    <label>Bloc US (hauteur 2 m) — enduit + peinture 2 faces</label>
-                    <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:0.4rem;">
-                      <div>
-                        <label for="cloturePar" style="font-weight:400; font-size:0.78rem;">Linéaire (ml)</label>
-                        <input type="number" id="cloturePar" min="0" step="1" value="0" class="qte-input">
-                      </div>
-                      <div>
-                        <label for="cloturePrixPar" style="font-weight:400; font-size:0.78rem;">Prix €/ml</label>
-                        <input type="number" id="cloturePrixPar" min="0" step="10" value="350" class="prix-input">
-                      </div>
-                    </div>
-                    <span class="hint">350 €/ml — hauteur 2 m, semelle + bloc US + enduit 2 faces + peinture 2 faces</span>
-                  </div>
-
-                  <div class="field">
-                    <label>Mur moellons (hauteur 2 m)</label>
-                    <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:0.4rem;">
-                      <div>
-                        <label for="clotureMoellons" style="font-weight:400; font-size:0.78rem;">Linéaire (ml)</label>
-                        <input type="number" id="clotureMoellons" min="0" step="1" value="0" class="qte-input">
-                      </div>
-                      <div>
-                        <label for="clotureMoellonsPrix" style="font-weight:400; font-size:0.78rem;">Prix €/ml</label>
-                        <input type="number" id="clotureMoellonsPrix" min="0" step="10" value="750" class="prix-input">
-                      </div>
-                    </div>
-                    <span class="hint">750 €/ml — mur en moellons apparents, hauteur 2 m, fondation comprise</span>
-                  </div>
-
-                  <div class="field">
-                    <label>Semi-rigide métallique</label>
-                    <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:0.4rem;">
-                      <div>
-                        <label for="clotureSR" style="font-weight:400; font-size:0.78rem;">Linéaire (ml)</label>
-                        <input type="number" id="clotureSR" min="0" step="1" value="0" class="qte-input">
-                      </div>
-                      <div>
-                        <label for="clotureSRPrix" style="font-weight:400; font-size:0.78rem;">Prix €/ml</label>
-                        <input type="number" id="clotureSRPrix" min="0" step="5" value="120" class="prix-input">
-                      </div>
-                    </div>
-                    <span class="hint">120 €/ml — panneau rigide métallique avec poteaux</span>
-                  </div>
-                </div>
-
-                <div class="tab-content" data-content="stationnement">
-                  <div class="row">
-                    <div class="field">
-                      <label for="statGravillon">Gravillon</label>
-                      <div style="display:grid; grid-template-columns:1fr 0.9fr; gap:0.4rem;">
-                        <input type="number" id="statGravillon" min="0" step="1" value="0" placeholder="m²" class="qte-input">
-                        <input type="number" id="statGravillonPrix" min="0" step="5" value="30" title="Prix HT €/m²" class="prix-input">
-                      </div>
-                    </div>
-                    <div class="field">
-                      <label for="statPaveHerbe">Pavé herbe</label>
-                      <div style="display:grid; grid-template-columns:1fr 0.9fr; gap:0.4rem;">
-                        <input type="number" id="statPaveHerbe" min="0" step="1" value="0" placeholder="m²" class="qte-input">
-                        <input type="number" id="statPaveHerbePrix" min="0" step="5" value="70" title="Prix HT €/m²" class="prix-input">
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="field">
-                      <label for="statDallage">Dallage béton</label>
-                      <div style="display:grid; grid-template-columns:1fr 0.9fr; gap:0.4rem;">
-                        <input type="number" id="statDallage" min="0" step="1" value="0" placeholder="m²" class="qte-input">
-                        <input type="number" id="statDallagePrix" min="0" step="5" value="90" title="Prix HT €/m²" class="prix-input">
-                      </div>
-                    </div>
-                    <div class="field">
-                      <label for="statBetonDes">Béton désactivé</label>
-                      <div style="display:grid; grid-template-columns:1fr 0.9fr; gap:0.4rem;">
-                        <input type="number" id="statBetonDes" min="0" step="1" value="0" placeholder="m²" class="qte-input">
-                        <input type="number" id="statBetonDesPrix" min="0" step="5" value="120" title="Prix HT €/m²" class="prix-input">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tab-content" data-content="portail">
-                  <div class="field">
-                    <label>Portail standard 3,70 m × 2 m</label>
-
-                    <div class="checkbox-row">
-                      <input type="checkbox" id="portailVantail">
-                      <label for="portailVantail">Portail (3,70 m × 2 m de haut)</label>
-                      <input type="number" id="portailVantailPrix" min="0" step="100" value="3500" class="prix-input" style="width:80px;">
-                      <span class="row-soustotal empty" id="st_portailVantail">0 €</span>
-                    </div>
-                    <div class="checkbox-row">
-                      <input type="checkbox" id="portailLongrine">
-                      <label for="portailLongrine">Longrine + scellement du rail</label>
-                      <input type="number" id="portailLongrinePrix" min="0" step="50" value="600" class="prix-input" style="width:80px;">
-                      <span class="row-soustotal empty" id="st_portailLongrine">0 €</span>
-                    </div>
-                    <div class="checkbox-row">
-                      <input type="checkbox" id="portailMotor">
-                      <label for="portailMotor">Motorisation</label>
-                      <input type="number" id="portailMotorPrix" min="0" step="50" value="1300" class="prix-input" style="width:80px;">
-                      <span class="row-soustotal empty" id="st_portailMotor">0 €</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tab-content" data-content="paysagisme">
-                  <div class="field">
-                    <label>Aménagements paysagers</label>
-
-                    <div class="checkbox-row">
-                      <input type="checkbox" id="paysEngazonnement">
-                      <label for="paysEngazonnement">Engazonnement</label>
-                      <div class="field-inline" style="margin:0; gap:0.25rem;">
-                        <input type="number" id="paysEngazonnementSurf" min="0" step="10" value="0" placeholder="m²" class="qte-input" style="width:70px;">
-                        <input type="number" id="paysEngazonnementPrix" min="0" step="1" value="12" class="prix-input" style="width:55px;">
-                        <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m²</span>
-                      </div>
-                      <span class="row-soustotal empty" id="st_paysEngazonnement">0 €</span>
-                    </div>
-
-                    <div class="checkbox-row">
-                      <input type="checkbox" id="paysPlantations">
-                      <label for="paysPlantations">Plantations (arbres, arbustes, massifs)</label>
-                      <input type="number" id="paysPlantationsPrix" min="0" step="100" value="1500" class="prix-input" style="width:80px;">
-                      <span class="row-soustotal empty" id="st_paysPlantations">0 €</span>
-                    </div>
-
-                    <div class="checkbox-row">
-                      <input type="checkbox" id="paysArrosage">
-                      <label for="paysArrosage">Système d'arrosage automatique</label>
-                      <input type="number" id="paysArrosagePrix" min="0" step="100" value="800" class="prix-input" style="width:80px;">
-                      <span class="row-soustotal empty" id="st_paysArrosage">0 €</span>
-                    </div>
-
-                    <div class="checkbox-row">
-                      <input type="checkbox" id="paysTerrassement">
-                      <label for="paysTerrassement">Terrassement végétal (terre végétale + nivellement)</label>
-                      <input type="number" id="paysTerrassementPrix" min="0" step="100" value="1200" class="prix-input" style="width:80px;">
-                      <span class="row-soustotal empty" id="st_paysTerrassement">0 €</span>
-                    </div>
-                  </div>
-
-                  <div class="field" style="margin-top:1rem; padding-top:0.85rem; border-top:1px dashed var(--c-border);">
-                    <label>Caillebotis bois (terrasse)</label>
-                    <span class="hint" style="margin-bottom:0.4rem;">Plots béton + structure compris dans le prix au m²</span>
-
-                    <div class="checkbox-row">
-                      <input type="checkbox" id="terrPin">
-                      <label for="terrPin">Pin classe 4 (traité autoclave)</label>
-                      <div class="field-inline" style="margin:0; gap:0.25rem;">
-                        <input type="number" id="terrPinSurf" min="0" step="1" value="0" placeholder="m²" class="qte-input" style="width:70px;">
-                        <input type="number" id="terrPinPrix" min="0" step="10" value="250" class="prix-input" style="width:60px;">
-                        <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m²</span>
-                      </div>
-                      <span class="row-soustotal empty" id="st_terrPin">0 €</span>
-                    </div>
-
-                    <div class="checkbox-row">
-                      <input type="checkbox" id="terrExo">
-                      <label for="terrExo">Bois exotique (ipé, cumaru, bangkirai...)</label>
-                      <div class="field-inline" style="margin:0; gap:0.25rem;">
-                        <input type="number" id="terrExoSurf" min="0" step="1" value="0" placeholder="m²" class="qte-input" style="width:70px;">
-                        <input type="number" id="terrExoPrix" min="0" step="10" value="350" class="prix-input" style="width:60px;">
-                        <span style="font-size:0.7rem; color:var(--c-text-muted);">€/m²</span>
-                      </div>
-                      <span class="row-soustotal empty" id="st_terrExo">0 €</span>
-                    </div>
-
-                    <span class="hint" style="margin-top:0.4rem;">Pin classe 4 ou bois exotique ? <button type="button" class="help-btn" data-help="boisHelp" aria-label="Comparer les bois">?</button></span>
-                    <div class="help-notice" id="boisHelp">
-                      <strong>Pin classe 4 (250 €/m²)</strong> : plus économique, durabilité ~15-20 ans en climat tropical, entretien régulier (saturateur).<br>
-                      <strong>Bois exotique (350 €/m²)</strong> : durabilité ~30 ans, résistant naturellement aux insectes et champignons, prend une teinte grise s'il n'est pas saturé.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tab-content" data-content="piscine">
-                  <div style="display:grid; grid-template-columns:1.3fr 1fr 0.9fr; gap:0.55rem;">
-                    <div class="field">
-                      <label for="piscineType" style="font-weight:400; font-size:0.78rem;">Type</label>
-                      <select id="piscineType">
-                        <option value="aucune">Aucune</option>
-                        <option value="coque">À coque</option>
-                        <option value="standard">Standard béton</option>
-                        <option value="debordement">À débordement</option>
-                        <option value="miroir">Miroir</option>
-                      </select>
-                    </div>
-                    <div class="field">
-                      <label for="piscineSurface" style="font-weight:400; font-size:0.78rem;">Surface (m²)</label>
-                      <input type="number" id="piscineSurface" min="0" step="1" value="0" class="qte-input">
-                    </div>
-                    <div class="field">
-                      <label for="piscinePrixM2" style="font-weight:400; font-size:0.78rem;">Prix €/m²</label>
-                      <input type="number" id="piscinePrixM2" min="0" step="100" value="0" placeholder="Auto" class="prix-input">
-                    </div>
-                  </div>
-                  <span class="hint">Prix indicatifs : Coque 700 / Standard béton 1 350 / Débordement 1 600 / Miroir 2 000 €/m² — modifiables selon prestations</span>
-                  <div class="panel-soustotal" id="st_piscine">
-                    <span class="panel-soustotal-label">Sous-total piscine HT</span>
-                    <span class="panel-soustotal-value">0 €</span>
-                  </div>
-                </div>
-
-                <div class="panel-soustotal" id="st_exterieurs">
-                  <span class="panel-soustotal-label">Sous-total aménagements extérieurs HT</span>
-                  <span class="panel-soustotal-value">0 €</span>
-                </div>
-              </div>
-
               <!-- ASSURANCE & TAXES -->
               <div class="panel">
                 <h2>6. Assurance &amp; taxes</h2>
@@ -2226,9 +2248,14 @@
                   </div>
                 </div>
 
+                <div class="imp-options">
+                  <label for="impTitre">Nom du PDF</label>
+                  <input type="text" id="impTitre" maxlength="120" placeholder="ex. Maison Dupont — estimation" autocomplete="off">
+                  <label class="imp-check"><input type="checkbox" id="impAvecDetail" checked> Joindre le détail des postes (ce que comprend chaque poste)</label>
+                </div>
                 <div class="actions">
                   <button onclick="imprimerEstimatif()">Imprimer / PDF</button>
-                  <button class="primary" onclick="resetForm()">Réinitialiser</button>
+                  <button class="primary" onclick="if (confirm('Effacer toute la saisie et repartir de zéro ?')) resetForm()">Réinitialiser</button>
                 </div>
               </div>
             </div>
@@ -2325,8 +2352,13 @@
         .replace(/color:\s*#fff(fff)?\b/gi, 'color:#4F4A3F')
         .replace(/color:\s*white\b/gi, 'color:#4F4A3F');
       const dateStr = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+      // « Nom du PDF » = titre du document (nom proposé à l'enregistrement) et
+      // en-tête ; détail des postes travaux joint si la case est cochée (RUN MAP, 15/10).
+      const esc = s => s.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+      const nomPdf = esc((document.getElementById('impTitre').value || '').trim());
+      const detail = document.getElementById('impAvecDetail').checked && typeof window.rmDetailHTML === 'function' ? window.rmDetailHTML() : '';
       const doc = `<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
-<title>Calculateur de budget construction à La Réunion | ALB MOE</title>
+<title>${nomPdf || 'Calculateur de budget construction à La Réunion | ALB MOE'}</title>
 <style>
   *{box-sizing:border-box;}
   body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:0;padding:22px;font-size:12px;line-height:1.45;}
@@ -2346,11 +2378,22 @@
   tr.total td{background:#B8860B;color:#fff;font-weight:800;font-size:14px;}
   td span{color:inherit !important;}
   .foot{margin-top:16px;font-size:9.5px;color:#777;font-style:italic;line-height:1.5;border-top:1px dashed #e5e7eb;padding-top:10px;}
+  .imp-detail{break-before:page;font-size:12px;color:#111;}
+  .imp-detail h2{font-size:16px;margin:0 0 8px;color:#B8860B;}
+  .imp-detail h3{font-size:13px;margin:14px 0 6px;padding-bottom:3px;border-bottom:1px solid #ccc;}
+  .imp-detail .pd{break-inside:avoid;padding:5px 0;border-bottom:1px solid #eee;}
+  .imp-detail .pd:last-child{border-bottom:0;}
+  .imp-detail .pd-t{display:grid;grid-template-columns:minmax(0,1fr) 150px 90px;gap:12px;align-items:baseline;}
+  .imp-detail .pd-t span{color:#444;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .imp-detail .pd-t .mt{font-weight:600;color:#111;}
+  .imp-detail .pd-ent{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:#666;border-bottom:1.5px solid #111;padding-bottom:3px;}
+  .imp-detail .pd-ent b,.imp-detail .pd-ent span,.imp-detail .pd-ent .mt{color:#666;font-weight:600;}
+  .imp-detail ul{margin:2px 0 0;padding-left:18px;color:#555;font-size:11px;line-height:1.45;max-width:calc(100% - 260px);}
   @page{margin:13mm;}
 </style></head><body>
   <div class="head">
     <div><h1>Estimatif de budget</h1><div class="sub">ALB Maître d'œuvre — La Réunion · albmaitredoeuvre.fr</div></div>
-    <div class="sub">Édité le ${dateStr}</div>
+    <div class="sub">${nomPdf ? nomPdf + ' · ' : ''}Édité le ${dateStr}</div>
   </div>
   <div class="budget">
     <div class="cell"><span class="lab">Budget bas −${pct}%</span><span class="val">${low}</span></div>
@@ -2359,6 +2402,7 @@
   </div>
   <table>${inner}</table>
   <div class="foot">Document non contractuel — estimation à titre indicatif. Les prix unitaires sont une moyenne du marché, susceptibles de varier selon la localisation du projet, l'accessibilité du chantier, la complexité technique, les prestations choisies et les fluctuations du marché et des matériaux.</div>
+  ${detail ? '<section class="imp-detail">' + detail + '</section>' : ''}
   <script>window.onload=function(){setTimeout(function(){window.print();},250);};<\/script>
 </body></html>`;
       const w = window.open('', '_blank');
@@ -2371,32 +2415,18 @@
     // - Calculateur intégré (iframe dans l'appli) → postMessage au parent.
     // - Calculateur autonome → ouvre RUN MAP BTP avec la fourchette en paramètres.
     function publierProjet() {
-      // ⚠️ Validation 2026-07-03 (Alan) : au moins un équipement spécifique doit
-      //    être coché (cuisine, SDB, WC, chauffe-eau solaire) — sinon le budget
-      //    est trop générique pour être utile à la publication.
-      const equipIds = ['equipCuisine', 'equipSDB', 'equipWC', 'equipCES'];
-      const anyEquipChecked = equipIds.some(id => document.getElementById(id)?.checked);
-      if (!anyEquipChecked) {
-        const panel = document.getElementById('panelEquipements');
-        if (panel) {
-          panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Flash rouge sur le panel pour attirer l'attention
-          const oldBorder = panel.style.border;
-          const oldBg = panel.style.background;
-          panel.style.border = '2px solid #dc2626';
-          panel.style.background = '#fef2f2';
-          setTimeout(() => { panel.style.border = oldBorder; panel.style.background = oldBg; }, 2500);
-        }
-        alert('⚠️ Merci de cocher au moins un équipement spécifique (cuisine, salle de bain, WC ou chauffe-eau solaire) avant de publier votre projet.\n\nCe choix rend le budget cohérent et augmente vos chances de recevoir des devis pertinents.');
-        return;
-      }
-      // La fourchette est reprise si elle existe ; sinon on ouvre quand même
-      // la publication (budget renseignable ensuite côté RUN MAP BTP).
+      // Comme sur RUN MAP BTP : le bouton n'est actif qu'avec un type de projet
+      // et un budget travaux ; les corps de métiers choisis sont présélectionnés
+      // dans l'annonce.
+      if (!lastBudget.total) return;
+      const metiers = lastBudget.metiers || [];
       const payload = {
         source: 'alb-calculateur-budget',
         action: 'publier-projet',
         budgetMinK: lastBudget.lowK,
-        budgetMaxK: lastBudget.highK
+        budgetMaxK: lastBudget.highK,
+        metier: metiers[0] || '',
+        metiers: metiers
       };
       const embedded = window.parent && window.parent !== window;
       if (embedded) {
@@ -2417,9 +2447,7 @@
     function demanderDommageOuvrage() {
       const _txtNum = id => { const el = document.getElementById(id); return el ? (parseFloat((el.textContent || '').replace(/[^\d]/g, '')) || 0) : 0; };
       const eur = n => n ? Math.round(n).toLocaleString('fr-FR') + ' €' : '—';
-      const _sel = document.querySelector('.type-card.selected');
-      const _pt = _sel ? _sel.dataset.type : '';
-      const typeLabel = { neuf: 'Construction neuve', reno: 'Rénovation', both: 'Neuf + rénovation' }[_pt] || 'Non précisé';
+      const typeLabel = Array.from(document.querySelectorAll('#rmType .rm-type.selected')).map(b => b.firstChild.textContent.trim()).join(' + ') || 'Non précisé';
       const travaux = lastBudget.total || _txtNum('fMid');  // hors DO
       const recap = {
         'Type de projet': typeLabel,
@@ -2583,7 +2611,13 @@
     const c = id => document.getElementById(id).checked;
     const fmt = n => Math.round(n).toLocaleString('fr-FR') + ' €';
 
+    // Travaux HT par partie, donnés par le moteur RUN MAP (script « TRAVAUX »
+    // plus bas) ; zéro tant qu'il n'est pas chargé.
+    const RM_VIDE = { choix: {}, projetChoisi: false, reno: 0, neuf: 0, ajust: 0, tauxAjust: TVA_AUTRE, ext: 0, metier: 0, tauxMetier: TVA_RENO, ht: 0, surfNeuf: 0, surfReno: 0, metiers: [] };
+    const travauxRM = () => (typeof window.rmCalculer === 'function' ? window.rmCalculer() : RM_VIDE);
+
     function calculer() {
+      const rm = travauxRM();
       const prixTerrain = v('prixTerrain');
       const fraisNotaire = prixTerrain * NOTAIRE_RATE;
 
@@ -2601,24 +2635,18 @@
       const raccordements = raccEau + raccElec + raccTelecom;
       const viabComplete = c('viabComplete') ? v('viabCompletePrix') : 0;
 
-      const renoSurface = v('renoSurface');
-      const renoType = document.getElementById('renoType').value;
-      const renoPrixM2 = v('renoPrixM2');
-      let renoLabel = '';
-      if (renoType === 'legere')       renoLabel = 'Rénovation légère';
-      else if (renoType === 'moyenne') renoLabel = 'Rénovation moyenne';
-      else if (renoType === 'lourde')  renoLabel = 'Rénovation lourde';
-      const totalReno = (renoType !== 'aucune') ? renoSurface * renoPrixM2 : 0;
-
-      const neuf = v('neuf') * v('neufPrixM2');
-      const totalTravaux = totalReno + neuf;
+      // Travaux principaux = surfaces (rénovation, neuf, varangues) + corps de
+      // métiers : base des honoraires MOE (DET) et de la Dommage Ouvrage.
+      const totalReno = rm.reno, neuf = rm.neuf, metier = rm.metier;
+      const metierReno = rm.tauxMetier === TVA_RENO;
+      const totalTravaux = totalReno + neuf + metier;
 
       let frais_be = c('be') ? v('bePrix') : 0;
       let frais_csps = c('csps') ? v('cspsPrix') : 0;
       let frais_bcontrole = c('bcontrole') ? v('bcontrolePrix') : 0;
       let frais_geometre = c('geometre') ? v('geometrePrix') : 0;
 
-      const surfaceConception = v('neuf') + v('renoSurface');
+      const surfaceConception = rm.surfNeuf + rm.surfReno;
 
       const dessinateurPrixM2 = v('dessinateurPrixM2');
       let frais_dessinateur = c('dessinateur') ? surfaceConception * dessinateurPrixM2 : 0;
@@ -2645,72 +2673,30 @@
                             + frais_moeDET
                             + total_spanc;
 
-      const piscineType = document.getElementById('piscineType').value;
-      const piscineSurface = v('piscineSurface');
-      const piscinePrixM2 = v('piscinePrixM2');
-      const piscine = (piscineType !== 'aucune') ? piscineSurface * piscinePrixM2 : 0;
+      // Travaux & équipements spécifiques et aménagements extérieurs (moteur RUN MAP)
+      const totalEquipements = rm.ajust;
+      const totalExterieurs = rm.ext;
 
-      const cloturePar = v('cloturePar') * v('cloturePrixPar');
-      const clotureMoellons = v('clotureMoellons') * v('clotureMoellonsPrix');
-      const clotureSR = v('clotureSR') * v('clotureSRPrix');
-      const totalClotures = cloturePar + clotureMoellons + clotureSR;
-
-      const stationnement =
-        v('statGravillon') * v('statGravillonPrix') +
-        v('statPaveHerbe') * v('statPaveHerbePrix') +
-        v('statDallage') * v('statDallagePrix') +
-        v('statBetonDes') * v('statBetonDesPrix');
-
-      const portail_vantail = c('portailVantail') ? v('portailVantailPrix') : 0;
-      const portail_longrine = c('portailLongrine') ? v('portailLongrinePrix') : 0;
-      const portail_motor = c('portailMotor') ? v('portailMotorPrix') : 0;
-      const totalPortail = portail_vantail + portail_longrine + portail_motor;
-
-      const pays_engazonnement = c('paysEngazonnement') ? v('paysEngazonnementSurf') * v('paysEngazonnementPrix') : 0;
-      const pays_plantations = c('paysPlantations') ? v('paysPlantationsPrix') : 0;
-      const pays_arrosage = c('paysArrosage') ? v('paysArrosagePrix') : 0;
-      const pays_terrassement = c('paysTerrassement') ? v('paysTerrassementPrix') : 0;
-      const totalPaysagisme = pays_engazonnement + pays_plantations + pays_arrosage + pays_terrassement;
-
-      const terr_pin_surf = c('terrPin') ? v('terrPinSurf') : 0;
-      const terr_pin = terr_pin_surf * v('terrPinPrix');
-      const terr_exo_surf = c('terrExo') ? v('terrExoSurf') : 0;
-      const terr_exo = terr_exo_surf * v('terrExoPrix');
-      const totalTerrasse = terr_pin + terr_exo;
-      const surfaceTerrasse = terr_pin_surf + terr_exo_surf;
-
-      const totalExterieurs = totalClotures + stationnement + totalPortail + totalPaysagisme + totalTerrasse;
-
-      // --- ÉQUIPEMENTS / LOTS SPÉCIFIQUES (TVA 8,5%) ---
-      const equipCuisineQty = c('equipCuisine') ? v('equipCuisineQty') : 0;
-      const equip_cuisine = equipCuisineQty * v('equipCuisinePrix');
-      const equipSDBQty = c('equipSDB') ? v('equipSDBQty') : 0;
-      const equip_sdb = equipSDBQty * v('equipSDBPrix');
-      const equipWCQty = c('equipWC') ? v('equipWCQty') : 0;
-      const equip_wc = equipWCQty * v('equipWCPrix');
-      const equipCESQty = c('equipCES') ? v('equipCESQty') : 0;
-      const equip_ces = equipCESQty * v('equipCESPrix');
-      const totalEquipements = equip_cuisine + equip_sdb + equip_wc + equip_ces;
-
+      // Pente : +0,5 % par % de pente sur les travaux principaux et l'extérieur
+      // (pas sur les équipements spécifiques), plafonné à 50 %.
       const pente = v('pente');
       const tauxMajoPente = Math.min(pente * 0.005, 0.50);
       const majoActive = pente > 0;
-      const baseMajo = totalTravaux + piscine + totalClotures + stationnement + totalPortail + totalPaysagisme + totalTerrasse;
-      const surcoutPente = baseMajo * tauxMajoPente;
+      const surcoutReno = totalReno * tauxMajoPente;
+      const surcoutNeuf = neuf * tauxMajoPente;
+      const surcoutMetier = metier * tauxMajoPente;
+      const surcoutAutres = totalExterieurs * tauxMajoPente;
+      const surcoutPente = surcoutReno + surcoutNeuf + surcoutMetier + surcoutAutres;
 
-      const partRenoBase = totalTravaux > 0 ? totalReno / totalTravaux : 0;
-      const partNeufBase = totalTravaux > 0 ? neuf / totalTravaux : 0;
-      const surcoutTravaux = totalTravaux * tauxMajoPente;
-      const surcoutReno = surcoutTravaux * partRenoBase;
-      const surcoutNeuf = surcoutTravaux * partNeufBase;
-      const surcoutAutres = (piscine + totalClotures + stationnement + totalPortail + totalPaysagisme + totalTerrasse) * tauxMajoPente;
-
-      const ht_2_1 = totalReno + surcoutReno;
+      const ht_2_1 = totalReno + surcoutReno
+                   + (rm.tauxAjust === TVA_RENO ? totalEquipements : 0)
+                   + (metierReno ? metier + surcoutMetier : 0);
       // Bâti = TRAVAUX artisans uniquement (géotech + MOE/études inclus ; HORS
       // acquisition, concessionnaires et fosse/SPANC qui sont des frais annexes).
-      const ht_8_5 = neuf + geoEtude + (total_moe_etudes - total_spanc)
-                   + piscine + totalClotures + stationnement + totalPortail + totalPaysagisme + totalTerrasse
-                   + totalEquipements + surcoutNeuf + surcoutAutres;
+      const ht_8_5 = neuf + surcoutNeuf + geoEtude + (total_moe_etudes - total_spanc)
+                   + totalExterieurs + surcoutAutres
+                   + (rm.tauxAjust === TVA_RENO ? 0 : totalEquipements)
+                   + (metierReno ? 0 : metier + surcoutMetier);
 
       const ht_bati = ht_2_1 + ht_8_5;
 
@@ -2726,14 +2712,14 @@
       const ttc_prestations = ht_bati + tvaTotal;        // HT + TVA
       const ttc_bati = ttc_prestations;                  // provision aléas retirée (voir plus haut)
 
-      // Dommage Ouvrage : 2% du TTC travaux principaux (TVA sur HT)
-      const ht_travaux_bati = totalReno + surcoutReno + neuf + surcoutNeuf;
-      const tva_travaux = (totalReno + surcoutReno) * TVA_RENO + (neuf + surcoutNeuf) * TVA_AUTRE;
+      // Dommage Ouvrage : 2,5 % du TTC des travaux principaux (TVA sur HT)
+      const ht_travaux_bati = totalReno + surcoutReno + neuf + surcoutNeuf + metier + surcoutMetier;
+      const tva_travaux = (totalReno + surcoutReno) * TVA_RENO + (neuf + surcoutNeuf) * TVA_AUTRE + (metier + surcoutMetier) * rm.tauxMetier;
       const ttc_travaux = ht_travaux_bati + tva_travaux;
       const damageOuvrage = c('includeDO') ? ttc_travaux * DO_RATE : 0;
 
       const taxeAmenagement = c('taxeAmenagement')
-        ? v('neuf') * v('taxeAmenagementValeurM2') * (v('taxeAmenagementTaux') / 100)
+        ? rm.surfNeuf * v('taxeAmenagementValeurM2') * (v('taxeAmenagementTaux') / 100)
         : 0;
 
       const totalFoncier = prixTerrain + fraisNotaire + taxeAmenagement;
@@ -2771,17 +2757,23 @@
       document.getElementById('fLowPct').textContent = (isNaN(fPctRaw) ? 0 : fPctRaw);
       document.getElementById('fHighPct').textContent = (isNaN(fPctRaw) ? 0 : fPctRaw);
 
-      // Budget travaux mémorisé pour le bouton « Publier mon projet » (en k€)
+      // Budget travaux mémorisé pour le bouton « Publier mon projet » (en k€) ;
+      // petits montants (< 20 000 €) au dixième de k€, comme RUN MAP BTP.
+      const arrondiK = x => coutTravauxHorsDO < 20000 ? Math.round(x / 100) / 10 : Math.round(x / 1000);
       lastBudget = {
-        lowK:  Math.round(coutTravauxHorsDO * (1 - fPct) / 1000),
-        highK: Math.round(coutTravauxHorsDO * (1 + fPct) / 1000),
+        lowK:  arrondiK(coutTravauxHorsDO * (1 - fPct)),
+        highK: arrondiK(coutTravauxHorsDO * (1 + fPct)),
         total: coutTravauxHorsDO,   // enveloppe travaux seule (sert aussi au calcul DO)
-        totalAvecDO: coutTravaux
+        totalAvecDO: coutTravaux,
+        metiers: rm.metiers
       };
       const pubBtn = document.getElementById('publishProjectBtn');
       const pubSub = document.getElementById('publishCtaSub');
       if (pubBtn) {
-        if (coutTravauxHorsDO > 0) {
+        if (!rm.projetChoisi) {
+          pubBtn.disabled = true;
+          pubSub.textContent = 'Choisissez d\'abord le type de projet';
+        } else if (coutTravauxHorsDO > 0) {
           pubBtn.disabled = false;
           pubSub.textContent = `Budget travaux ${fmt(coutTravauxHorsDO * (1 - fPct))} – ${fmt(coutTravauxHorsDO * (1 + fPct))} pré-rempli`;
         } else {
@@ -2789,6 +2781,7 @@
           pubSub.textContent = 'Renseignez vos travaux pour activer la publication';
         }
       }
+      if (typeof window.rmSauver === 'function') window.rmSauver();
 
       let html = '';
       const aProjet = ht_bati > 0 || prixTerrain > 0 || taxeAmenagement > 0 || ht_horsTravaux > 0;
@@ -2796,13 +2789,9 @@
       if (!aProjet) {
         html = `<tr><td colspan="2" style="text-align:center; padding:1.4rem 0.5rem; color:rgba(255,255,255,0.55); font-style:italic;">Renseignez les paramètres du projet pour voir l'estimation</td></tr>`;
         document.getElementById('resultats').innerHTML = html;
-        ['st_acquis','st_raccord','st_travaux','st_moe','st_piscine','st_exterieurs','st_equipements','st_assurtaxes',
+        ['st_acquis','st_raccord','st_travaux','st_moe','st_assurtaxes',
          'st_be','st_csps','st_bcontrole','st_geometre','st_geo','st_dessinateur','st_architecte',
-         'st_archCCTP','st_archAssistContrats','st_moeDET',
-         'st_portailVantail','st_portailLongrine','st_portailMotor',
-         'st_paysEngazonnement','st_paysPlantations','st_paysArrosage','st_paysTerrassement',
-         'st_terrPin','st_terrExo',
-         'st_equipCuisine','st_equipSDB','st_equipWC','st_equipCES'].forEach(id => {
+         'st_archCCTP','st_archAssistContrats','st_moeDET'].forEach(id => {
           const el = document.getElementById(id);
           if (el) {
             el.classList.add('empty');
@@ -2824,7 +2813,7 @@
         if (taxeAmenagement > 0) {
           const _taux = v('taxeAmenagementTaux');
           const _val = v('taxeAmenagementValeurM2');
-          html += `<tr><td>Taxe d'aménagement (${v('neuf')} m² × ${_val} €/m² × ${_taux}%)</td><td>${fmt(taxeAmenagement)}</td></tr>`;
+          html += `<tr><td>Taxe d'aménagement (${rm.surfNeuf} m² × ${_val} €/m² × ${_taux}%)</td><td>${fmt(taxeAmenagement)}</td></tr>`;
         }
         if (viabComplete > 0) html += `<tr><td>Viabilisation complète (terrain non viabilisé)</td><td>${fmt(viabComplete)}</td></tr>`;
         if (ht_acquis > 0) html += `<tr><td>TVA 8,5% (viabilisation)</td><td>${fmt(ht_acquis * TVA_AUTRE)}</td></tr>`;
@@ -2872,77 +2861,28 @@
 
         // Ordre du récap aligné sur l'ordre des ÉTAPES du formulaire (demande
         // Alan 2026-07-15) : Conception & études → Contrôle → Maîtrise d'œuvre
-        // (étape 4) → Travaux principaux + Équipements (étape 5) → Aménagements
-        // extérieurs + Piscine (étape 6).
+        // → Travaux (rénovation, neuf, corps de métiers, équipements, extérieur).
         if (frais_moeDET > 0) {
           html += sousTitre("Maîtrise d'œuvre", COL.moe);
           html += `<tr><td>MOE — Direction d'exécution (${(moeDETPct*100).toFixed(1)}% travaux)</td><td>${fmt(frais_moeDET)}</td></tr>`;
         }
 
-        if (totalTravaux > 0) {
-          html += sousTitre('Travaux principaux', COL.travaux);
-          if (totalReno > 0) {
-            html += `<tr><td>${renoLabel} (${renoSurface} m² × ${renoPrixM2} €/m²) <span style="color:#4A8E94;font-size:0.65rem;">[2,1%]</span></td><td>${fmt(totalReno)}</td></tr>`;
-          }
-          if (neuf > 0) {
-            html += `<tr><td>Construction neuve (${v('neuf')} m² × ${v('neufPrixM2')} €/m²) <span style="color:#E8C547;font-size:0.65rem;">[8,5%]</span></td><td>${fmt(neuf)}</td></tr>`;
-          }
-        }
-
-        // ÉQUIPEMENTS (cuisine / SDB / WC) — étape 5, juste après les travaux
-        if (totalEquipements > 0) {
-          html += sousTitre('Équipements', COL.equip);
-          if (equip_cuisine > 0) html += `<tr><td>Cuisine équipée (${equipCuisineQty} <span style="color:#E8C547;">u</span> × ${v('equipCuisinePrix')} €/u)</td><td>${fmt(equip_cuisine)}</td></tr>`;
-          if (equip_sdb > 0) html += `<tr><td>Salle de bain (${equipSDBQty} <span style="color:#E8C547;">u</span> × ${v('equipSDBPrix')} €/u)</td><td>${fmt(equip_sdb)}</td></tr>`;
-          if (equip_wc > 0) html += `<tr><td>WC indépendant (${equipWCQty} <span style="color:#E8C547;">u</span> × ${v('equipWCPrix')} €/u)</td><td>${fmt(equip_wc)}</td></tr>`;
-          if (equip_ces > 0) html += `<tr><td>Chauffe-eau solaire (${equipCESQty} <span style="color:#E8C547;">u</span> × ${v('equipCESPrix')} €/u)</td><td>${fmt(equip_ces)}</td></tr>`;
-        }
-
-        if (totalClotures > 0 || stationnement > 0 || totalPortail > 0 || totalPaysagisme > 0 || totalTerrasse > 0 || (majoActive && surcoutPente > 0)) {
-          html += sousTitre('Aménagements extérieurs', COL.ext);
-          if (cloturePar > 0) html += `<tr><td>Clôture bloc US h. 2 m (${v('cloturePar')} <span style="color:#E8C547;">ml</span> × ${v('cloturePrixPar')} €/ml)</td><td>${fmt(cloturePar)}</td></tr>`;
-          if (clotureMoellons > 0) html += `<tr><td>Mur moellons hauteur 2 m (${v('clotureMoellons')} <span style="color:#E8C547;">ml</span> × ${v('clotureMoellonsPrix')} €/ml)</td><td>${fmt(clotureMoellons)}</td></tr>`;
-          if (clotureSR > 0) html += `<tr><td>Clôture semi-rigide métallique (${v('clotureSR')} <span style="color:#E8C547;">ml</span> × ${v('clotureSRPrix')} €/ml)</td><td>${fmt(clotureSR)}</td></tr>`;
-          if (majoActive && surcoutPente > 0) {
-            const pctAffiche = (tauxMajoPente * 100).toFixed(1).replace('.0','');
-            const noteSeuil = pente > 100 ? ' — plafonné à 50%' : '';
-            html += `<tr><td>Aléa de site <span style="color:rgba(255,255,255,0.50); font-size:0.72rem;">(pente ${pente}% → +${pctAffiche}%${noteSeuil})</span></td><td>${fmt(surcoutPente)}</td></tr>`;
-          }
-          if (stationnement > 0) {
-            html += `<tr><td>Stationnement</td><td>${fmt(stationnement)}</td></tr>`;
-            const _statGravillon = v('statGravillon') * v('statGravillonPrix');
-            const _statPaveHerbe = v('statPaveHerbe') * v('statPaveHerbePrix');
-            const _statDallage = v('statDallage') * v('statDallagePrix');
-            const _statBetonDes = v('statBetonDes') * v('statBetonDesPrix');
-            if (_statGravillon > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Gravillon (${v('statGravillon')} <span style="color:#E8C547;">m²</span> × ${v('statGravillonPrix')} €/m²)</td><td>${fmt(_statGravillon)}</td></tr>`;
-            if (_statPaveHerbe > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Pavé herbe (${v('statPaveHerbe')} <span style="color:#E8C547;">m²</span> × ${v('statPaveHerbePrix')} €/m²)</td><td>${fmt(_statPaveHerbe)}</td></tr>`;
-            if (_statDallage > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Dallage béton (${v('statDallage')} <span style="color:#E8C547;">m²</span> × ${v('statDallagePrix')} €/m²)</td><td>${fmt(_statDallage)}</td></tr>`;
-            if (_statBetonDes > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Béton désactivé (${v('statBetonDes')} <span style="color:#E8C547;">m²</span> × ${v('statBetonDesPrix')} €/m²)</td><td>${fmt(_statBetonDes)}</td></tr>`;
-          }
-          if (totalPortail > 0) {
-            html += `<tr><td>Portail 3,70 × 2 m</td><td>${fmt(totalPortail)}</td></tr>`;
-            if (portail_vantail > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Portail (vantail)</td><td>${fmt(portail_vantail)}</td></tr>`;
-            if (portail_longrine > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Longrine + scellement rail</td><td>${fmt(portail_longrine)}</td></tr>`;
-            if (portail_motor > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Motorisation</td><td>${fmt(portail_motor)}</td></tr>`;
-          }
-          if (totalPaysagisme > 0) {
-            html += `<tr><td>Paysagisme</td><td>${fmt(totalPaysagisme)}</td></tr>`;
-            if (pays_engazonnement > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Engazonnement (${v('paysEngazonnementSurf')} <span style="color:#E8C547;">m²</span> × ${v('paysEngazonnementPrix')} €/m²)</td><td>${fmt(pays_engazonnement)}</td></tr>`;
-            if (pays_plantations > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Plantations</td><td>${fmt(pays_plantations)}</td></tr>`;
-            if (pays_arrosage > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Arrosage automatique</td><td>${fmt(pays_arrosage)}</td></tr>`;
-            if (pays_terrassement > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Terrassement végétal</td><td>${fmt(pays_terrassement)}</td></tr>`;
-          }
-          if (totalTerrasse > 0) {
-            html += `<tr><td>Terrasse caillebotis bois</td><td>${fmt(totalTerrasse)}</td></tr>`;
-            if (terr_pin > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Pin classe 4 (${terr_pin_surf} <span style="color:#E8C547;">m²</span> × ${v('terrPinPrix')} €/m²)</td><td>${fmt(terr_pin)}</td></tr>`;
-            if (terr_exo > 0) html += `<tr><td style="padding-left:1.1rem; font-size:0.8rem;">↳ Bois exotique (${terr_exo_surf} <span style="color:#E8C547;">m²</span> × ${v('terrExoPrix')} €/m²)</td><td>${fmt(terr_exo)}</td></tr>`;
-          }
-        }
-
-        // PISCINE — étape 6 (aménagements), affichée après les extérieurs.
-        if (piscine > 0) {
-          html += sousTitre('Piscine', COL.piscine);
-          html += `<tr><td>Piscine (${piscineSurface} <span style="color:${COL.piscine};">m²</span> × ${piscinePrixM2} €/m²)</td><td>${fmt(piscine)}</td></tr>`;
+        // TRAVAUX : une ligne par poste retenu dans le moteur RUN MAP, quantité
+        // sans prix unitaire (les prix sont dans les cases de saisie).
+        const COL_PARTIE = { 'Rénovation': COL.travaux, 'Construction neuve': COL.travaux, 'Corps de métiers': COL.travaux,
+          'Travaux & équipements spécifiques': COL.equip, 'Aménagements extérieurs': COL.ext };
+        const parties = typeof window.rmParties === 'function' ? window.rmParties() : [];
+        parties.forEach(pa => {
+          const taux = pa.taux === TVA_RENO ? '2,1%' : '8,5%';
+          html += sousTitre(pa.titre, COL_PARTIE[pa.titre]);
+          pa.postes.forEach(x => {
+            html += `<tr><td>${x.lib} <span style="color:rgba(255,255,255,0.50); font-size:0.72rem;">(${window.rmSansPU(x.calc)})</span> <span style="color:${pa.taux === TVA_RENO ? '#4A8E94' : '#E8C547'};font-size:0.65rem;">[${taux}]</span></td><td>${fmt(x.montant)}</td></tr>`;
+          });
+        });
+        if (majoActive && surcoutPente > 0) {
+          const pctAffiche = (tauxMajoPente * 100).toFixed(1).replace('.0','');
+          const noteSeuil = pente > 100 ? ' — plafonné à 50%' : '';
+          html += `<tr><td>Aléa de site <span style="color:rgba(255,255,255,0.50); font-size:0.72rem;">(pente ${pente}% → +${pctAffiche}%${noteSeuil})</span></td><td>${fmt(surcoutPente)}</td></tr>`;
         }
 
         html += `<tr class="subtotal"><td>Sous-total HT bâti</td><td>${fmt(ht_bati)}</td></tr>`;
@@ -2995,31 +2935,11 @@
       setSousTotal('st_raccord', ht_raccord);
       setSousTotal('st_geo', geoEtude);
       setSousTotal('st_assurtaxes', damageOuvrage + taxeAmenagement);
-      setSousTotal('st_travaux', totalTravaux);
+      setSousTotal('st_travaux', rm.ht);
 
       // MOE panel = conception/suivi + contrôle/sécurité + géotechnique (hors SPANC)
       const st_moe = (total_moe_etudes - total_spanc) + geoEtude;
       setSousTotal('st_moe', st_moe);
-      setSousTotal('st_piscine', piscine);
-      setSousTotal('st_exterieurs', totalExterieurs);
-
-      setSousTotal('st_portailVantail', portail_vantail);
-      setSousTotal('st_portailLongrine', portail_longrine);
-      setSousTotal('st_portailMotor', portail_motor);
-
-      setSousTotal('st_paysEngazonnement', pays_engazonnement);
-      setSousTotal('st_paysPlantations', pays_plantations);
-      setSousTotal('st_paysArrosage', pays_arrosage);
-      setSousTotal('st_paysTerrassement', pays_terrassement);
-
-      setSousTotal('st_terrPin', terr_pin);
-      setSousTotal('st_terrExo', terr_exo);
-
-      setSousTotal('st_equipCuisine', equip_cuisine);
-      setSousTotal('st_equipSDB', equip_sdb);
-      setSousTotal('st_equipWC', equip_wc);
-      setSousTotal('st_equipCES', equip_ces);
-      setSousTotal('st_equipements', totalEquipements);
 
       setSousTotal('st_be', frais_be);
       setSousTotal('st_csps', frais_csps);
@@ -3030,267 +2950,38 @@
       setSousTotal('st_archCCTP', frais_archCCTP);
       setSousTotal('st_archAssistContrats', frais_archAssistContrats);
       setSousTotal('st_moeDET', frais_moeDET);
+      updateArchAuto(surfaceConception);
     }
+    window.calculer = calculer;
+
+    // Blocs dépliés selon les cases (viabilisation, taxe, assainissement) :
+    // au chargement, après restauration de la saisie et après réinitialisation.
+    function syncBlocs() {
+      document.getElementById('viabCompleteAmount').style.display = c('viabComplete') ? 'block' : 'none';
+      document.getElementById('taxeAmenagementBloc').style.display = c('taxeAmenagement') ? 'block' : 'none';
+      document.getElementById('spancBloc').style.display = c('fosse') ? 'block' : 'none';
+      document.getElementById('fosseTypeBloc').style.display = c('fosse') ? 'block' : 'none';
+    }
+    window.syncBlocs = syncBlocs;
 
     function resetForm() {
-      document.querySelectorAll('.calc-app input[type="number"]').forEach(i => i.value = 0);
-      document.querySelectorAll('.calc-app input[type="checkbox"]').forEach(i => i.checked = false);
-      document.getElementById('includeDO').checked = true;
-      document.getElementById('piscineType').value = 'aucune';
-      document.getElementById('renoType').value = 'aucune';
-      document.getElementById('viabCompletePrix').value = 8000;
-      document.getElementById('viabCompleteAmount').style.display = 'none';
-      document.getElementById('raccEauQty').value = 0;
-      document.getElementById('raccEauPrix').value = 1000;
-      document.getElementById('raccElecQty').value = 0;
-      document.getElementById('raccElecPrix').value = 1500;
-      document.getElementById('raccTelecomQty').value = 0;
-      document.getElementById('raccTelecomPrix').value = 0;
-
-      document.getElementById('taxeAmenagementValeurM2').value = 1036;
-      document.getElementById('taxeAmenagementTaux').value = 3;
-      document.getElementById('taxeAmenagementBloc').style.display = 'none';
-
-      document.getElementById('geoPrix').value = 2500;
-      document.getElementById('fossePrix').value = 9000;
-      document.getElementById('fosseMicroPrix').value = 12500;
-      document.getElementById('fosseTypeFTE').checked = true;
-
-      document.getElementById('renoPrixM2').value = 0;
-      document.getElementById('neufPrixM2').value = 1550;
-      document.getElementById('piscinePrixM2').value = 0;
-
-      document.getElementById('cloturePrixPar').value = 350;
-      document.getElementById('clotureMoellonsPrix').value = 750;
-      document.getElementById('clotureSRPrix').value = 120;
-
-      document.getElementById('statGravillonPrix').value = 30;
-      document.getElementById('statPaveHerbePrix').value = 70;
-      document.getElementById('statDallagePrix').value = 90;
-      document.getElementById('statBetonDesPrix').value = 120;
-
-      document.getElementById('portailVantailPrix').value = 3500;
-      document.getElementById('portailLongrinePrix').value = 600;
-      document.getElementById('portailMotorPrix').value = 1300;
-
-      document.getElementById('paysEngazonnementPrix').value = 12;
-      document.getElementById('paysPlantationsPrix').value = 1500;
-      document.getElementById('paysArrosagePrix').value = 800;
-      document.getElementById('paysTerrassementPrix').value = 1200;
-
-      document.getElementById('terrPinPrix').value = 250;
-      document.getElementById('terrExoPrix').value = 350;
-
-      document.getElementById('bePrix').value = 3500;
-      document.getElementById('cspsPrix').value = 2500;
-      document.getElementById('bcontrolePrix').value = 4000;
-      document.getElementById('geometrePrix').value = 2000;
-      document.getElementById('dessinateurPrixM2').value = 15;
-      document.getElementById('architectePrixM2').value = 50;
-      document.getElementById('archCCTPPrix').value = 8;
-      document.getElementById('archAssistContratsPrix').value = 6;
-      document.getElementById('moeDETPct').value = 6;
-      document.getElementById('equipCuisine').checked = false;
-      document.getElementById('equipSDB').checked = false;
-      document.getElementById('equipWC').checked = false;
-      document.getElementById('equipCES').checked = false;
-      document.getElementById('equipCuisineQty').value = 0;
-      document.getElementById('equipSDBQty').value = 0;
-      document.getElementById('equipWCQty').value = 0;
-      document.getElementById('equipCESQty').value = 0;
-      document.getElementById('equipCuisinePrix').value = 10000;
-      document.getElementById('equipSDBPrix').value = 7000;
-      document.getElementById('equipWCPrix').value = 1000;
-      document.getElementById('equipCESPrix').value = 2500;
-      document.getElementById('spancEtudePrix').value = 1200;
-      document.getElementById('spancDossierPrix').value = 600;
-      document.getElementById('spancControlePrix').value = 400;
-      document.getElementById('fourchettePct').value = 15;
-
-      updateArchAuto();
-      const memoBody = document.getElementById('renoMemoBody');
-      const memoToggle = document.getElementById('renoMemoToggle');
-      const memoHeader = document.getElementById('renoMemoHeader');
-      if (memoBody) memoBody.classList.remove('open');
-      if (memoToggle) memoToggle.textContent = '▼ Voir le détail';
-      if (memoHeader) memoHeader.setAttribute('aria-expanded', 'false');
-      renderRenoMemo();
-      if (typeof updateSpancBloc === 'function') updateSpancBloc();
-      calculer();
-    }
-
-    const RENO_MEMOS = {
-      legere: {
-        titre: 'Rénovation légère — Rafraîchissement',
-        objectif: 'Remettre au propre sans modifier l\'existant',
-        level: 'legere',
-        includes: '',
-        categories: [
-          { titre: 'Préparation', items: [
-            'Protection du chantier (sols, menuiseries)',
-            'Nettoyage et préparation des supports',
-            'Rebouchage fissures et petits défauts',
-            'Ponçage et enduits de finition',
-          ]},
-          { titre: 'Finitions', items: [
-            'Peinture murs et plafonds',
-            'Remplacement revêtements de sol (PVC, stratifié)',
-            'Remplacement plinthes',
-          ]},
-          { titre: 'Équipements légers', items: [
-            'Changement appareillages électriques (prises, interrupteurs)',
-            'Remplacement luminaires',
-            'Changement robinetterie / WC',
-          ]},
-          { titre: 'Livraison', items: [
-            'Nettoyage fin de chantier',
-          ]},
-        ],
-      },
-      moyenne: {
-        titre: 'Rénovation moyenne — Amélioration',
-        objectif: 'Moderniser et améliorer le confort',
-        level: 'moyenne',
-        includes: 'Inclut toutes les prestations de la rénovation légère, plus :',
-        categories: [
-          { titre: 'Dépose & préparation', items: [
-            'Dépose des anciens équipements (cuisine, SDB, sols)',
-            'Ragréage des sols',
-          ]},
-          { titre: 'Cloisons & plafonds', items: [
-            'Création ou modification de cloisons placo',
-            'Pose de faux plafonds',
-            'Isolation intérieure (thermique / acoustique)',
-          ]},
-          { titre: 'Réseaux partiels', items: [
-            'Réfection partielle électricité (tableau, circuits)',
-            'Réfection partielle plomberie',
-          ]},
-          { titre: 'Équipements & revêtements', items: [
-            'Installation cuisine équipée',
-            'Création ou rénovation complète salle de bain',
-            'Pose carrelage sols / murs',
-            'Remplacement menuiseries intérieures (portes)',
-            'Étanchéité pièces humides',
-            'Peinture complète du logement',
-          ]},
-        ],
-      },
-      lourde: {
-        titre: 'Rénovation lourde — Restructuration',
-        objectif: 'Transformer le bâtiment en profondeur',
-        level: 'lourde',
-        includes: 'Inclut toutes les prestations de la rénovation moyenne, plus :',
-        categories: [
-          { titre: 'Gros œuvre', items: [
-            'Démolition murs / planchers',
-            'Ouverture de mur porteur (avec étude structure)',
-            'Reprise de fondations si nécessaire',
-            'Création d\'extension / surélévation',
-          ]},
-          { titre: 'Structure & clos couvert', items: [
-            'Réfection toiture / charpente',
-            'Étanchéité toiture / terrasse',
-            'Ravalement de façade',
-          ]},
-          { titre: 'Réseaux complets', items: [
-            'Reprise complète de l\'électricité',
-            'Reprise complète de la plomberie',
-            'Mise aux normes assainissement',
-          ]},
-          { titre: 'Second œuvre complet', items: [
-            'Redistribution complète des pièces',
-            'Isolation complète',
-            'Menuiseries extérieures (fenêtres, baies)',
-            'Cloisons neuves',
-            'Revêtements sols et murs complets',
-          ]},
-          { titre: 'Spécifique La Réunion', items: [
-            'Gestion des eaux pluviales (EP)',
-            'Drainage périphérique',
-            'Protection cyclonique (fixations, toiture)',
-          ]},
-        ],
-      },
-    };
-
-    function renderRenoMemo() {
-      const type = document.getElementById('renoType').value;
-      const memo = document.getElementById('renoMemo');
-      const memoBody = document.getElementById('renoMemoBody');
-      const memoTitle = document.getElementById('renoMemoTitle');
-
-      if (!RENO_MEMOS[type]) {
-        memo.style.display = 'none';
-        return;
-      }
-
-      const data = RENO_MEMOS[type];
-      memo.style.display = 'block';
-      memo.className = 'reno-memo memo-level-' + data.level;
-      memoTitle.innerHTML = `<strong>${data.titre}</strong>`;
-
-      let html = `<div class="memo-objectif">${data.objectif}</div>`;
-      if (data.includes) {
-        html += `<div class="memo-includes">${data.includes}</div>`;
-      }
-      data.categories.forEach(cat => {
-        html += `<div class="memo-cat">${cat.titre}</div>`;
-        html += `<ul>`;
-        cat.items.forEach(item => { html += `<li>${item}</li>`; });
-        html += `</ul>`;
+      // Chaque champ reprend sa valeur d'origine (celle écrite dans la page), prix compris
+      document.querySelectorAll('.calc-app input, .calc-app select').forEach(el => {
+        if (el.type === 'checkbox' || el.type === 'radio') el.checked = el.defaultChecked;
+        else if (el.tagName === 'SELECT') Array.from(el.options).forEach(o => { o.selected = o.defaultSelected; });
+        else el.value = el.defaultValue;
       });
-      memoBody.innerHTML = html;
-    }
-
-    function toggleRenoMemo() {
-      const header = document.getElementById('renoMemoHeader');
-      const body = document.getElementById('renoMemoBody');
-      const toggle = document.getElementById('renoMemoToggle');
-      const isOpen = body.classList.toggle('open');
-      header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      toggle.textContent = isOpen ? '▲ Masquer le détail' : '▼ Voir le détail';
-    }
-
-    const PRIX_DEFAUT_RENO = { legere: 250, moyenne: 600, lourde: 950 };
-    const PRIX_DEFAUT_PISCINE = { coque: 700, standard: 1350, debordement: 1600, miroir: 2000 };
-
-    document.getElementById('renoType').addEventListener('change', function() {
-      const type = this.value;
-      const champPrix = document.getElementById('renoPrixM2');
-      if (PRIX_DEFAUT_RENO[type] !== undefined) {
-        champPrix.value = PRIX_DEFAUT_RENO[type];
-      } else {
-        champPrix.value = 0;
-      }
-      renderRenoMemo();
+      if (typeof window.rmReset === 'function') window.rmReset();
+      updateSpancBloc();
+      syncBlocs();
+      document.dispatchEvent(new CustomEvent('rm-choix'));
       calculer();
-    });
+      if (typeof window.rmEffacerSaisie === 'function') window.rmEffacerSaisie();
+    }
+    window.resetForm = resetForm;
 
-    document.getElementById('piscineType').addEventListener('change', function() {
-      const type = this.value;
-      const champPrix = document.getElementById('piscinePrixM2');
-      if (PRIX_DEFAUT_PISCINE[type] !== undefined) {
-        champPrix.value = PRIX_DEFAUT_PISCINE[type];
-      } else {
-        champPrix.value = 0;
-      }
-      calculer();
-    });
-
-    document.getElementById('renoMemoHeader').addEventListener('click', toggleRenoMemo);
-    document.getElementById('renoMemoHeader').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleRenoMemo(); }
-    });
-    renderRenoMemo();
-
-    document.getElementById('viabComplete').addEventListener('change', function(e) {
-      document.getElementById('viabCompleteAmount').style.display = e.target.checked ? 'block' : 'none';
-    });
-
-    document.getElementById('taxeAmenagement').addEventListener('change', function(e) {
-      document.getElementById('taxeAmenagementBloc').style.display = e.target.checked ? 'block' : 'none';
-    });
+    document.getElementById('viabComplete').addEventListener('change', syncBlocs);
+    document.getElementById('taxeAmenagement').addEventListener('change', syncBlocs);
 
     // ❔ Toggle générique : tout .help-btn[data-help] ouvre/ferme la notice #<data-help>.
     //    (Audit densité d'info 2026-07-09 : les pavés explicatifs sont repliés derrière
@@ -3321,17 +3012,6 @@
       document.getElementById('archHelpNotice').classList.remove('open');
     });
 
-    document.querySelectorAll('.calc-app .tab-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const target = this.getAttribute('data-tab');
-        const tabsContainer = this.closest('.panel');
-        tabsContainer.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        tabsContainer.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        this.classList.add('active');
-        tabsContainer.querySelector(`[data-content="${target}"]`).classList.add('active');
-      });
-    });
-
     function updateSpancBloc() {
       const fosseCochee = document.getElementById('fosse').checked;
       const bloc = document.getElementById('spancBloc');
@@ -3349,12 +3029,11 @@
     document.getElementById('fosseTypeMicro').addEventListener('change', calculer);
     updateSpancBloc();
 
-    function updateArchAuto() {
-      const surfaceNeuf = parseFloat(document.getElementById('neuf').value) || 0;
-      const surfaceReno = parseFloat(document.getElementById('renoSurface').value) || 0;
-      const surface = surfaceNeuf + surfaceReno;
+    // Surface de conception = surfaces neuve + à rénover des parties cochées (étape Travaux)
+    function updateArchAuto(surface) {
       const hint = document.getElementById('archHint');
       if (!hint) return;
+      surface = surface || 0;
 
       if (surface === 0) {
         hint.textContent = '';
@@ -3368,15 +3047,11 @@
         hint.style.fontWeight = '600';
       }
     }
-    document.getElementById('neuf').addEventListener('input', updateArchAuto);
-    document.getElementById('renoSurface').addEventListener('input', updateArchAuto);
-    updateArchAuto();
 
     document.querySelectorAll('.calc-app input, .calc-app select').forEach(el => {
       el.addEventListener('input', calculer);
       el.addEventListener('change', calculer);
     });
-
     /* ═══════════════════════════════════════════════════════════════════════
        PRIX PAR DÉFAUT ADMIN (persistés) — 2026-07-15 (demande Alan : « ajuster
        les prix sans passer par Claude »). Le calculateur (iframe) ne parle PAS
@@ -3458,6 +3133,592 @@
     });
 
     calculer();
+  </script>
+
+  <script>
+// ===================================================================
+// TRAVAUX — moteur repris du calculateur RUN MAP BTP (calculateur-budget.html,
+// version du 16/10/2026) : types cumulables (neuf, rénovation, extérieur,
+// corps de métiers), surfaces et varangues, travaux & équipements
+// spécifiques, aménagements extérieurs détaillés (murs, postes composés),
+// panier de corps de métiers. Il ne calcule que les TRAVAUX HT par partie ;
+// le calculer() du site s'en sert pour la pente, la TVA, la MOE, la DO et
+// le récapitulatif. L'assainissement reste dans « Raccordement &
+// assainissement » (pas de doublon dans l'extérieur).
+// ===================================================================
+(function () {
+  'use strict';
+  const TVA_RENO = 0.021, TVA_NEUF = 0.085;
+  const $ = id => document.getElementById(id);
+  const v = id => { const el = $(id); const n = parseFloat(el && el.value); return isFinite(n) ? n : 0; };
+  const fmt = n => Math.round(n).toLocaleString('fr-FR') + ' €';
+  const m2 = n => n.toLocaleString('fr-FR') + ' m²';
+  const eur = n => Number(n).toLocaleString('fr-FR');
+
+  /* ── Aménagement extérieur ───────────────────────────────────────────────
+     Un bandeau déroulant par sous-lot. Trois sortes de postes :
+       simple  : quantité × prix unitaire (ou forfait) ;
+       comp    : une quantité saisie (m²) qui commande des SOUS-LIGNES dérivées
+                 (coef × quantité, chacune à son prix unitaire) — stationnement,
+                 terrasse ;
+       mur     : longueur + hauteur, et une logique de calcul (Alan, 14/09) :
+                 moellons → largeur à la base = hauteur / 2 (1 m → 0,50 ;
+                 2 m → 1,00 ; 3 m → 1,50), semelle = base + 0,20 m de large
+                 (0,70 / 1,20 / 1,70) sur 0,30 m d'épaisseur, section du mur en
+                 trapèze (0,50 m en tête) ; bloc US → semelle 0,40 m (le 0,60 /
+                 0,80 est pour les bâtiments R+2 / R+3), soubassement 0,30 m, bloc
+                 US au-dessus, enduit ET peinture sur les deux faces.
+     Prix HT : bibliothèque ALB DPGF v9.3 (semelle clôture 609 €/m³, béton de
+     propreté 399, soubassement 116 €/m², bloc US 94,5, enduit 24, peinture
+     ext 23, hérissonnage 72 €/m³, dalle BA 630 €/m³, portail 3 413…), sinon
+     l'ancien calculateur ou un ordre de grandeur (géotextile, plots, finition). */
+  const EXT = [
+    { grp: 'Clôture', items: [
+      { id: 'extMurMoellons', lib: 'Mur en moellons', type: 'mur', mur: 'moellons',
+        info: 'Moellons apparents. Largeur à la base = hauteur / 2, semelle 0,20 m plus large que la base sur 0,30 m d\'épaisseur, section en trapèze (0,50 m en tête).',
+        sous: [['prop', 'Béton de propreté', 'm³', 399], ['sem', 'Semelle filante béton armé', 'm³', 609], ['moel', 'Moellons hourdés', 'm³', 350]] },
+      { id: 'extMurUS', lib: 'Mur bloc US enduit et peint', type: 'mur', mur: 'us',
+        info: 'Semelle 0,40 m de large sur 0,30 m (mur de clôture ; 0,60 m et 0,80 m sont réservés aux bâtiments R+2 / R+3), soubassement coulé plein 0,30 m, bloc US 20 à crépir, chaînage haut, enduit ciment et peinture sur 2 faces par défaut — le menu de chaque ligne permet 1 face ou aucune.',
+        sous: [['prop', 'Béton de propreté', 'm³', 399], ['sem', 'Semelle filante béton armé', 'm³', 609], ['soub', 'Soubassement coulé plein 0,30 m', 'm²', 116], ['bloc', 'Bloc US 20 à crépir', 'm²', 94.5], ['chai', 'Chaînage haut + raidisseurs', 'ml', 35], ['end', 'Enduit ciment', 'm²', 24, 'faces'], ['pei', 'Peinture extérieure', 'm²', 23, 'faces']] },
+      { id: 'extClotureSR', lib: 'Clôture semi-rigide métallique', u: 'ml', prix: 100, info: 'Panneaux rigides sur poteaux, scellés au sol ou fixés en tête de mur de clôture.' },
+    ] },
+    { grp: 'Stationnement', places: true, items: [
+      { id: 'extStatBordure', lib: 'Bordures de délimitation', u: 'ml', prix: 30, info: 'Bordure béton posée sur fondation béton, pour délimiter les places.' },
+      { id: 'extStatGravillon', lib: 'Gravillon', type: 'comp', u: 'm²', info: 'Décapage et couche de forme 20 cm, géotextile, gravillon 5 cm.',
+        sous: [['cf', 'Couche de forme 20 cm', 'm³', 0.20, 72], ['geo', 'Géotextile', 'm²', 1, 3], ['grav', 'Gravillon 5 cm', 'm²', 1, 30]] },
+      { id: 'extStatPaveHerbe', lib: 'Pavé herbe', type: 'comp', u: 'm²', info: 'Couche de forme 20 cm, géotextile, lit de gravillon 4 cm, pavés herbe fournis et posés.',
+        sous: [['cf', 'Couche de forme 20 cm', 'm³', 0.20, 72], ['geo', 'Géotextile', 'm²', 1, 3], ['lit', 'Lit de gravillon 4 cm', 'm²', 1, 12], ['pave', 'Pavés herbe fournis et posés', 'm²', 1, 70]] },
+      { id: 'extStatDallage', lib: 'Dallage béton balayé', type: 'comp', u: 'm²', info: 'Couche de forme 20 cm, dalle béton armé 12 cm finition balayée.',
+        sous: [['cf', 'Couche de forme 20 cm', 'm³', 0.20, 72], ['dalle', 'Dalle béton armé 12 cm', 'm³', 0.12, 630]] },
+      { id: 'extStatBetonDes', lib: 'Béton désactivé', type: 'comp', u: 'm²', info: 'Couche de forme 20 cm, dalle béton armé 12 cm, finition désactivée.',
+        sous: [['cf', 'Couche de forme 20 cm', 'm³', 0.20, 72], ['dalle', 'Dalle béton armé 12 cm', 'm³', 0.12, 630], ['fin', 'Finition désactivée', 'm²', 1, 45]] },
+    ] },
+    { grp: 'Portail', items: [
+      { id: 'extPortail', lib: 'Portail 3,70 × 2 m', u: 'u', prix: 3400, info: 'Portail coulissant standard, 3,70 m de large, 2 m de haut (DPGF 16 : 3 413).' },
+      { id: 'extPortailLongrine', lib: 'Longrine + rail', u: 'u', prix: 600, info: 'Longrine béton et scellement du rail de coulissement.' },
+      { id: 'extPortailMotor', lib: 'Motorisation', u: 'u', prix: 1300, info: 'DPGF 16 : 1 313.' },
+      { id: 'extPortailPoteau', lib: 'Poteau enduit et peint', u: 'u', prix: 450, info: 'Poteau béton armé, enduit et peint — 450 € l\'unité (Alan, 14/09). Compter 2 poteaux pour un portail.' },
+    ] },
+    { grp: 'Paysagisme', items: [
+      { id: 'extPaysGazon', lib: 'Engazonnement', u: 'm²', prix: 12 },
+      { id: 'extPaysPlantations', lib: 'Plantations', u: 'u', prix: 1500, info: 'Arbres, arbustes, massifs.' },
+      { id: 'extPaysArrosage', lib: 'Arrosage automatique', u: 'u', prix: 800 },
+      { id: 'extPaysTerrassement', lib: 'Terrassement végétal', u: 'u', prix: 1200, info: 'Terre végétale et nivellement.' },
+    ] },
+    { grp: 'Varangue et dalle extérieures', items: [
+      { id: 'extVarangue', lib: 'Varangue extérieure couverte', u: 'm²', prix: 1350, info: 'Varangue ajoutée hors construction neuve : dalle, poteaux, charpente et couverture.|Quantité = surface de la varangue ; prix au m² HT modifiable.' },
+      { id: 'extDalle', lib: 'Dalle béton extérieure', u: 'm²', prix: 90, info: 'Couche de forme 20 cm et dalle béton armé 12 cm (DPGF : hérissonnage 72 €/m³, dalle BA 630 €/m³), sans revêtement.|Quantité = surface de la dalle ; prix au m² HT modifiable.' },
+      { id: 'extGardeCorps', lib: 'Garde-corps', u: 'ml', prix: 300, choix: [['alu', 'Aluminium', 300], ['bois', 'Bois', 200], ['acier', 'Acier', 250], ['vitre', 'Vitré', 700]], choixDefaut: 'alu',
+        info: 'Garde-corps fourni et posé, fixations comprises.|Le prix au mètre linéaire suit le matériau choisi : aluminium, bois, acier ou vitré.|Quantité = longueur en mètres linéaires.' },
+    ] },
+    { grp: 'Maçonnerie extérieure', items: [
+      { id: 'extPasJaponais', lib: 'Pas japonais', u: 'm²', prix: 170, info: 'Dalles de pas (béton ou pierre, 40 à 50 cm) posées sur lit de sable ou mortier, terrassement léger compris.|Quantité = surface couverte par les pas, en m².' },
+      { id: 'extEscalier', lib: 'Escalier', u: 'marches', prix: 200, choix: [['bois', 'Bois', 150], ['beton', 'Béton', 200], ['moellons', 'Moellons', 250]], choixDefaut: 'beton',
+        info: 'Escalier de jardin d\'environ 1,20 m de large, fondation comprise.|Bois : marches en bois classe 4 sur limons ou rondins.|Béton : marches coulées en place ou préfabriquées, finition brute ou balayée.|Moellons : marches maçonnées en moellons hourdés.|Quantité = nombre de marches.' },
+    ] },
+    { grp: 'Terrasse caillebotis', items: [
+      { id: 'extTerrPin', lib: 'Pin classe 4', type: 'comp', u: 'm²', info: 'Caillebotis pin traité autoclave sur lambourdes ; option plots béton, 1 plot pour 5 m² environ.',
+        sous: [['plot', 'Plots béton (1 pour 5 m²)', 'u', 0.2, 45, true], ['cai', 'Lambourdes + caillebotis pin', 'm²', 1, 250]] },
+      { id: 'extTerrExo', lib: 'Bois exotique', type: 'comp', u: 'm²', info: 'Ipé, cumaru, bangkirai… sur lambourdes ; option plots béton, 1 plot pour 5 m² environ.',
+        sous: [['plot', 'Plots béton (1 pour 5 m²)', 'u', 0.2, 45, true], ['cai', 'Lambourdes + caillebotis exotique', 'm²', 1, 350]] },
+    ] },
+    { grp: 'Piscine', items: [
+      { id: 'extPiscine', lib: 'Piscine', u: 'm²', prix: 1350, choix: [['coque', 'À coque', 700], ['standard', 'Béton', 1350], ['debordement', 'À débordement', 1600], ['miroir', 'Miroir', 2000]], choixDefaut: 'standard',
+        info: 'Bassin, structure, revêtement, filtration et local technique ; la quantité est la surface du bassin.' },
+      { id: 'extJacuzzi', lib: 'Jacuzzi', u: 'u', prix: 6000, info: 'Spa extérieur 4 à 6 places fourni et posé : cuve, mise en place, raccordements électrique et eau.' },
+    ] },
+  ];
+  const EXT_ITEMS = EXT.flatMap(g => g.items);
+  const EP_SEMELLE = 0.30, EP_PROPRETE = 0.05, TETE_MOELLONS = 0.50, SOUBASSEMENT = 0.30;
+  /* Quantités dérivées d'un mur (par mètre linéaire × longueur) */
+  function quantitesMur(it, ml, h, faces) {
+    if (!(ml > 0) || !(h > 0)) return { q: {}, regle: '' };
+    faces = faces || {};
+    const fEnd = faces.end == null ? 2 : faces.end, fPei = faces.pei == null ? 2 : faces.pei;
+    const txtF = n => n === 0 ? 'aucune face' : n === 1 ? '1 face' : '2 faces';
+    if (it.mur === 'moellons') {
+      const base = h / 2, fond = base + 0.20, section = (TETE_MOELLONS + base) / 2 * h;
+      return { q: { prop: ml * fond * EP_PROPRETE, sem: ml * fond * EP_SEMELLE, moel: ml * section },
+        regle: `Base ${base.toFixed(2)} m, tête ${TETE_MOELLONS.toFixed(2)} m, semelle ${fond.toFixed(2)} × ${EP_SEMELLE.toFixed(2)} m → ${(ml * fond * EP_SEMELLE).toFixed(2)} m³ de semelle et ${(ml * section).toFixed(2)} m³ de moellons pour ${ml} ml` };
+    }
+    const fond = 0.40, hBloc = Math.max(0, h - SOUBASSEMENT);
+    return { q: { prop: ml * fond * EP_PROPRETE, sem: ml * fond * EP_SEMELLE, soub: ml * SOUBASSEMENT, bloc: ml * hBloc, chai: ml, end: fEnd * ml * h, pei: fPei * ml * h },
+      regle: `Semelle ${fond.toFixed(2)} × ${EP_SEMELLE.toFixed(2)} m → ${(ml * fond * EP_SEMELLE).toFixed(2)} m³, soubassement ${SOUBASSEMENT.toFixed(2)} m, bloc US ${hBloc.toFixed(2)} m → ${(ml * hBloc).toFixed(1)} m², enduit ${fEnd ? (fEnd * ml * h).toFixed(1) + ' m² (' + txtF(fEnd) + ')' : 'sans'}, peinture ${fPei ? (fPei * ml * h).toFixed(1) + ' m² (' + txtF(fPei) + ')' : 'sans'}` };
+  }
+  const fmtQ = n => (Math.round(n * 100) / 100).toLocaleString('fr-FR', { maximumFractionDigits: 2 });
+  // virgule décimale dans les règles affichées
+  const _virg = t => t.replace(/(\d)\.(\d)/g, '$1,$2');
+  /* Places de stationnement : une place = 2,50 × 5 m = 12,5 m² ; bordure 15 ml
+     pour la première place, + 10 ml par place suivante (côté de 5 m partagé). */
+  const PLACE_M2 = 12.5;
+  function majPlaces(texteSeul) {
+    const n = Math.max(0, Math.round(v('extStatPlaces')));
+    const surf = n * PLACE_M2, bord = n ? 10 * n + 5 : 0;
+    if (texteSeul !== true) EXT.find(g => g.places).items.forEach(it => { const q = $(it.id + 'Qty'); if (q) q.value = it.u === 'ml' ? bord : surf; });
+    $('extStatPlacesRegle').textContent = n ? _virg(`${surf.toFixed(1)} m² (2,50 × 5 m par place), ${bord} ml de bordure`).replace(',0 m²', ' m²') : '';
+  }
+  (function construireExt() {
+    const cont = $('extGroupes');
+    EXT.forEach((g, gi) => {
+      const det = document.createElement('details');
+      det.className = 'sl'; det.id = 'extGrp' + gi;
+      det.innerHTML = `<summary>${g.grp}<span class="chev"><span id="extGrpTot${gi}">0 €</span><i>▾</i></span></summary><div class="sl-c"></div>`;
+      const bloc = det.querySelector('.sl-c');
+      // Stationnement : le nombre de places pré-remplit les surfaces et la bordure (Alan, 15/10)
+      if (g.places) bloc.insertAdjacentHTML('beforeend', '<div class="places"><label for="extStatPlaces">Nombre de places</label><input type="number" id="extStatPlaces" min="0" step="1" value="2" inputmode="numeric"><span class="regle" id="extStatPlacesRegle"></span></div>');
+      g.items.forEach(it => {
+        const info = it.info ? `<button type="button" class="info" data-titre="${it.lib}" data-info="${it.info}" aria-label="Ce que comprend ${it.lib}">i</button>` : '';
+        const ligne = document.createElement('div');
+        if (it.type === 'comp' || it.type === 'mur') {
+          const avecOpt = it.sous.some(s => it.type === 'mur' ? s[4] === 'faces' : !!s[5]);
+          const sous = '<button type="button" class="det-prix">Détail des prix ▾</button><div class="sous' + (avecOpt ? '' : ' sans-opt') + '">' + it.sous.map(s => {
+            const [k, lib, u, coefOuPrix, prix, opt] = it.type === 'mur' ? [s[0], s[1], s[2], null, s[3], false] : [s[0], s[1], s[2], s[3], s[4], !!s[5]];
+            // Mur : enduit / peinture sur 2 faces, 1 face ou aucune (Alan, 16/09)
+            const faces = it.type === 'mur' && s[4] === 'faces'
+              ? ` <select id="${it.id}_${k}Faces" class="faces" aria-label="Nombre de faces — ${lib}"><option value="2" selected>2 faces</option><option value="1">1 face</option><option value="0">aucune</option></select>` : '';
+            return `<div class="li${opt || faces ? ' opt' : ''}" data-sl="${k}">${opt ? `<input type="checkbox" id="${it.id}_${k}On" checked>` : '<span></span>'}<span>${lib}${faces}</span><span class="q"><span id="${it.id}_${k}Q">0</span> ${u}</span><span class="x">×</span><input type="number" id="${it.id}_${k}Prix" class="prix-input" min="0" step="1" value="${prix}" inputmode="decimal" aria-label="Prix unitaire HT"><span class="m" id="${it.id}_${k}M">0 €</span></div>`;
+          }).join('') + '</div>';
+          if (it.type === 'mur') {
+            ligne.className = 'eq comp';
+            ligne.innerHTML = `<input type="checkbox" id="${it.id}"><label for="${it.id}">${it.lib}${info}</label><span></span><span class="tot" id="${it.id}Tot">0 €</span>` +
+              `<div class="params"><label>Longueur <input type="number" id="${it.id}Ml" min="0" step="0.5" value="0" inputmode="decimal"> ml</label><label>Hauteur <input type="number" id="${it.id}H" min="0" step="0.1" value="1.8" inputmode="decimal"> m</label></div><div class="regle" id="${it.id}Regle"></div>` + sous;
+          } else {
+            ligne.className = 'eq comp';
+            ligne.innerHTML = `<input type="checkbox" id="${it.id}"><label for="${it.id}">${it.lib}<span class="u">${it.u}</span>${info}</label><input type="number" id="${it.id}Qty" min="0" step="0.5" value="0" inputmode="decimal" aria-label="Surface en ${it.u}"><span class="tot" id="${it.id}Tot">0 €</span>` + sous;
+          }
+        } else {
+          const unite = it.u === 'u' ? '' : `<span class="u">${it.u}</span>`;
+          const menu = it.choix ? `<select id="${it.id}Type" aria-label="Type">${it.choix.map(c => `<option value="${c[0]}" ${c[0] === it.choixDefaut ? 'selected' : ''}>${c[1]}</option>`).join('')}</select>` : '';
+          const qte = it.u === 'u' ? '' : `<input type="number" id="${it.id}Qty" min="0" step="0.5" value="0" inputmode="decimal" aria-label="Quantité en ${it.u}"><span class="x">×</span>`;
+          const qteForfait = (it.u === 'u' && !it.choix) ? `<input type="number" id="${it.id}Qty" min="0" step="1" value="1" inputmode="numeric" aria-label="Quantité"><span class="x">×</span>` : '';
+          ligne.className = 'eq' + (it.choix ? ' sel' : '') + (it.choix && it.u !== 'u' ? ' q' : '');
+          ligne.innerHTML = `<input type="checkbox" id="${it.id}"><label for="${it.id}">${it.lib}${unite}${info}<span class="mt-imp" id="${it.id}Mt"></span></label>${menu}${qte}${qteForfait}` +
+            `<input type="number" id="${it.id}Prix" class="prix-input" min="0" step="10" value="${it.prix}" inputmode="numeric" aria-label="Prix unitaire HT">`;
+        }
+        bloc.appendChild(ligne);
+      });
+      cont.appendChild(det);
+    });
+    EXT_ITEMS.filter(it => it.enfants).forEach(it => {
+      $(it.id).addEventListener('change', () => { it.enfants.forEach(e => { $(e).checked = $(it.id).checked; }); });
+    });
+    $('extPiscine').addEventListener('change', () => { if ($('extPiscine').checked && !v('extPiscineQty')) $('extPiscineQty').value = 32; });
+    $('extStatPlaces').addEventListener('input', majPlaces); majPlaces();
+    $('extPasJaponais').addEventListener('change', () => { if ($('extPasJaponais').checked && !v('extPasJaponaisQty')) $('extPasJaponaisQty').value = 1; });
+    // Cocher un poste déplie son bandeau ; un poste composé sans quantité en propose une
+    EXT_ITEMS.forEach(it => $(it.id).addEventListener('change', () => {
+      if ($(it.id).checked) { $(it.id).closest('details').open = true; if (it.type === 'comp' && !v(it.id + 'Qty')) $(it.id + 'Qty').value = 20; if (it.type === 'mur' && !v(it.id + 'Ml')) $(it.id + 'Ml').value = 20; }
+    }));
+  })();
+  /* Total HT d'un poste extérieur ; met à jour ses sous-lignes */
+  function totalExt(it) {
+    if (it.type === 'comp' || it.type === 'mur') {
+      const on = $(it.id).checked;
+      let tot = 0, quantites = {};
+      if (it.type === 'mur') {
+        const faces = {};
+        it.sous.forEach(s => { if (s[4] === 'faces' && $(it.id + '_' + s[0] + 'Faces')) faces[s[0]] = v(it.id + '_' + s[0] + 'Faces'); });
+        const r = quantitesMur(it, v(it.id + 'Ml'), v(it.id + 'H'), faces); quantites = r.q; $(it.id + 'Regle').textContent = on ? _virg(r.regle) : '';
+      }
+      it.sous.forEach(s => {
+        const k = s[0];
+        const q = it.type === 'mur' ? (quantites[k] || 0) : v(it.id + 'Qty') * s[3];
+        const optOn = $(it.id + '_' + k + 'On') ? $(it.id + '_' + k + 'On').checked : true;
+        const m = optOn ? q * v(it.id + '_' + k + 'Prix') : 0;
+        $(it.id + '_' + k + 'Q').textContent = fmtQ(q);
+        $(it.id + '_' + k + 'M').textContent = fmt(m);
+        $(it.id + '_' + k + 'M').closest('.li').classList.toggle('off', !optOn);
+        tot += m;
+      });
+      $(it.id + 'Tot').textContent = fmt(tot);
+      return on ? tot : 0;
+    }
+    if (!$(it.id).checked) return 0;
+    const q = it.u === 'u' && it.choix ? 1 : v(it.id + 'Qty');
+    return q * v(it.id + 'Prix');
+  }
+
+  /* ── Un seul corps de métier : unité et prix unitaire HT ────────────────────
+     Base : bibliothèque ALB DPGF v9.3 (bibliotheque_ouvrages.json, pu_ref HT
+     réunionnais) quand elle chiffre le poste, arrondie ; sinon l'ancien
+     calculateur ou un ordre de grandeur (marqué « estimé »). Les aléas ± du
+     bas de page font la marge. Noms = corps de métier de l'application (le
+     métier est présélectionné à la publication). Prix admin : palier metierPrix. */
+  const METIERS = [
+    // [nom, unité, prix HT, source]
+    ['Terrassement · VRD', 'm³ de déblais', 45, 'estimé'],
+    ['Démolition', 'm²', 60, 'estimé'],
+    ['Gros œuvre', 'm² de plancher', 550, 'estimé'],
+    ['Enduits projetés', 'm² de façade', 24, 'DPGF 04 enduit ciment ext'],
+    ['Charpente bois', 'm² de toiture', 120, 'estimé'],
+    ['Charpente métallique', 'm² de toiture', 110, 'estimé'],
+    ['Couverture', 'm² de toiture', 85, 'estimé'],
+    ['Étanchéité', 'm²', 53, 'DPGF 08 étanchéité liquide 52,5'],
+    ['Gouttières', 'ml', 45, 'estimé'],
+    ['Bardage', 'm²', 120, 'estimé'],
+    ['Menuiseries extérieures - Fourniture', 'unité', 800, 'DPGF 07 fenêtre coulissante 2 vtx 788'],
+    ['Menuiseries extérieures - Pose', 'unité', 250, 'estimé (DPGF 07a forfait maison 3 987)'],
+    ['Métallerie', 'ml de garde-corps', 250, 'estimé'],
+    ['Portail', 'unité', 3400, 'DPGF 16 portail motorisé 3 413'],
+    ['Électricité', 'm² habitable', 75, 'estimé (DPGF 06 : tableau 1 523 + ~70 € le point)'],
+    ['Plomberie', 'm² habitable', 70, 'estimé (DPGF 05a : réseaux 4 516 + attentes 158)'],
+    ['VMC', 'unité', 900, 'DPGF 05a VMC + réseaux 893'],
+    ['Climatisation', 'unité', 850, 'DPGF 13 climatiseur 12 000 Btu 840'],
+    ['Photovoltaïque', 'kWc', 2500, 'estimé'],
+    ['Chauffe-eau solaire', 'unité', 2500, 'DPGF 15 CES 300 L thermosiphon 2 520'],
+    ['Menuiserie intérieure', 'porte', 380, 'DPGF 10 bloc-porte standard 294 + pose 84'],
+    ['Plâtrerie · Cloison · Faux plafond', 'm²', 55, 'DPGF 09 cloison 72/48 54,5'],
+    ['Parquet', 'm²', 90, 'estimé'],
+    ['Sol souple', 'm²', 45, 'estimé'],
+    ['Carrelage', 'm²', 65, 'DPGF 12 fourniture 15,75 + pose 47,5'],
+    ['Peinture', 'm² peint', 14, 'DPGF 11 peinture murs / plafonds 13,65'],
+    ['Béton ciré', 'm²', 130, 'estimé'],
+    ['Cuisine', 'unité', 12000, 'DPGF 14 fourniture 10 500 + pose 1 575'],
+    ['Paysagiste', 'm²', 25, 'estimé'],
+    ['Élagueur', 'arbre', 350, 'estimé'],
+    ['Dessouchage', 'souche', 300, 'estimé'],
+    ['Moellons', 'm³', 350, 'ancien calculateur'],
+    ['Piscine', 'm² de bassin', 1350, 'ancien calculateur (béton)'],
+    ['Assainissement individuel', 'unité', 11100, 'DPGF 16 micro-station 8 400 + pose 2 730'],
+    ['Nettoyage', 'm²', 5, 'DPGF 18 sols 4,2 + vitres'],
+    ['Entreprise générale', 'm² de plancher', 1500, 'prix au m² du neuf'],
+  ];
+  const METIER_CLE = n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/gi, '_');
+  $('metierSel').innerHTML = METIERS.map(m => `<option value="${METIER_CLE(m[0])}">${m[0]}</option>`).join('');
+  /* Familles et couleurs = METIER_FAMILLE de l'application (app.js) */
+  const FAMILLES = [
+    ['Gros œuvre / structure', '#1D4ED8', ['Terrassement · VRD', 'Démolition', 'Gros œuvre', 'Enduits projetés', 'Charpente bois', 'Charpente métallique']],
+    ['Couverture / étanchéité', '#0891B2', ['Couverture', 'Étanchéité', 'Gouttières', 'Bardage']],
+    ['Menuiserie / métallerie', '#CA8A04', ['Menuiseries extérieures - Fourniture', 'Menuiseries extérieures - Pose', 'Métallerie', 'Portail']],
+    ['Électricité / fluides', '#DC2626', ['Électricité', 'Plomberie', 'VMC', 'Climatisation']],
+    ['Énergies renouvelables', '#EAB308', ['Photovoltaïque', 'Chauffe-eau solaire']],
+    ['Finitions', '#9333EA', ['Carrelage', 'Peinture', 'Béton ciré', 'Plâtrerie · Cloison · Faux plafond', 'Parquet', 'Sol souple', 'Cuisine', 'Menuiserie intérieure']],
+    ['Aménagement extérieur', '#16A34A', ['Paysagiste', 'Élagueur', 'Dessouchage', 'Moellons', 'Piscine', 'Assainissement individuel']],
+    ['Services', '#64748B', ['Nettoyage', 'Entreprise générale']],
+  ];
+  const FAMILLE_DE = {}; FAMILLES.forEach(f => f[2].forEach(m => { FAMILLE_DE[m] = f; }));
+  let familleOuverte = FAMILLES[0][0];
+  function rendreFamilles() {
+    const courant = metierCourant()[0];
+    $('metierFamilles').innerHTML = FAMILLES.map(f => `<button type="button" data-fam="${f[0]}" style="--fc:${f[1]}" class="${f[0] === familleOuverte ? 'on' : ''}">${f[0]}</button>`).join('');
+    const fam = FAMILLES.find(f => f[0] === familleOuverte) || FAMILLES[0];
+    $('metierPuces').innerHTML = fam[2].filter(m => METIERS.some(x => x[0] === m)).map(m => `<button type="button" data-metier="${METIER_CLE(m)}" style="--fc:${fam[1]}" class="${m === courant ? 'on' : ''}">${m}</button>`).join('');
+  }
+  $('metierFamilles').addEventListener('click', e => { const b = e.target.closest('button[data-fam]'); if (!b) return; familleOuverte = b.dataset.fam; rendreFamilles(); });
+  $('metierPuces').addEventListener('click', e => { const b = e.target.closest('button[data-metier]'); if (!b) return; $('metierSel').value = b.dataset.metier; $('metierSel').dispatchEvent(new Event('change', { bubbles: true })); rendreFamilles(); });
+  const metierCourant = () => METIERS.find(m => METIER_CLE(m[0]) === $('metierSel').value) || METIERS[0];
+  function majMetierUnite() {
+    const m = metierCourant();
+    $('metierUnite').textContent = m[1];
+    $('metierSource').textContent = m[3] ? 'prix : ' + m[3] : '';
+    $('metierPrixUnite').textContent = '€ HT / ' + m[1].replace(/^m² de |^ml de /, s => s);
+  }
+  $('metierSel').addEventListener('change', () => { majMetierUnite(); const f = FAMILLE_DE[metierCourant()[0]]; if (f) familleOuverte = f[0]; rendreFamilles(); });
+  rendreFamilles();
+
+  /* ── Paliers : un prix par choix de menu, tous modifiables par l'admin ────
+     champ → { menu, prix par valeur du menu }. Changer le menu met le prix du
+     palier dans le champ ; modifier le champ range la valeur dans le palier
+     courant. Les paliers voyagent avec les prix admin (prices.paliers). */
+  const PALIERS = {
+    renoPrixM2:     { menu: 'renoType',       prix: { legere: 400, moyenne: 700, lourde: 1000 } },
+    renoPrixGardeCorps: { menu: 'renoGCType',  prix: { alu: 300, bois: 200, acier: 250, vitre: 700 } },
+    extGardeCorpsPrix:  { menu: 'extGardeCorpsType', prix: { alu: 300, bois: 200, acier: 250, vitre: 700 } },
+    extPiscinePrix: { menu: 'extPiscineType', prix: { coque: 700, standard: 1350, debordement: 1600, miroir: 2000 } },
+    extEscalierPrix: { menu: 'extEscalierType', prix: { bois: 150, beton: 200, moellons: 250 } },
+    metierPrix:     { menu: 'metierSel',      prix: Object.fromEntries(METIERS.map(m => [METIER_CLE(m[0]), m[2]])) },
+  };
+  function appliquerPalier(champ) {
+    const p = PALIERS[champ]; const val = p.prix[$(p.menu).value];
+    if (val != null) $(champ).value = val;
+  }
+  function majPaliersTxt() {
+    const r = PALIERS.renoPrixM2.prix;
+    $('renoPaliersTxt').textContent = `légère ${eur(r.legere)} · moyenne ${eur(r.moyenne)} · lourde ${eur(r.lourde)} €/m²`;
+  }
+  Object.keys(PALIERS).forEach(champ => {
+    const p = PALIERS[champ];
+    $(p.menu).addEventListener('change', () => appliquerPalier(champ));
+    $(champ).addEventListener('input', () => { const n = parseFloat($(champ).value); if (isFinite(n)) { p.prix[$(p.menu).value] = n; majPaliersTxt(); } });
+  });
+  majPaliersTxt();
+  appliquerPalier('metierPrix'); majMetierUnite();
+
+  /* ── Panier de corps de métiers (Alan, 14/09) : un poste = métier, quantité,
+     unité, prix unitaire ; le même métier ajouté deux fois remplace la ligne. */
+  const panier = [];
+  function rendrePanier() {
+    const p = $('metierPanier');
+    if (!panier.length) { p.innerHTML = '<div class="vide">Aucun poste pour l\'instant — choisissez un métier, une quantité, puis Ajouter.</div>'; return; }
+    p.innerHTML = panier.map((l, i) => `<div class="pl"><span><span class="nom">${l.nom}</span><span class="det">${l.qte.toLocaleString('fr-FR')} ${l.unite} × ${eur(l.prix)} € HT</span></span><span class="mt">${fmt(l.qte * l.prix)}</span><button type="button" class="sup" data-i="${i}" aria-label="Retirer ${l.nom}">×</button></div>`).join('');
+  }
+  $('metierPanier').addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (!b) return; panier.splice(+b.dataset.i, 1); rendrePanier(); window.calculer(); });
+  $('metierAjouter').addEventListener('click', () => {
+    const m = metierCourant(), qte = v('metierQte'), prix = v('metierPrix');
+    if (!(qte > 0)) { $('metierQte').focus(); return; }
+    const k = panier.findIndex(l => l.nom === m[0]);
+    const ligne = { nom: m[0], unite: m[1], qte, prix };
+    if (k >= 0) panier[k] = ligne; else panier.push(ligne);
+    $('metierQte').value = 0; rendrePanier(); window.calculer();
+  });
+  rendrePanier();
+
+  // ── 1. Type de projet : tuiles cumulables ─────────────────────────────────
+  const EQUIPS = ['Cuisine', 'SDB', 'WC', 'CES'];
+  const majGC = () => { document.querySelectorAll('#blocReno .gc').forEach(r => { r.hidden = !$('renoGC').checked; }); };
+  $('renoGC').addEventListener('change', () => { if ($('renoGC').checked && !v('renoGardeCorps')) $('renoGardeCorps').value = 5; majGC(); });
+  // Sous-total de chaque poste, visible seulement à l'impression (Alan, 15/10)
+  EQUIPS.forEach(k => { const sp = document.createElement('span'); sp.className = 'mt-imp'; sp.id = 'equip' + k + 'Mt'; document.querySelector('label[for="equip' + k + '"]').appendChild(sp); });
+  const choix = { neuf: false, reno: false, ext: false, metier: false };
+  const projetChoisi = () => choix.neuf || choix.reno || choix.ext || choix.metier;
+  const tuiles = () => document.querySelectorAll('#rmType .rm-type');
+  tuiles().forEach(b => b.addEventListener('click', () => {
+    choix[b.dataset.type] = !choix[b.dataset.type];
+    // « Sélection des corps de métiers » est exclusive : elle remplace les autres choix, et inversement
+    if (b.dataset.type === 'metier' && choix.metier) { choix.neuf = choix.reno = choix.ext = false; }
+    else if (b.dataset.type !== 'metier' && choix[b.dataset.type]) { choix.metier = false; }
+    tuiles().forEach(x => x.classList.toggle('selected', !!choix[x.dataset.type]));
+    // Construction neuve : cuisine, salle de bain, WC, chauffe-eau pré-cochés (Alan, 14/09)
+    if ((b.dataset.type === 'neuf' && choix.neuf) || (b.dataset.type === 'reno' && choix.reno)) preremplirAjustements();
+    appliquerChoix();
+    // Le parcours par étapes du site suit le choix (libellés, aléas par défaut, bouton Continuer)
+    document.dispatchEvent(new CustomEvent('rm-choix'));
+    window.calculer();
+  }));
+  /* Neuf : une cuisine, une salle de bain, un WC et un chauffe-eau PAR LOGEMENT
+     (Alan, 14/09 : « s'il y a plusieurs appartements, il y aura une cuisine, une
+     SdB, un WC, un CES en plus automatiquement »). Rejoué quand le nombre change. */
+  /* Quantités des ajustements = logements neufs + logements à rénover (Alan,
+     14/09). En neuf ils sont cochés d'office ; en rénovation seule, la quantité
+     est prête mais on laisse cocher (une réno ne refait pas forcément la cuisine). */
+  function nbLogements() { return (choix.neuf ? Math.max(1, Math.round(v('neufLogements')) || 1) : 0) + (choix.reno ? Math.max(1, Math.round(v('renoLogements')) || 1) : 0) || 1; }
+  function preremplirAjustements() {
+    const n = nbLogements();
+    EQUIPS.forEach(k => { $('equip' + k + 'Qty').value = n; if (choix.neuf) $('equip' + k).checked = true; });
+  }
+  $('neufLogements').addEventListener('input', () => { if (choix.neuf) preremplirAjustements(); });
+  $('renoLogements').addEventListener('input', () => { if (choix.reno) preremplirAjustements(); });
+
+  function appliquerChoix() {
+    const ok = projetChoisi();
+    $('rmAttente').hidden = ok;
+    document.querySelectorAll('#rmTravaux .carte').forEach(c => { c.classList.toggle('attente', !ok); });
+    const bati = choix.neuf || choix.reno;
+    $('qSurfaces').hidden = !bati; $('qAjust').hidden = !bati; $('qExt').hidden = !choix.ext; $('qMetier').hidden = !choix.metier;
+    $('blocReno').hidden = !choix.reno; $('blocNeuf').hidden = !choix.neuf;
+    // Numéros d'étape continus sur les cartes visibles (Alan, 15/09 : « on voit 1 et 5 »)
+    let n = 0;
+    document.querySelectorAll('#rmTravaux .carte').forEach(c => { const b = c.querySelector('.carte-t .n'); if (b && !c.hidden) b.textContent = String(++n); });
+  }
+  appliquerChoix();
+
+  // Cliquer n'importe où sur une ligne cochable la coche (sauf dans ses champs)
+  document.addEventListener('click', e => {
+    const el = e.target.closest('#rmTravaux .eq'); if (!el || e.target.closest('input, label, select, button')) return;
+    const cb = el.querySelector('input[type=checkbox]'); cb.checked = !cb.checked;
+    cb.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+
+  // ── Calcul : HT par partie (la TVA, la pente et le total sont faits par le site) ──
+  function rmCalculer() {
+    const renoActif = choix.reno, neufActif = choix.neuf, extActif = choix.ext;
+    const gcOn = $('renoGC').checked && v('renoGardeCorps') > 0;
+    const gcReno = gcOn ? v('renoGardeCorps') * v('renoPrixGardeCorps') : 0;
+    // Varangue isolée du logement, avec son propre total (Alan, 16/10) ; le garde-corps va avec la varangue
+    const renoLog = renoActif ? v('renoSurface') * v('renoPrixM2') : 0;
+    const renoVar = renoActif ? v('renoVarangue') * v('renoPrixVarangue') + gcReno : 0;
+    const reno = renoLog + renoVar;
+
+    const prixNeuf = v('neufPrixM2'), prixVar = v('neufPrixVarangue');
+    const neufLog = neufActif ? v('neuf') * prixNeuf : 0;
+    const neufVar = neufActif ? v('neufVarangue') * prixVar : 0;
+    const neuf = neufLog + neufVar;
+    let ajust = 0;
+    EQUIPS.forEach(k => {
+      const on = $('equip' + k).checked;
+      $('equip' + k).closest('.eq').classList.toggle('on', on);
+      if (on && (renoActif || neufActif)) ajust += v('equip' + k + 'Qty') * v('equip' + k + 'Prix');
+    });
+    const tauxAjust = renoActif && !neufActif ? TVA_RENO : TVA_NEUF;
+    $('tauxAjustTitre').textContent = 'TVA ' + (tauxAjust === TVA_RENO ? '2,1' : '8,5') + ' %';
+    let ext = 0;
+    EXT.forEach((g, gi) => {
+      let totGrp = 0;
+      g.items.forEach(it => {
+        const on = $(it.id).checked;
+        $(it.id).closest('.eq').classList.toggle('on', on);
+        const t = totalExt(it);
+        if (on && extActif) totGrp += t;
+      });
+      $('extGrpTot' + gi).textContent = fmt(totGrp);
+      ext += totGrp;
+    });
+    // Sélection des corps de métiers : somme du panier
+    const metier = choix.metier ? panier.reduce((t, l) => t + l.qte * l.prix, 0) : 0;
+    const tauxMetier = $('metierTva').value === 'neuf' ? TVA_NEUF : TVA_RENO;
+    $('tauxMetierTitre').textContent = 'TVA ' + (tauxMetier === TVA_RENO ? '2,1' : '8,5') + ' %';
+
+    const ttcDe = (id, ht, ttc) => { $(id).textContent = fmt(ht); $(id + 'Ttc').textContent = ht ? fmt(ttc) + ' TTC' : ''; };
+    const varTot = renoVar + neufVar;
+    $('stLogement').hidden = $('stVarangue').hidden = !varTot;
+    ttcDe('sTotLogement', renoLog + neufLog, renoLog * (1 + TVA_RENO) + neufLog * (1 + TVA_NEUF));
+    ttcDe('sTotVarangue', varTot, renoVar * (1 + TVA_RENO) + neufVar * (1 + TVA_NEUF));
+    ttcDe('sTotSurf', reno + neuf, reno * (1 + TVA_RENO) + neuf * (1 + TVA_NEUF));
+    ttcDe('sTotAjust', ajust, ajust * (1 + tauxAjust));
+    ttcDe('sTotExt', ext, ext * (1 + TVA_NEUF));
+    ttcDe('sTotMetier', metier, metier * (1 + tauxMetier));
+
+    return {
+      choix: Object.assign({}, choix), projetChoisi: projetChoisi(),
+      reno, neuf, ajust, tauxAjust, ext, metier, tauxMetier,
+      ht: reno + neuf + ajust + ext + metier,
+      // Surfaces des parties cochées : conception (dessinateur / architecte) et taxe d'aménagement
+      surfNeuf: neufActif ? v('neuf') : 0, surfReno: renoActif ? v('renoSurface') : 0,
+      metiers: choix.metier ? panier.map(l => l.nom) : [],
+    };
+  }
+  window.rmCalculer = rmCalculer;
+  // Saisir remplace ce qu'il y a dans la case (Alan, 14/09) : le contenu est sélectionné au focus
+  document.addEventListener('focusin', e => { const el = e.target; if (el && el.matches && el.matches('#rmTravaux input[type=number]')) setTimeout(() => { try { el.select(); } catch (x) {} }, 0); });
+  const surSaisie = e => { if (e.target.closest && e.target.closest('#rmTravaux')) window.calculer(); };
+  document.addEventListener('input', surSaisie);
+  document.addEventListener('change', surSaisie);
+  /* ── Saisie gardée au rechargement (Alan, 15/10) : types de projet, champs,
+     cases, menus, panier de métiers et prix sont rangés dans ce navigateur à
+     chaque calcul — ici pour tout le calculateur, étapes générales comprises ;
+     « Réinitialiser » repart des valeurs par défaut. */
+  const CLE_SAISIE = 'alb-calc-saisie-v1';
+  let pretASauver = false;
+  const champsSaisie = () => Array.from(document.querySelectorAll('.calc-app input[id], .calc-app select[id]')).filter(el => el.id !== 'impAvecDetail');
+  const coche = el => el.type === 'checkbox' || el.type === 'radio';
+  window.rmSauver = function () {
+    if (!pretASauver) return;
+    try {
+      const o = { choix: Object.assign({}, choix), panier: panier.slice(), champs: {} };
+      champsSaisie().forEach(el => { o.champs[el.id] = coche(el) ? el.checked : el.value; });
+      localStorage.setItem(CLE_SAISIE, JSON.stringify(o));
+    } catch (e) {}
+  };
+  function restaurerSaisie() {
+    let o = null;
+    try { o = JSON.parse(localStorage.getItem(CLE_SAISIE) || 'null'); } catch (e) {}
+    if (!o || !o.champs) return;
+    Object.keys(o.champs).forEach(id => { const el = $(id); if (!el) return; if (coche(el)) el.checked = !!o.champs[id]; else el.value = o.champs[id]; });
+    Object.keys(choix).forEach(k => { choix[k] = !!(o.choix && o.choix[k]); });
+    tuiles().forEach(x => x.classList.toggle('selected', !!choix[x.dataset.type]));
+    if (Array.isArray(o.panier)) { panier.length = 0; o.panier.forEach(l => panier.push(l)); rendrePanier(); }
+    EXT_ITEMS.forEach(it => { if ($(it.id).checked) $(it.id).closest('details').open = true; });
+    appliquerChoix(); majGC(); majPlaces(true); majMetierUnite();
+  }
+  window.rmEffacerSaisie = function () { try { localStorage.removeItem(CLE_SAISIE); } catch (e) {} };
+
+  /* ── Détail des postes (Alan, 15/10) : pour chaque poste retenu, son calcul
+     et « ce que ça comprend » (texte des boutons i). En rénovation, la
+     définition de l'ampleur choisie (légère / moyenne / lourde). Sert au
+     récapitulatif du site (lignes de travaux) et à l'impression (détail). */
+  const infoDe = id => { const b = document.querySelector('label[for="' + id + '"] .info'); return b ? b.dataset.info.split('|') : []; };
+  const txtTaux = t => t === TVA_RENO ? '2,1' : '8,5';
+  function partiesDetail() {
+    const parties = [];
+    const poste = (lib, calc, montant, items) => ({ lib, calc, montant, items: items || [] });
+    if (choix.reno) {
+      const p = [];
+      if (v('renoSurface')) {
+        const amp = $('renoType').selectedOptions[0].text;
+        const def = infoDe('renoType').find(t => t.toLowerCase().startsWith(amp.toLowerCase())) || '';
+        p.push(poste('Rénovation ' + amp.toLowerCase(), m2(v('renoSurface')) + ' × ' + eur(v('renoPrixM2')) + ' € HT', v('renoSurface') * v('renoPrixM2'), [def]));
+      }
+      if (v('renoVarangue')) p.push(poste('Varangue à rénover', m2(v('renoVarangue')) + ' × ' + eur(v('renoPrixVarangue')) + ' € HT', v('renoVarangue') * v('renoPrixVarangue'), infoDe('renoVarangue')));
+      if ($('renoGC').checked && v('renoGardeCorps')) p.push(poste('Garde-corps — ' + $('renoGCType').selectedOptions[0].text, fmtQ(v('renoGardeCorps')) + ' ml × ' + eur(v('renoPrixGardeCorps')) + ' € HT', v('renoGardeCorps') * v('renoPrixGardeCorps'), infoDe('renoGC')));
+      if (p.length) parties.push({ titre: 'Rénovation', taux: TVA_RENO, postes: p });
+    }
+    if (choix.neuf) {
+      const p = [];
+      if (v('neuf')) p.push(poste('Surface de plancher', m2(v('neuf')) + ' × ' + eur(v('neufPrixM2')) + ' € HT', v('neuf') * v('neufPrixM2'), infoDe('neuf')));
+      if (v('neufVarangue')) p.push(poste('Varangue couverte', m2(v('neufVarangue')) + ' × ' + eur(v('neufPrixVarangue')) + ' € HT', v('neufVarangue') * v('neufPrixVarangue'), infoDe('neufVarangue')));
+      if (p.length) parties.push({ titre: 'Construction neuve', taux: TVA_NEUF, postes: p });
+    }
+    if (choix.neuf || choix.reno) {
+      const p = EQUIPS.filter(k => $('equip' + k).checked).map(k => poste($('equip' + k).nextElementSibling.firstChild.textContent.trim(),
+        v('equip' + k + 'Qty') + ' × ' + eur(v('equip' + k + 'Prix')) + ' € HT', v('equip' + k + 'Qty') * v('equip' + k + 'Prix'), infoDe('equip' + k)));
+      if (p.length) parties.push({ titre: 'Travaux & équipements spécifiques', taux: choix.reno && !choix.neuf ? TVA_RENO : TVA_NEUF, postes: p });
+    }
+    if (choix.ext) {
+      const p = [];
+      EXT_ITEMS.filter(it => $(it.id).checked).forEach(it => {
+        // Poste à menu : seule la définition du choix retenu (« Bois : … » si bois)
+        const autres = it.choix ? it.choix.filter(c => c[0] !== $(it.id + 'Type').value).map(c => c[1] + ' :') : [];
+        const items = (it.info ? it.info.split('|') : []).filter(t => !autres.some(a => t.startsWith(a)));
+        if (it.type === 'comp' || it.type === 'mur') {
+          // Murs et postes composés : quantité et montant (le détail semelle,
+          // couche de forme… reste à l'écran, dans le poste déplié).
+          // Mur : dimensions dans la désignation, quantité = surface du mur (ml × hauteur).
+          const ml = v(it.id + 'Ml'), h = v(it.id + 'H');
+          const lib = it.type === 'mur' ? it.lib + ' (' + fmtQ(ml) + ' ml × ' + h.toFixed(2).replace('.', ',') + ' m)' : it.lib;
+          const calc = it.type === 'mur' ? fmtQ(ml * h) + ' m²' : fmtQ(v(it.id + 'Qty')) + ' ' + it.u;
+          p.push(poste(lib, calc, totalExt(it), items));
+        } else {
+          const q = it.u === 'u' && it.choix ? 1 : v(it.id + 'Qty');
+          const lib = it.lib + (it.choix ? ' — ' + $(it.id + 'Type').selectedOptions[0].text : '');
+          p.push(poste(lib, fmtQ(q) + (it.u === 'u' ? '' : ' ' + it.u) + ' × ' + eur(v(it.id + 'Prix')) + ' € HT', q * v(it.id + 'Prix'), items));
+        }
+      });
+      if (p.length) parties.push({ titre: 'Aménagements extérieurs', taux: TVA_NEUF, postes: p });
+    }
+    if (choix.metier && panier.length) parties.push({ titre: 'Corps de métiers', taux: $('metierTva').value === 'neuf' ? TVA_NEUF : TVA_RENO,
+      postes: panier.map(l => poste(l.nom, l.qte.toLocaleString('fr-FR') + ' ' + l.unite + ' × ' + eur(l.prix) + ' € HT', l.qte * l.prix)) });
+    return parties;
+  }
+  window.rmParties = partiesDetail;
+  // Quantité seule, sans prix unitaire (« 6 ml », pas « 6 ml × 300 € HT ») : récapitulatif et impression
+  const sansPU = t => t.replace(/ × [^×]*€ HT$/, '');
+  window.rmSansPU = sansPU;
+  window.rmDetailHTML = function () {
+    const parties = partiesDetail();
+    return parties.length ? '<h2>Détail des postes</h2><div class="pd-t pd-ent"><b>Poste</b><span>Quantité</span><span class="mt">Montant HT</span></div>' + parties.map(pa => '<h3>' + pa.titre + ' — TVA ' + txtTaux(pa.taux) + ' %</h3>' + pa.postes.map(x =>
+      '<div class="pd"><div class="pd-t"><b>' + x.lib + '</b><span>' + sansPU(x.calc) + '</span><span class="mt">' + fmt(x.montant) + '</span></div>' +
+      ((x.items = x.items.filter(t => t && !/^Quantité =|^Coche automatiquement/.test(t))).length ? '<ul>' + x.items.map(t => '<li>' + t + '</li>').join('') + '</ul>' : '') + '</div>').join('')).join('') : '';
+  };
+
+  // ── Fenêtre commune : boutons i (liste) et ? (aide) ────────────────────────
+  const voile = $('infoVoile');
+  function ouvrirFenetre(titre, sousTitre, html) {
+    $('infoTitre').innerHTML = titre + (sousTitre ? '<small>' + sousTitre + '</small>' : '');
+    $('infoCorps').innerHTML = html;
+    voile.hidden = false; $('infoOk').focus();
+  }
+  const fermerFenetre = () => { voile.hidden = true; };
+  const liste = info => '<ul>' + info.split('|').map(t => '<li>' + t + '</li>').join('') + '</ul>';
+  document.querySelectorAll('#rmType .info, #rmTravaux .info').forEach(b => {
+    b.dataset.bulle = b.dataset.info.split('|').join(' · ');
+    b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ouvrirFenetre(b.dataset.titre, 'Ce que ce poste comprend', liste(b.dataset.info)); });
+  });
+  document.querySelectorAll('#rmType .help[data-info], #rmTravaux .help[data-info]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ouvrirFenetre(b.dataset.titre, '', liste(b.dataset.info)); }));
+  $('infoOk').addEventListener('click', fermerFenetre);
+  $('infoX').addEventListener('click', fermerFenetre);
+  // Pas de fermeture au clic sur le voile : un glissé de souris qui sort de la
+  // fenêtre déclenchait un clic sur le voile et la fermait. Croix ou Échap seulement.
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !voile.hidden) fermerFenetre(); });
+
+  /* Réinitialiser la partie travaux : le resetForm() du site a déjà remis
+     chaque champ à sa valeur d'origine (prix compris) ; on remet ici l'état
+     du moteur (types, panier, bandeaux, paliers). */
+  window.rmReset = function () {
+    majGC();
+    panier.length = 0; rendrePanier();
+    majPlaces();
+    document.querySelectorAll('#rmTravaux details.sl').forEach(d => { d.open = false; });
+    Object.keys(PALIERS).forEach(appliquerPalier);
+    majMetierUnite();
+    Object.keys(choix).forEach(k => { choix[k] = false; });
+    tuiles().forEach(x => x.classList.remove('selected'));
+    appliquerChoix();
+  };
+
+  restaurerSaisie(); pretASauver = true;
+  if (typeof window.syncBlocs === 'function') window.syncBlocs();
+  window.calculer();
+})();
   </script>
 
   <script>
@@ -3572,56 +3833,41 @@
         step.appendChild(nav);
       });
 
-      // --- Étape 1 : sélection du type de projet ---
-      const typeCards = typeStep.querySelectorAll('.type-card');
-      const typeLabel = { neuf: 'Construction neuve', reno: 'Rénovation', both: 'Neuf + rénovation' };
-      typeCards.forEach(card => {
-        card.addEventListener('click', () => {
-          projectType = card.dataset.type;
-          // Aléas budgétaires par défaut : neuf ± 10 %, rénovation (ou « les deux ») ± 20 %
-          //    — la réno réserve plus d'imprévus. L'utilisateur peut toujours ajuster ensuite.
-          try { const _fpct = document.getElementById('fourchettePct'); if (_fpct) _fpct.value = (projectType === 'neuf') ? 10 : 20; } catch(e){}
-          typeCards.forEach(c => c.classList.toggle('selected', c === card));
-          applyTypeFilter();
-          if (typeof calculer === 'function') calculer();
-          updateSummaries();
-          updateNextButtons();
-        });
+      // --- Étape 1 : tuiles cumulables du moteur RUN MAP (#rmType) ---
+      // Le moteur gère la sélection et les cartes de l'étape Travaux ; il
+      // prévient par l'évènement « rm-choix » (clic sur une tuile, réinitialisation).
+      const typeLabel = { neuf: 'Neuf', reno: 'Rénovation', ext: 'Extérieur', metier: 'Corps de métiers' };
+      const typesChoisis = () => Array.from(typeStep.querySelectorAll('.rm-type.selected')).map(b => b.dataset.type);
+      document.addEventListener('rm-choix', () => {
+        const t = typesChoisis();
+        projectType = t.length ? t.join('+') : null;
+        // Aléas budgétaires par défaut : neuf ± 10 %, dès qu'il y a de la rénovation ± 20 %
+        //    — la réno réserve plus d'imprévus. L'utilisateur peut toujours ajuster ensuite.
+        if (t.length) { try { const _fpct = document.getElementById('fourchettePct'); if (_fpct) _fpct.value = t.includes('reno') ? 20 : 10; } catch(e){} }
+        applyTypeFilter();
+        if (typeof calculer === 'function') calculer();
+        updateSummaries();
+        updateNextButtons();
       });
 
-      // Affiche / masque les sous-blocs Travaux selon le choix
+      // Libellés et champs de l'étape Acquisition selon le choix
       function applyTypeFilter() {
-        const renoCard = document.querySelector('.travaux-card--reno');
-        const neufCard = document.querySelector('.travaux-card--neuf');
-        if (!renoCard || !neufCard) return;
-        const showReno = projectType === 'reno' || projectType === 'both';
-        const showNeuf = projectType === 'neuf' || projectType === 'both';
-        renoCard.style.display = showReno ? '' : 'none';
-        neufCard.style.display = showNeuf ? '' : 'none';
+        const t = typesChoisis();
+        const renoSeule = t.includes('reno') && !t.includes('neuf');
 
         // Label et champs de la section Acquisition selon le type
         const labelTerrain = document.querySelector('label[for="prixTerrain"]');
         const fieldPente = document.getElementById('pente')?.closest('.field');
         const fieldViab = document.querySelector('.field:has(#viabComplete)') || document.getElementById('viabComplete')?.closest('.field');
         if (labelTerrain) {
-          if (projectType === 'reno') {
+          if (renoSeule) {
             labelTerrain.innerHTML = 'Prix d\'achat du bâtiment à rénover HT (€) <span style="font-size:0.7rem; color:var(--c-or); font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">· frais d\'agence inclus</span>';
           } else {
             labelTerrain.innerHTML = 'Prix d\'achat du terrain HT (€) <span style="font-size:0.7rem; color:var(--c-or); font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">· frais d\'agence inclus</span>';
           }
         }
-        if (fieldPente) fieldPente.style.display = projectType === 'reno' ? 'none' : '';
-        if (fieldViab) fieldViab.style.display = projectType === 'reno' ? 'none' : '';
-
-        // Neutralise les postes masqués pour ne pas fausser le calcul
-        if (!showReno) {
-          document.getElementById('renoType').value = 'aucune';
-          document.getElementById('renoSurface').value = 0;
-          if (typeof renderRenoMemo === 'function') renderRenoMemo();
-        }
-        if (!showNeuf) {
-          document.getElementById('neuf').value = 0;
-        }
+        if (fieldPente) fieldPente.style.display = renoSeule ? 'none' : '';
+        if (fieldViab) fieldViab.style.display = renoSeule ? 'none' : '';
       }
 
       // --- Navigation ---
@@ -3673,7 +3919,7 @@
       // Résumé affiché dans l'en-tête replié
       function stepSummaryText(step, i) {
         if (step === typeStep) {
-          return projectType ? { txt: typeLabel[projectType], muted: false } : { txt: 'À choisir', muted: true };
+          return projectType ? { txt: typesChoisis().map(k => typeLabel[k]).join(' + '), muted: false } : { txt: 'À choisir', muted: true };
         }
         // SOMME de TOUS les sous-totaux du panel : certaines étapes en ont deux
         // INDÉPENDANTS (Travaux principaux = travaux + équipements ; Aménagements
@@ -3727,8 +3973,12 @@
       // Met à jour les résumés à chaque saisie
       inputsCol.addEventListener('input', updateSummaries);
       inputsCol.addEventListener('change', updateSummaries);
+      // Ajout / retrait d'un poste du panier de corps de métiers (boutons, pas de saisie)
+      inputsCol.addEventListener('click', () => setTimeout(updateSummaries, 0));
 
-      // État initial
+      // État initial (types éventuellement restaurés de la saisie précédente)
+      projectType = typesChoisis().join('+') || null;
+      applyTypeFilter();
       render();
     })();
   </script>
