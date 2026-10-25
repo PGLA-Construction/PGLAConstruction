@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /category/
 
-Sitemap: https://albmaitredoeuvre.fr/sitemap.xml
+Sitemap: https://www.albmaitredoeuvre.fr/sitemap.xml
