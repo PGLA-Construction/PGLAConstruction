@@ -1574,6 +1574,13 @@ li { margin-bottom: 0.4em; }
   .nav.active .nav-link { color: rgba(13,13,13,0.85); border-bottom-color: rgba(0,0,0,0.08); }
   .nav.active .nav-dropdown { background: transparent; }
 }
+/* Menu : chaque entrée dans une pilule délimitée (25/10/2026) */
+@media (min-width: 993px) {
+  .nav-list { gap: 0.45rem; }
+  .nav-list > .nav-item > .nav-link { padding: 0.45rem 1rem; border: 1px solid rgba(212,160,23,0.38); border-radius: 999px; background: rgba(212,160,23,0.05); transition: background 0.2s, border-color 0.2s, color 0.2s; }
+  .nav-list > .nav-item > .nav-link:hover, .nav-list > .nav-item > .nav-link--active { background: rgba(212,160,23,0.16); border-color: #D4A017; color: #0D0D0D; }
+  .nav-list > .nav-item > .nav-link::after { display: none; }
+}
 /* ============ LEXIQUE ET SOURCES (blog) ============ */
 .lexique { margin: 2rem 0 0; font-size: 0.85rem; color: var(--text-light); border-top: 1px solid var(--border); padding-top: 0.9rem; }
 .lexique summary { cursor: pointer; font-weight: 500; color: var(--text-muted); list-style: none; }
