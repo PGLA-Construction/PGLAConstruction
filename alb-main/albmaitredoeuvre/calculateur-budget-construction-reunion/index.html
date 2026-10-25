@@ -789,14 +789,14 @@
     <!-- 8. Assurance & taxes -->
     <section class="carte large gen assur attente" id="qAssur">
       <div class="carte-t"><span class="n">8</span>Assurance &amp; taxes
-        <button type="button" class="help" data-titre="Assurance &amp; taxes" data-info="Dommage Ouvrage : obligatoire pour le maître d'ouvrage qui fait construire (loi Spinetta) ; estimée à 2,5 % du TTC des travaux (rénovation, neuf, corps de métiers, pente comprise).|Taxe d'aménagement : surface de plancher neuve × valeur forfaitaire × taux communal (1 à 5 % selon les communes de La Réunion, à vérifier au service urbanisme)." aria-label="Aide">?</button></div>
+        <button type="button" class="help" data-titre="Assurance &amp; taxes" data-info="Dommage Ouvrage : obligatoire pour le maître d'ouvrage qui fait construire (loi Spinetta) ; estimée à 2,5 % du TTC des travaux (rénovation, neuf, corps de métiers, pente comprise).|Taxe d'aménagement : surface de plancher neuve × valeur forfaitaire 2026 (892 €/m²) × taux cumulé : part communale (5 % à Saint-Pierre, Le Tampon, Saint-Louis ; 3 % à Saint-Joseph ; 3,5 % à Petite-Île) + part départementale 2,5 %. Estimation sans l'abattement de 50 % des 100 premiers m² d'une résidence principale : le montant réel peut être plus bas. Taux à confirmer au service urbanisme." aria-label="Aide">?</button></div>
       <div class="carte-c">
         <div class="row chk"><label for="includeDO"><input type="checkbox" id="includeDO" checked>Assurance Dommage Ouvrage<span class="u">2,5 % du TTC des travaux</span></label></div>
         <div class="row chk"><label for="taxeAmenagement"><input type="checkbox" id="taxeAmenagement">Taxe d'aménagement<span class="u">hors TVA, sur la surface neuve</span></label></div>
         <div class="row ta" hidden><label for="taxeAmenagementValeurM2">Valeur forfaitaire<span class="u">€/m²</span></label>
-          <input type="number" id="taxeAmenagementValeurM2" class="prix-input" min="0" step="1" value="1036" inputmode="numeric"></div>
-        <div class="row ta" hidden><label for="taxeAmenagementTaux">Taux communal<span class="u">%</span></label>
-          <input type="number" id="taxeAmenagementTaux" min="0" max="20" step="0.1" value="3" inputmode="decimal"></div>
+          <input type="number" id="taxeAmenagementValeurM2" class="prix-input" min="0" step="1" value="892" inputmode="numeric"></div>
+        <div class="row ta" hidden><label for="taxeAmenagementTaux">Taux commune + Département<span class="u">%</span></label>
+          <input type="number" id="taxeAmenagementTaux" min="0" max="25" step="0.1" value="7.5" inputmode="decimal"></div>
       </div>
       <div class="stot"><span>Total assurance &amp; taxes</span><span class="vv"><span id="sTotAssur">0 €</span></span></div>
     </section>
