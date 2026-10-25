@@ -237,15 +237,19 @@ img { display: block; max-width: 100%; }
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background-size: auto 110%;
-  background-position: center;
+  /* Photo paysage plein écran : villa tropicale bioclimatique (Unsplash, Ronaldo Rizzutti) */
+  background-image: url('images/hero-villa-bioclimatique.jpg');
+  background-size: cover;
+  background-position: center 60%;
   background-repeat: no-repeat;
   background-color: #0d0d0d;
-  filter: brightness(1);
+}
+@media (max-width: 700px) {
+  .hero-bg { background-image: url('images/hero-villa-bioclimatique-mobile.jpg'); background-position: 62% center; }
 }
 .hero::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(13,13,13,0.35) 0%, rgba(13,13,13,0.1) 50%, rgba(13,13,13,0.45) 100%);
+  background: linear-gradient(180deg, rgba(13,13,13,0.55) 0%, rgba(13,13,13,0.35) 45%, rgba(13,13,13,0.6) 100%);
   z-index: 1;
 }
 .hero-content {
@@ -758,7 +762,7 @@ img { display: block; max-width: 100%; }
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-bg" style="background-image: url('images/villa-canne-reunion.jpg')"></div>
+    <div class="hero-bg" role="img" aria-label="Villa tropicale bioclimatique : larges débords de toiture, toit végétalisé, brise-soleil en bois et séjour ouvert sur le jardin"></div>
     <div class="hero-content">
       <img src="images/8000 A 02 RECTO calibrage nouvelle carte recto HAUT 350 gr by pass   -07.png" alt="ALB Maître d'œuvre" class="hero-logo">
       <p class="hero-label">Maître d'œuvre · La Réunion · Depuis 2022</p>
