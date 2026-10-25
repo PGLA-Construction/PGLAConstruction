@@ -758,7 +758,7 @@
     <!-- 7. Conception & suivi (études, honoraires) -->
     <section class="carte large gen conc attente" id="qConception">
       <div class="carte-t"><span class="n">7</span>Conception &amp; suivi
-        <button type="button" class="help" data-titre="Conception &amp; suivi" data-info="Études et honoraires, cochez ce qui s'applique : montants HT modifiables.|Dessinateur, architecte, CCTP et ACT : prix au m² × surfaces neuve et à rénover saisies plus haut.|Architecte obligatoire à partir de 150 m² de surface de plancher (loi du 3 janvier 1977).|Honoraires de maîtrise d'œuvre (direction de l'exécution des travaux) : pourcentage des travaux HT (rénovation, neuf, corps de métiers)." aria-label="Aide">?</button>
+        <button type="button" class="help" data-titre="Conception &amp; suivi" data-info="Études et honoraires, cochez ce qui s'applique : montants HT modifiables.|Dessinateur et architecte : prix au m² × surfaces neuve et à rénover saisies plus haut.|Architecte obligatoire à partir de 150 m² de surface de plancher (loi du 3 janvier 1977).|Honoraires de maîtrise d'œuvre (direction de l'exécution des travaux) : pourcentage des travaux HT (rénovation, neuf, corps de métiers)." aria-label="Aide">?</button>
         <span class="taux">TVA 8,5 %</span></div>
       <div class="carte-c">
         <div class="sub">Études</div>
@@ -778,10 +778,6 @@
           <input type="number" id="dessinateurPrixM2" class="prix-input" min="0" step="1" value="15" inputmode="numeric" aria-label="Prix HT au m²"><span class="u2">€/m²</span><span class="tot" id="dessinateurMt">0 €</span></div>
         <div class="eq m2"><input type="checkbox" id="architecte"><label for="architecte">Architecte<span class="u">projets ≥ 150 m²</span><button type="button" class="info" data-titre="Mission architecte" data-info="Esquisse (ESQ) : faisabilité, premières propositions.|Avant-projet sommaire (APS) : plans, coupes, façades.|Avant-projet définitif (APD) : plans détaillés, choix techniques, estimation.|Dossier de permis de construire : Cerfa, notice, plans réglementaires." aria-label="Ce que comprend la mission architecte">i</button></label>
           <input type="number" id="architectePrixM2" class="prix-input" min="0" step="1" value="50" inputmode="numeric" aria-label="Prix HT au m²"><span class="u2">€/m²</span><span class="tot" id="architecteMt">0 €</span></div>
-        <div class="eq m2"><input type="checkbox" id="archCCTP"><label for="archCCTP">CCTP<button type="button" class="info" data-titre="CCTP" data-info="Cahier des clauses techniques particulières : spécifications par lot pour consulter les entreprises." aria-label="Ce que comprend le CCTP">i</button></label>
-          <input type="number" id="archCCTPPrix" class="prix-input" min="0" step="1" value="8" inputmode="numeric" aria-label="Prix HT au m²"><span class="u2">€/m²</span><span class="tot" id="archCCTPMt">0 €</span></div>
-        <div class="eq m2"><input type="checkbox" id="archAssistContrats"><label for="archAssistContrats">Assistance aux contrats (ACT)<button type="button" class="info" data-titre="ACT" data-info="Analyse des offres, mise au point des marchés et signature des contrats avec les entreprises retenues." aria-label="Ce que comprend l'ACT">i</button></label>
-          <input type="number" id="archAssistContratsPrix" class="prix-input" min="0" step="1" value="6" inputmode="numeric" aria-label="Prix HT au m²"><span class="u2">€/m²</span><span class="tot" id="archAssistContratsMt">0 €</span></div>
         <div class="regle-arch" id="archHint"></div>
         <div class="sub">Maîtrise d'œuvre</div>
         <div class="eq m2"><input type="checkbox" id="moeDET"><label for="moeDET">Direction de l'exécution des travaux (DET)</label>
@@ -1384,7 +1380,7 @@
     const baseMoe = reno + neuf + metier;
     let conc = 0;
     ['geo', 'be', 'geometre', 'bcontrole', 'csps'].forEach(k => { if (coche(k)) conc += v(k + 'Prix'); });
-    [['dessinateur', 'dessinateurPrixM2'], ['architecte', 'architectePrixM2'], ['archCCTP', 'archCCTPPrix'], ['archAssistContrats', 'archAssistContratsPrix']].forEach(([k, p]) => {
+    [['dessinateur', 'dessinateurPrixM2'], ['architecte', 'architectePrixM2']].forEach(([k, p]) => {
       const m = coche(k) ? surfConc * v(p) : 0; conc += m; $(k + 'Mt').textContent = fmt(m);
     });
     const moe = coche('moeDET') ? baseMoe * v('moeDETPct') / 100 : 0; conc += moe; $('moeDETMt').textContent = fmt(moe);
