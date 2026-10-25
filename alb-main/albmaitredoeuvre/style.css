@@ -1574,3 +1574,19 @@ li { margin-bottom: 0.4em; }
   .nav.active .nav-link { color: rgba(13,13,13,0.85); border-bottom-color: rgba(0,0,0,0.08); }
   .nav.active .nav-dropdown { background: transparent; }
 }
+/* ============ LEXIQUE ET SOURCES (blog) ============ */
+.lexique { margin: 2rem 0 0; font-size: 0.85rem; color: var(--text-light); border-top: 1px solid var(--border); padding-top: 0.9rem; }
+.lexique summary { cursor: pointer; font-weight: 500; color: var(--text-muted); list-style: none; }
+.lexique summary::-webkit-details-marker { display: none; }
+.lexique summary::before { content: '+'; display: inline-block; width: 1.1rem; }
+.lexique[open] summary::before { content: '\2212'; }
+.lexique dl { margin: 0.8rem 0 0; display: grid; grid-template-columns: 1fr; gap: 0.55rem; }
+.lexique dt { font-weight: 600; color: var(--noir); }
+.lexique dd { margin: 0 0 0.2rem; line-height: 1.5; }
+.lexique-page { padding: 0 0 2.5rem; }
+.article-sources { margin: 2rem 0 0; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 0.9rem; }
+.article-sources-title { margin: 0 0 0.4rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.72rem; }
+.article-sources ol { margin: 0; padding-left: 1.2rem; }
+.article-sources li { margin: 0 0 0.25rem; line-height: 1.45; overflow-wrap: anywhere; }
+.article-sources a { color: var(--text-light); text-decoration: underline; text-underline-offset: 2px; }
+@media (min-width: 768px) { .lexique dl { grid-template-columns: 1fr 1fr; column-gap: 2rem; } }
